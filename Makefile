@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/09/22 10:55:49 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/09/22 11:20:58 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ vpath %.a $(DIR_LIBFT)
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS_WITH_DIR) $(NFLAG) $(NAME) $(DIR_LIBFT)$(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS_WITH_DIR) $(NFLAG) $@ $(DIR_LIBFT)$(LIBFT)
 
 $(OBJS): %.o:%.c $(HEADERS) | $(DIR_BIN)
 	$(CC) $(CFLAG) $(CFLAGS) $< $(addprefix $(IFLAG), $(DIRS_INCLUDE)) $(NFLAG) $(DIR_BIN)$@
