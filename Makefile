@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/09/22 11:20:58 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/09/23 01:37:51 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,13 @@ DIR_INCLUDE_LIBFT		:= ./libft/include
 DIR_BIN					:= bin/
 DIRS_INCLUDE			:= $(DIR_INCLUDE_MINISHELL) $(DIR_INCLUDE_LIBFT)
 
-SRCS					:= main.c
+SRCS					:= main.c ft_strsplit_skip_space.c
 OBJS					:= $(SRCS:.c=.o)
 OBJS_WITH_DIR			:= $(addprefix $(DIR_BIN), $(OBJS))
 HEADERS					:= minishell.h
 LIBFT					:= libft.a
 
-CFLAGS					:= -Wextra -Werror -Wall
+CFLAGS					:= -Wextra -Werror -Wall -g
 CFLAG 					:= -c
 NFLAG					:= -o
 IFLAG					:= -I
@@ -38,9 +38,9 @@ vpath %.o $(DIR_BIN)
 vpath %.h $(DIR_INCLUDE_MINISHELL)
 vpath %.a $(DIR_LIBFT)
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS_WITH_DIR) $(NFLAG) $@ $(DIR_LIBFT)$(LIBFT)
 
 $(OBJS): %.o:%.c $(HEADERS) | $(DIR_BIN)
