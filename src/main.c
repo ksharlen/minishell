@@ -1,19 +1,5 @@
 #include "minishell.h"
 
-// static void		print_string(char *const ex[])
-// {
-// 	int i;
-// 	int j;
-
-// 	i = 0;
-// 	j = 0;
-// 	while (ex[i])
-// 	{
-// 		ft_printf("str: %s\n", ex[i]);
-// 		++i;
-// 	}
-// }
-
 // static char		*time_only(void)
 // {
 // 	time_t t_time;
@@ -68,34 +54,39 @@
 // 	return (0);
 // }
 
-static void print_string(char *const *str)
-{
-	size_t		i;
+// static void print_string(char *const *str)
+// {
+// 	size_t		i;
 
-	i = 0;
-	if (str && *str)
-	{
-		while (*str)
-		{
-			ft_printf("%s\n", str[i]);
-			str++;
-		}
-	}
-}
+// 	i = 0;
+// 	if (str && *str)
+// 	{
+// 		while (*str)
+// 		{
+// 			ft_printf("%s\n", str[i]);
+// 			str++;
+// 		}
+// 	}
+// }
 
-int		main(int argc, char **argv)
+// int		main(int argc, char **argv)
+// {
+
+// 	return (0);
+// }
+
+int		main(int argc, char **argv, char **env)
 {
+	char	*temp_line;
+
 	P_UNUSED(argc);
 	P_UNUSED(argv);
-	char	**p_str;
-
-	if (argc == 2)
+	P_UNUSED(env);
+	system("clear");
+	while (1)
 	{
-		p_str = ft_strsplit_skip_space(argv[1], ';');
-		print_string(p_str);
-		// //ft_printf("p_str: %s\n", p_str);
-		//p_str = ft_skip_before(argv[1], ';');
-		//ft_printf("p_str: %s\n", p_str);
+		minishell_design();
+		get_next_line(0, &temp_line);
 	}
 	return (0);
 }

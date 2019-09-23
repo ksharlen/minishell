@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/09/23 01:37:51 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/09/23 20:26:00 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ DIR_INCLUDE_LIBFT		:= ./libft/include
 DIR_BIN					:= bin/
 DIRS_INCLUDE			:= $(DIR_INCLUDE_MINISHELL) $(DIR_INCLUDE_LIBFT)
 
-SRCS					:= main.c ft_strsplit_skip_space.c
+SRCS					:= main.c minishell_design.c
 OBJS					:= $(SRCS:.c=.o)
 OBJS_WITH_DIR			:= $(addprefix $(DIR_BIN), $(OBJS))
 HEADERS					:= minishell.h
