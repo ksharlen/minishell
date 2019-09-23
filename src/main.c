@@ -75,6 +75,11 @@
 // 	return (0);
 // }
 
+static void		temp(const char *path)
+{
+	chdir(path);
+}
+
 int		main(int argc, char **argv, char **env)
 {
 	char	*temp_line;
@@ -87,6 +92,7 @@ int		main(int argc, char **argv, char **env)
 	{
 		minishell_design();
 		get_next_line(0, &temp_line);
+		temp(temp_line);
 	}
 	return (0);
 }
