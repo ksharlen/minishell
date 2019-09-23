@@ -6,12 +6,12 @@
 # include <unistd.h>
 # include <sys/types.h>
 # include <time.h>
-# if __APPLE__
-#	include <pwd.h>
-# endif
+# include <pwd.h>
+# include <signal.h>
 
 # if __linux__
 #	include <sys/wait.h>
+#	include <sys/types.h>
 # endif
 
 # include "libft.h"
