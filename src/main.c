@@ -74,11 +74,13 @@ int		main(int argc, char **argv)
 	P_UNUSED(argv);
 	//char *str;
 
-	// char **p_str;
+	// char *p_str;
 
 	if (argc == 2)
 	{
 		ft_strsplit_skip_space(argv[1], ';');
+		// //ft_printf("p_str: %s\n", p_str);
+		//p_str = ft_skip_before(argv[1], ';');
 		//ft_printf("p_str: %s\n", p_str);
 	}
 	return (0);
