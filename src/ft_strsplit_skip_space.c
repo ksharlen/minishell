@@ -42,12 +42,7 @@ static void		push_str(char *str, char *str_ret[], size_t size_str, char sym)
 	i = 0;
 	while (i < size_str - 1)
 	{
-		//str = ft_skiptabs(str);
 		str = ft_skiptabs_sym(str, sym);
-		// if (str && *str == sym)
-		// 	str = ft_skipfirst(str, sym);
-		ft_printf("test: %s\n", str);
-		exit(EXIT_FAILURE);
 		str_ret[i] = ft_alloc_before(&str, sym);
 		++i;
 	}
