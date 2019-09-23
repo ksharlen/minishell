@@ -18,15 +18,36 @@ static int	ft_num_str(const char *p_str, char sym)
 	return (ret);
 }
 
+static int		ft_num_space_end(const char *str, char sym)
+{
+	size_t		spaces;
+	const char *p_str;
+
+	spaces = 0;
+	if (str && *str)
+	{
+		p_str = ft_strmoveptr_end(str, sym);
+		while (p_str && *p_str && TABS(*p_str))
+		{
+			spaces++;
+			p_str--;
+		}
+	}
+	return (spaces);
+}
+
 static char		*ft_alloc_before(char **str, char sym)
 {
 	size_t		len;
+	size_t		end_spaces;
 	char		*ret_str;
 
 	ret_str = NULL;
 	if (*str && **str)
 	{
 		len = ft_strnlen(*str, sym);
+		end_spaces = ft_num_space_end(*str, sym);
+		len -= end_spaces;
 		ret_str = (char *)ft_strnew(sizeof(char) * len);
 		ft_strncat(ret_str, *str, len);
 		(*str) = *(str) + len;
