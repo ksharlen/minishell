@@ -13,6 +13,6 @@
 
 # include "libft.h"
 
-char	**ft_strsplit_skip_space(const char *str, char sym);
+char	**ft_strsplit_skip_space(char *str, char sym);
 
 #endif
