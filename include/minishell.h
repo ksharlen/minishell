@@ -16,10 +16,16 @@
 
 # include "libft.h"
 
+/*
+**macro for entry shell
+*/
 # define TO_TIME		11
 # define SIZE_TIME 		8
 # define MAX_UNAME		255
 # define MAX_SIZE_PATH	32767
+# define COLOR_DIR		"\e[36m"
+# define COLOR_UNAME	"\e[33m"
+# define COLOR_DEFAULT	"\e[0m"
 
 struct		s_entry
 {
