@@ -27,6 +27,19 @@
 # define COLOR_UNAME	"\e[33m"
 # define COLOR_DEFAULT	"\e[0m"
 
+enum		e_stdstream
+{
+	STDIN,
+	STDOUT
+};
+
+// enum		e_gnl
+// {
+// 	NOTHING_READ,
+// 	HAS_BEEN_READ,
+// 	READ_ERROR
+// };
+
 struct		s_entry
 {
 	char time[SIZE_TIME + 1];
@@ -35,5 +48,6 @@ struct		s_entry
 };
 
 void	minishell_design(void);
+char	*minishell_read_stdio(void);
 
 #endif

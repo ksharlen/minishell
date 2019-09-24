@@ -75,24 +75,22 @@
 // 	return (0);
 // }
 
-static void		temp(const char *path)
-{
-	chdir(path);
-}
+// static void		temp(const char *path)
+// {
+// 	chdir(path);
+// }
 
-int		main(int argc, char **argv, char **env)
+int		main(void)
 {
-	char	*temp_line;
+	char	*str_stdio;
+	char	**parsed_str;
 
-	P_UNUSED(argc);
-	P_UNUSED(argv);
-	P_UNUSED(env);
 	system("clear");
 	while (1)
 	{
 		minishell_design();
-		get_next_line(0, &temp_line);
-		temp(temp_line);
+		str_stdio = minishell_read_stdio();
+		parsed_str = minishell_parse_str(str_stdio);
 	}
 	return (0);
 }
