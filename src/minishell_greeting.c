@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_design.c                                 :+:      :+:    :+:   */
+/*   minishell_greeting.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 20:12:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/24 15:15:32 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/24 15:48:37 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char		*get_curr_dir(char *curr_dir)
 	return (p_str + 1);
 }
 
-void			minishell_design(void)
+void			minishell_greeting(void)
 {
 	struct s_entry	entry;
 	char			*curr_dir_without_full_path;

@@ -51,7 +51,7 @@ struct		s_entry
 	char curr_dir[MAX_SIZE_PATH];
 };
 
-void	minishell_design(void);
+void	minishell_greeting(void);
 char	*minishell_read_stdio(void);
 char	**minishell_parse_str(const char *str_for_parse);
 

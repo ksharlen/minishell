@@ -97,7 +97,7 @@ int		main(void)
 	system("clear");
 	while (1)
 	{
-		minishell_design();
+		minishell_greeting();
 		str_stdio = minishell_read_stdio();
 		parsed_str = minishell_parse_str(str_stdio);
 		//minishell_command_execution(parsed_str);
