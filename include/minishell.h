@@ -16,6 +16,8 @@
 
 # include "libft.h"
 
+# define SHELL			minishell
+
 /*
 **macro for entry shell
 */
@@ -51,8 +53,14 @@ struct		s_entry
 	char curr_dir[MAX_SIZE_PATH];
 };
 
+struct		s_argv
+{
+	char	**parsed_cmds;
+}
+
 void	minishell_greeting(void);
 char	*minishell_read_stdio(void);
 char	**minishell_parse_str(const char *str_for_parse);
+void	minishell_command_execution(char *const commands[]);
 
 #endif

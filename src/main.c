@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
+/*   Updated: 2019/09/24 19:12:48 by ksharlen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // static char		*time_only(void)
@@ -89,18 +101,20 @@
 // 	}
 // }
 
-int		main(void)
+int		main(int argc, char **argv, char **env)
 {
 	char	*str_stdio;
 	char	**parsed_str;
 
+	P_UNUSED(argc);
+	P_UNUSED(argv);
 	system("clear");
 	while (1)
 	{
 		minishell_greeting();
 		str_stdio = minishell_read_stdio();
 		parsed_str = minishell_parse_str(str_stdio);
-		//minishell_command_execution(parsed_str);
+		minishell_command_execution(parsed_str);
 	}
 	return (0);
 }
