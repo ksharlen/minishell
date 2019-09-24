@@ -80,6 +80,15 @@
 // 	chdir(path);
 // }
 
+// static void print_command(char *const str[])
+// {
+// 	while (*str)
+// 	{
+// 		ft_printf("%s\n", *str);
+// 		str++;
+// 	}
+// }
+
 int		main(void)
 {
 	char	*str_stdio;
@@ -91,6 +100,7 @@ int		main(void)
 		minishell_design();
 		str_stdio = minishell_read_stdio();
 		parsed_str = minishell_parse_str(str_stdio);
+		//minishell_command_execution(parsed_str);
 	}
 	return (0);
 }

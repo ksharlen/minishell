@@ -27,6 +27,10 @@
 # define COLOR_UNAME	"\e[33m"
 # define COLOR_DEFAULT	"\e[0m"
 
+# define COMMAND_SPLIT	';'
+
+# define SPLIT_COMMANDS ft_strsplit_skip_space
+
 enum		e_stdstream
 {
 	STDIN,
@@ -49,5 +53,6 @@ struct		s_entry
 
 void	minishell_design(void);
 char	*minishell_read_stdio(void);
+char	**minishell_parse_str(const char *str_for_parse);
 
 #endif
