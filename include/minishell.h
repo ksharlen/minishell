@@ -43,13 +43,6 @@ enum		e_stdstream
 	STDOUT
 };
 
-// enum		e_gnl
-// {
-// 	NOTHING_READ,
-// 	HAS_BEEN_READ,
-// 	READ_ERROR
-// };
-
 struct		s_entry
 {
 	char time[SIZE_TIME + 1];
