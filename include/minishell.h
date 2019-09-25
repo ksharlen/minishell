@@ -61,5 +61,6 @@ char	*minishell_read_stdio(void);
 t_argv	*minishell_parse_str(const char *str_for_parse);
 void	minishell_command_execution(t_argv *beg, char *const env[]);
 void	list_add_end(t_argv **beg, char *cmd_argv);
+void	garbage_collector_internal(t_argv **beg, char **need_free);
 
 #endif

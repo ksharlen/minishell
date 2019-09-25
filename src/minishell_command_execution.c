@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/25 21:56:39 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/25 23:20:59 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	minishell_command_execution(t_argv *beg, char *const env[])
 		{
 			wait(&status_child);
 		}
+		
+		ft_strdel(&path_ex);
 		beg = beg->next;
 	}
 }
