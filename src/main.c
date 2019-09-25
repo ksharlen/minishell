@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/24 19:12:48 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/24 22:10:06 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,26 @@
 // 	}
 // }
 
+// static void	print_beg(t_argv *beg)
+// {
+// 	while (beg)
+// 	{
+// 		ft_printf("begin\n");
+// 		ft_print_lines(beg->argv);
+// 		ft_printf("end\n");
+// 		// while (*beg->argv)
+// 		// {
+// 		// 	ft_printf("%s	");
+// 		// 	beg->argv++;
+// 		// }
+// 		beg = beg->next;
+// 	}
+// }
+
 int		main(int argc, char **argv, char **env)
 {
 	char	*str_stdio;
-	char	**parsed_str;
+	t_argv	*beg;
 
 	P_UNUSED(argc);
 	P_UNUSED(argv);
@@ -113,8 +129,11 @@ int		main(int argc, char **argv, char **env)
 	{
 		minishell_greeting();
 		str_stdio = minishell_read_stdio();
-		parsed_str = minishell_parse_str(str_stdio);
-		minishell_command_execution(parsed_str);
+		beg = minishell_parse_str(str_stdio);
+		// ft_printf("argv[0] = %s\n", *beg->argv);
+		// exit(EXIT_SUCCESS);
+		//print_beg(beg);
+		minishell_command_execution(beg, env);
 	}
 	return (0);
 }

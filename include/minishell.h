@@ -53,14 +53,16 @@ struct		s_entry
 	char curr_dir[MAX_SIZE_PATH];
 };
 
-struct		s_argv
+typedef struct		s_argv
 {
-	char	**parsed_cmds;
-}
+	char			**argv;
+	struct s_argv	*next;
+}					t_argv;
 
 void	minishell_greeting(void);
 char	*minishell_read_stdio(void);
-char	**minishell_parse_str(const char *str_for_parse);
-void	minishell_command_execution(char *const commands[]);
+t_argv	*minishell_parse_str(const char *str_for_parse);
+void	minishell_command_execution(t_argv *beg, char *const env[]);
+void	list_add_end(t_argv **beg, char *cmd_argv);
 
 #endif
