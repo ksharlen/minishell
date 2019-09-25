@@ -33,6 +33,10 @@
 
 # define SPLIT_COMMANDS ft_strsplit_skip_space
 
+# define PATH_EX		"./utilities/"
+# define FULL_PATH		"/Users/ksharlen/git_clones/minishell/utilities/"
+// # define FULL_PATH		"/bin/"
+
 enum		e_stdstream
 {
 	STDIN,
