@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 20:15:30 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/26 21:38:24 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/26 22:33:53 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,19 @@ static int	check_dots_and_hypen(t_argv *beg, char *cur_dir, char **env)
 
 int			get_cd(t_argv *beg, char **env)
 {
-	char cur_dir[MAX_SIZE_PATH];
+	char	cur_dir[MAX_SIZE_PATH];
+	char	*home_dir;
+	int		n;
 
+	n = -1;
+	while (++n)
+		if (ft_strstr(env[n], "HOME"))
+			home_dir = ft_strdup(ft_strchr(env[n], '='));
 	if (!(getcwd(cur_dir, MAX_SIZE_PATH)))
 		error(cur_dir);
 	if (!beg->argv[1] || ft_strequ(beg->argv[1], "~") || ft_strequ(beg->argv[1], "--"))
 	{
-		if (chdir("/"))
+		if (chdir(home_dir))
 			exit(0);
 		set_env(beg, env, cur_dir);
 	}
