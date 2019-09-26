@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:18:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 21:13:10 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 21:21:56 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	del_parsed_str_and_for_parse(char ***parsed, char **for_parse)
 	}
 }
 
-t_argv	*minishell_parse_str(const char *str_for_parse)
+t_argv		*minishell_parse_str(const char *str_for_parse)
 {
 	t_argv	*beg;
 	char	**parsed_str;

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 21:15:20 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 21:21:01 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ static int		search_path(const char *path, const char *cmd, char *path_ex)
 	return (search);
 }
 
-int		find_in_the_var_path_env(const char *path_env, const char *cmd, char *path_ex)
+int				find_in_the_var_path_env(const char *path_env,
+	const char *cmd, char *path_ex)
 {
-	char 		**paths;
-	char 		**p_paths;
+	char		**paths;
+	char		**p_paths;
 	enum e_find	search;
 
 	ft_bzero(path_ex, MAX_SIZE_PATH + 1);
