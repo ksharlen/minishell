@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/26 22:35:33 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/26 22:44:28 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static int	check_dots_and_hyphen(char *const argv[], char *cur_dir, char *const 
 	int n;
 
 	n = -1;
-	while (++n)
+	while (env[++n])
 		if (ft_strstr(env[n], "OLDPWD"))
-			tmp = ft_strdup(env[n]);
+			tmp = ft_strdup(ft_strchr(env[n], '/'));
 	if (ft_strequ(argv[1], "."))
 		return (0);
 	else if (ft_strequ(argv[1], ".."))
@@ -58,6 +58,7 @@ static int	check_dots_and_hyphen(char *const argv[], char *cur_dir, char *const 
 	}
 	else if (ft_strequ(argv[1], "-"))
 	{
+		chdir(tmp);
 		my_setenv("PWD", tmp, cur_dir);
 		return (0);
 	}
@@ -71,16 +72,16 @@ int			cd(char *const argv[], char *const env[])
 	int		n;
 
 	n = -1;
-	while (++n)
-		if (ft_strstr(env[n], "HOME"))
-			home_dir = ft_strdup(ft_strchr(env[n], '='));
+	while (env[++n])
+		if (ft_strstr(env[n], "HOME="))
+			home_dir = ft_strdup(ft_strchr(env[n], '/'));
 	if (!(getcwd(cur_dir, MAX_SIZE_PATH)))
 		error();
 	if (!argv[1] || ft_strequ(argv[1], "~") || ft_strequ(argv[1], "--"))
 	{
 		if (chdir(home_dir))
 			exit(0);
-		set_env(argv, env, cur_dir);
+		my_setenv("PWD", home_dir, cur_dir);
 	}
 	else if (argv[2])
 		error();
