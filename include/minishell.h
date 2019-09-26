@@ -16,6 +16,7 @@
 
 # include "libft.h"
 
+# define PROGRAM_NAME	"minishell"
 # define SHELL			minishell
 
 /*
@@ -29,18 +30,38 @@
 # define COLOR_UNAME	"\e[33m"
 # define COLOR_DEFAULT	"\e[0m"
 
+/*
+**ERRORS
+*/
+# define NOT_FOUND_CMD	"command not found:"
+# define CMD_NOT_FOUND(x) ft_printf("%s: %s %s\n", PROGRAM_NAME, NOT_FOUND_CMD, (x))
+
+/*
+**PATH_TO_EX
+*/
+# define PATH_EX			"./utilities/"
+# define INTERNAL_PATH_CMD	"/Users/ksharlen/git_clones/minishell/utilities/"
+
+/*
+**OTHER
+*/
 # define COMMAND_SPLIT	';'
-
 # define SPLIT_COMMANDS ft_strsplit_skip_space
+# define NEW_PROCESS fork
 
-# define PATH_EX		"./utilities/"
-# define FULL_PATH		"/Users/ksharlen/git_clones/minishell/utilities/"
-// # define FULL_PATH		"/bin/"
+extern char	*g_internal_commands[];
 
 enum		e_stdstream
 {
 	STDIN,
 	STDOUT
+};
+
+enum		e_find
+{
+	NOT_FOUND = -1,
+	FOUND_INTERNAL_DIR,
+	FOUND_PATH_ENV
 };
 
 struct		s_entry
@@ -62,5 +83,6 @@ t_argv	*minishell_parse_str(const char *str_for_parse);
 void	minishell_command_execution(t_argv *beg, char *const env[]);
 void	list_add_end(t_argv **beg, char *cmd_argv);
 void	garbage_collector_internal(t_argv **beg, char **need_free);
+int		minishell_command_search(const char *cmd, char *path_ex);
 
 #endif

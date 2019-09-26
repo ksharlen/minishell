@@ -6,11 +6,18 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/25 23:21:17 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 14:35:21 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*g_internal_commands[] = {
+	"cd",
+	"echo",
+	"env",
+	"ls"
+};
 
 int		main(int argc, char **argv, char **env)
 {
