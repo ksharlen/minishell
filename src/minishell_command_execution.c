@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 15:30:10 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 20:04:07 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,14 @@ void	minishell_command_execution(t_argv *beg, char *const env[])
 				wait(&status_child);
 			}
 		}
-		else if (ret_minishell_cmd_search == NOT_FOUND)
+		else if (ret_minishell_cmd_search == FOUND_PATH_ENV)
+		{
+			if (execve(path_ex, beg->argv, env) == NOT_FOUND)
+				CMD_NOT_FOUND(beg->argv[0]);
+			else
+				exit(EXIT_SUCCESS);
+		}
+		else
 			CMD_NOT_FOUND(beg->argv[0]);
 		beg = beg->next;
 	}

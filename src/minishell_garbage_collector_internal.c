@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:12:57 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 19:44:04 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:59:28 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,5 @@ static void clean_struct(t_argv **beg)
 void	garbage_collector_internal(t_argv **beg)
 {
 	if (beg && *beg)
-	{
-		// ft_strdel(&need_free);
-		//ft_strdel(need_free);
-		//free(need_free);
-		//strddel(need_free);
 		clean_struct(beg);
-	}
 }
