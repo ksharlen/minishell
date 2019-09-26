@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 20:29:31 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 21:15:20 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,8 @@ static int		search_path(const char *path, const char *cmd, char *path_ex)
 		if (!ft_strcmp(dent->d_name, cmd))
 		{
 			push_path(cmd, path, path_ex);
-			// closedir(dir);
 			search = FOUND_PATH_ENV;
 			break ;
-			// return (FOUND_PATH_ENV);
 		}
 	}
 	closedir(dir);
