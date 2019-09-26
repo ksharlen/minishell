@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 21:37:49 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 22:01:58 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,11 @@
 **ERRORS
 */
 # define NOT_FOUND_CMD		"command not found:"
-# define PRINT(x) ft_printf("%s: %s %s\n", PROGRAM_NAME, NOT_FOUND_CMD, (x))
-# define CMD_NOT_FOUND(x) PRINT(x)
+# define N_TOO_LONG			"file name too long:"
+# define PRINT(p_name, e_str, out) ft_printf("%s: %s %s\n", p_name, e_str, out)
+// # define PRINT(x) ft_printf("%s: %s %s\n", PROGRAM_NAME, NOT_FOUND_CMD, (x))
+// # define CMD_NOT_FOUND(x) PRINT(x)
+// # define N_TOO_LNG(p_name, )
 
 /*
 **PATH_TO_EX
@@ -76,8 +79,9 @@ enum			e_stdstream
 enum			e_find
 {
 	NOT_FOUND = -1,
-	FOUND_INTERNAL_DIR,
-	FOUND_PATH_ENV
+	FOUND_OUR_DIR,
+	FOUND_PATH_ENV,
+	FOUND_INTERNAL
 };
 
 struct			s_entry
@@ -107,9 +111,8 @@ void			strddel(char ***del);
 /*
 **	----UTILS----
 */
-
-int			get_cd(t_argv *beg, char **env);
-void		set_env(t_argv *beg, char **env, char *cur_dir);
+int			cd(char *const argv[], char *const env[]);
+void		set_env(char *const argv[], char *const env[], char *cur_dir);
 void		my_setenv(char *key, char *value, char *old_pwd);
 
 #endif
