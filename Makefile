@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/09/25 22:55:31 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/09/26 15:07:40 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SRCS					:=	main.c minishell_greeting.c\
 							minishell_parse_str.c\
 							minishell_command_execution.c\
 							minishell_list.c\
-							minishell_garbage_collector_internal.c
+							minishell_garbage_collector_internal.c\
+							minishell_command_search.c
 OBJS					:= $(SRCS:.c=.o)
 OBJS_WITH_DIR			:= $(addprefix $(DIR_BIN), $(OBJS))
 HEADERS					:= minishell.h
