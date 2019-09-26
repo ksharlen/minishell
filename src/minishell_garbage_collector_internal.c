@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:12:57 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 19:59:28 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 21:20:31 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	argvdel(t_argv **del)
 	}
 }
 
-static void clean_struct(t_argv **beg)
+static void	clean_struct(t_argv **beg)
 {
 	t_argv	*tmp;
 
@@ -46,7 +46,7 @@ static void clean_struct(t_argv **beg)
 	(*beg) = NULL;
 }
 
-void	garbage_collector_internal(t_argv **beg)
+void		garbage_collector_internal(t_argv **beg)
 {
 	if (beg && *beg)
 		clean_struct(beg);

@@ -6,13 +6,24 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:18:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 19:59:53 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 21:21:56 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_argv	*minishell_parse_str(const char *str_for_parse)
+static void	del_parsed_str_and_for_parse(char ***parsed, char **for_parse)
+{
+	if (*parsed && *for_parse)
+	{
+		free(*parsed);
+		free(*for_parse);
+		*parsed = NULL;
+		*for_parse = NULL;
+	}
+}
+
+t_argv		*minishell_parse_str(const char *str_for_parse)
 {
 	t_argv	*beg;
 	char	**parsed_str;
@@ -30,7 +41,7 @@ t_argv	*minishell_parse_str(const char *str_for_parse)
 			++ptr_parsed_str;
 		}
 		ft_strdel_split(parsed_str);
-		free(parsed_str);
+		del_parsed_str_and_for_parse(&parsed_str, (char **)&str_for_parse);
 		get_next_line(STDIN, NULL, FLAG_ON);
 	}
 	return (beg);
