@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 14:35:21 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:50:42 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		main(int argc, char **argv, char **env)
 		str_stdio = minishell_read_stdio();
 		beg = minishell_parse_str(str_stdio);
 		minishell_command_execution(beg, env);
-		garbage_collector_internal(&beg, &str_stdio);
+		garbage_collector_internal(&beg);
 	}
 	return (0);
 }

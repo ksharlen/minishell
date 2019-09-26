@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 15:13:42 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 17:35:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		minishell_command_search(const char *cmd, char *path_ex)
 			ft_strcat(path_ex, cmd);
 			return (FOUND_INTERNAL_DIR);
 		}
+		else if (find_in_the_var_path_env(getenv("PATH"), cmd, path_ex))
+			;
 		// else if (find_from_path_env(cmd) == FOUND)
 		// 	ft_strcpy(path_ex, )
 	}

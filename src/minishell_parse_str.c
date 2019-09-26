@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:18:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/25 23:26:41 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:38:51 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ t_argv	*minishell_parse_str(const char *str_for_parse)
 			list_add_end(&beg, *ptr_parsed_str);
 			++ptr_parsed_str;
 		}
+		ft_strdel_split(parsed_str);
+		free(parsed_str);
+		//ft_strdel((char **)&str_for_parse);
+		//ft_strdel(parsed_str);
+		//temp(&parsed_str);
+		get_next_line(STDIN, NULL, FLAG_ON);
 	}
 	return (beg);
 }
