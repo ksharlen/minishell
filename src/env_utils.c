@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/26 21:36:40 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/26 21:55:40 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,12 @@ void	my_setenv(char *key, char *value, char *old_pwd)
 	}
 }
 
-void	set_env(t_argv *beg, char **env, char *cur_dir)
+void	set_env(char *const argv[], char *const env[], char *cur_dir)
 {
 	char *pwd;
 
-	pwd = ft_strjoin(cur_dir, beg->argv[1]);
+	P_UNUSED(env);
+	pwd = ft_strjoin(cur_dir, argv[1]);
 	setenv("OLDPWD", cur_dir, 1);
 	setenv("PWD", pwd, 1);
 }
