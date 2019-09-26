@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/25 21:56:39 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 20:04:07 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,39 @@ void	minishell_command_execution(t_argv *beg, char *const env[])
 {
 	pid_t 	pid;
 	int		status_child;
-	char	*path_ex;
+	char	path_ex[MAX_SIZE_PATH + 1];
+	int		ret_minishell_cmd_search;
 
-	path_ex = NULL;
 	while (beg)
 	{
-		pid = fork();
-		if (!pid)
+		ret_minishell_cmd_search = minishell_command_search(beg->argv[0], path_ex);
+		if (ret_minishell_cmd_search == FOUND_INTERNAL_DIR)
 		{
-			path_ex = ft_strjoin(FULL_PATH, beg->argv[0]);
-			execve(path_ex, beg->argv, env);
-			//working env
-			exit(EXIT_SUCCESS);
+			pid = NEW_PROCESS();
+			if (!pid)
+			{
+				{
+					if (execve(path_ex, beg->argv, env) == NOT_FOUND)
+						CMD_NOT_FOUND(beg->argv[0]);
+					else
+						exit(EXIT_SUCCESS);
+				}
+				//working env
+			}
+			else
+			{
+				wait(&status_child);
+			}
+		}
+		else if (ret_minishell_cmd_search == FOUND_PATH_ENV)
+		{
+			if (execve(path_ex, beg->argv, env) == NOT_FOUND)
+				CMD_NOT_FOUND(beg->argv[0]);
+			else
+				exit(EXIT_SUCCESS);
 		}
 		else
-		{
-			wait(&status_child);
-		}
+			CMD_NOT_FOUND(beg->argv[0]);
 		beg = beg->next;
 	}
 }

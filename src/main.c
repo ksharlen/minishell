@@ -6,11 +6,18 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/25 21:55:30 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:50:42 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*g_internal_commands[] = {
+	"cd",
+	"echo",
+	"env",
+	"ls"
+};
 
 int		main(int argc, char **argv, char **env)
 {
@@ -26,6 +33,7 @@ int		main(int argc, char **argv, char **env)
 		str_stdio = minishell_read_stdio();
 		beg = minishell_parse_str(str_stdio);
 		minishell_command_execution(beg, env);
+		garbage_collector_internal(&beg);
 	}
 	return (0);
 }

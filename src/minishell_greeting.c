@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 20:12:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/24 15:48:37 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/25 23:32:10 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void		get_curr_time(char *curr_time)
 	time_t	date;
 	char	*str_date;
 
+	ft_bzero(curr_time, SIZE_TIME + 1);
 	time(&date);
 	str_date = ctime(&date);
-	ft_bzero(curr_time, SIZE_TIME + 1);
 	ft_memcpy(curr_time, str_date + TO_TIME, SIZE_TIME);
 }
 

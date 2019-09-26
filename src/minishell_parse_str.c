@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:18:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/24 22:09:52 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 19:59:53 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ t_argv	*minishell_parse_str(const char *str_for_parse)
 	beg = NULL;
 	parsed_str = NULL;
 	if (str_for_parse && *str_for_parse)
-		parsed_str = SPLIT_COMMANDS((char *)str_for_parse, COMMAND_SPLIT);
-	ptr_parsed_str = parsed_str;
-	while (*ptr_parsed_str)
 	{
-		list_add_end(&beg, *ptr_parsed_str);
-		++ptr_parsed_str;
+		parsed_str = SPLIT_COMMANDS((char *)str_for_parse, COMMAND_SPLIT);
+		ptr_parsed_str = parsed_str;
+		while (*ptr_parsed_str)
+		{
+			list_add_end(&beg, *ptr_parsed_str);
+			++ptr_parsed_str;
+		}
+		ft_strdel_split(parsed_str);
+		free(parsed_str);
+		get_next_line(STDIN, NULL, FLAG_ON);
 	}
 	return (beg);
 }
