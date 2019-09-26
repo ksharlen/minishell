@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/26 22:44:28 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/26 23:18:27 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	check_dots_and_hyphen(char *const argv[], char *cur_dir, char *const 
 	{
 		chdir(tmp);
 		my_setenv("PWD", tmp, cur_dir);
+		free(tmp);
 		return (0);
 	}
 	return (1);
@@ -89,9 +90,11 @@ int			cd(char *const argv[], char *const env[])
 	{
 		if (check_dots_and_hyphen(argv, cur_dir, env))
 		{
-			chdir(argv[1]);
-			set_env(argv, env, cur_dir);
+			if (chdir(argv[1]))
+				exit(0);
+			my_setenv("PWD", argv[1], cur_dir);
 		}
 	}
+	free(home_dir);
 	return (0);
 }

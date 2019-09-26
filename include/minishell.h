@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 22:01:58 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/26 23:27:37 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void			strddel(char ***del);
 **	----UTILS----
 */
 int			cd(char *const argv[], char *const env[]);
-void		set_env(char *const argv[], char *const env[], char *cur_dir);
 void		my_setenv(char *key, char *value, char *old_pwd);
+void		my_unsetenv(char *key);
+void		pwd(char *const *argv[], char *const env[]);
 
 #endif
