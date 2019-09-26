@@ -90,4 +90,12 @@ int		minishell_command_search(const char *cmd, char *path_ex);
 int		find_in_the_var_path_env(const char *path_env, const char *cmd, char *path_ex);
 void	strddel(char ***del);
 
+/*
+**	----UTILS----
+*/
+
+int			get_cd(t_argv *beg, char **env);
+void		set_env(t_argv *beg, char **env, char *cur_dir);
+void		my_setenv(char *key, char *value, char *old_pwd);
+
 #endif
