@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 13:27:23 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/27 15:23:06 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void	minishell_command_execution(t_argv *beg, char *const env[])
 	enum e_find	search;
 	char cmd_for_ex[MAX_UNAME + 1];
 
+	P_UNUSED(env);
 	while (beg)
 	{
-		search = NOT_FOUND;
-		search = main_search_cmd(beg->CMD_NAME, cmd_for_ex);
+		search = minishell_command_search(beg->CMD_NAME, cmd_for_ex);
 		if (search == FOUND_INTERNAL_CMD)
-			;
-		else if (search == FOUND_INTERNAL_CMD)
+			;//empty
+		else if (search == FOUND_SHELL_DIR)
 			;
 		else if (search == FOUND_PATH_ENV)
 			;

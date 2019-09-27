@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 13:24:38 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/27 15:19:19 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@
 /*
 **PATH_TO_EX
 */
-# define INTERNAL_PATH_CMD	"/Users/ksharlen/git_clones/minishell/utilities/"
+# define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
 
 /*
 **OTHER
@@ -83,7 +83,8 @@ enum			e_find
 	NOT_FOUND = -1,
 	FOUND_INTERNAL_CMD,
 	FOUND_SHELL_DIR,
-	FOUND_PATH_ENV
+	FOUND_PATH_ENV,
+	FOUND
 };
 
 struct			s_entry
@@ -109,5 +110,7 @@ int				minishell_command_search(const char *cmd, char *path_ex);
 int				find_in_the_var_path_env(const char *path_env,
 	const char *cmd, char *path_ex);
 void			strddel(char ***del);
+void			push_path(const char *cmd, const char *path, char *path_ex);
+int				search_path(const char *path, const char *cmd, char *path_ex);
 
 #endif
