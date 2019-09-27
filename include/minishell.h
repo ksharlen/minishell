@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 15:28:10 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/27 15:49:30 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 # define NEW_PROCESS	fork
 # define CMD_NAME		argv[0]
 # define CHILD_PROCESS	0
+# define NUM_INTERNAL_CMDS	6
 
 extern char	*g_internal_commands[];
 
