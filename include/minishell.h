@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 23:27:37 by rloraine         ###   ########.fr       */
+/*   Created: 2019/09/27 21:13:02 by rloraine          #+#    #+#             */
+/*   Updated: 2019/09/27 21:13:04 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # include "libft.h"
 
-# define PROGRAM_NAME	"minishell"
+# define PROG_NAME		"minishell"
 # define SHELL			minishell
 
 /*
@@ -54,10 +54,16 @@
 // # define CMD_NOT_FOUND(x) PRINT(x)
 // # define N_TOO_LNG(p_name, )
 
+
+# define PRINT(p_name, e_name, out) ft_printf("%s: %s %s\n", p_name, e_name, out)
+# define PRINT_ERROR(p_name, e_name, out) PRINT(p_name, e_name, out)
+# define CMD_NOT_FOUND(p_name) PRINT_ERROR(PROG_NAME, NOT_FOUND_CMD, p_name)
+//# define PRINT(x) ft_printf("%s: %s %s\n", PROGRAM_NAME, NOT_FOUND_CMD, (x))
+//# define CMD_NOT_FOUND(x) PRINT(x)
+
 /*
 **PATH_TO_EX
 */
-# define PATH_EX			"./utilities/"
 # define INTERNAL_PATH_CMD	"/Users/ksharlen/git_clones/minishell/utilities/"
 
 /*
