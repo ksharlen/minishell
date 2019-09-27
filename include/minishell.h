@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 16:32:04 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/27 17:55:49 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@
 //# define CMD_NOT_FOUND(x) PRINT(x)
 
 /*
-**PATH_TO_EX
+**PATH
 */
 # define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
+# define MHISTORY "/Users/ksharlen/git_clones/minishell/.minishell_history"
+# define MRC	"/Users/ksharlen/git_clones/minishell/.minishellrc"
 
 /*
 **OTHER
@@ -71,6 +73,7 @@
 # define CMD_NAME		argv[0]
 # define CHILD_PROCESS	0
 # define NUM_INTERNAL_CMDS	6
+# define NUMBERS		"0123456789"
 
 /*
 **MINISHELL_HISTORY
@@ -105,7 +108,7 @@ struct			s_entry
 
 struct			s_minishell_history
 {
-	char	date[SIZE_DATE + 1]; //!Тут подумать про размер
+	char	date_ex_cmd[SIZE_DATE + 1]; //!Тут подумать про размер
 	t_key	key;
 };
 
@@ -128,5 +131,8 @@ int				find_in_the_var_path_env(const char *path_env,
 void			strddel(char ***del);
 void			push_path(const char *cmd, const char *path, char *path_ex);
 int				search_path(const char *path, const char *cmd, char *path_ex);
+void			minishell_push_minishell_history(const char *str_stdio, t_key *key);
+
+t_key			getkey_internal(void);
 
 #endif
