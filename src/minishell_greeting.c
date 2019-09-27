@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 20:12:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/25 23:32:10 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:13:27 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,32 @@ static void		get_uname(char *uname)
 	ft_strcat(uname, pw_name);
 }
 
-static char		*get_curr_dir(char *curr_dir)
+static char		*get_curr_dir(char *curr_dir, const char *home_dir)
 {
 	char	*p_str;
 
 	ft_bzero(curr_dir, MAX_SIZE_PATH);
 	getcwd(curr_dir, MAX_SIZE_PATH);
-	p_str = ft_strrchr(curr_dir, '/');
-	return (p_str + 1);
+	if (!ft_strcmp(home_dir, curr_dir))
+		return ("~/");
+	else if (*(curr_dir) && *(curr_dir + 1))
+	{
+		p_str = ft_strrchr(curr_dir, '/');
+		p_str++;
+	}
+	else
+		p_str = curr_dir;
+	return (p_str);
 }
 
-void			minishell_greeting(void)
+void			minishell_greeting(const char *home_dir)
 {
 	struct s_entry	entry;
 	char			*curr_dir_without_full_path;
 
 	get_curr_time(entry.time);
 	get_uname(entry.uname);
-	curr_dir_without_full_path = get_curr_dir(entry.curr_dir);
+	curr_dir_without_full_path = get_curr_dir(entry.curr_dir, home_dir);
 	ft_printf("[%s] %s%s%s %s%s%s $>", entry.time, COLOR_UNAME, entry.uname,
 		COLOR_DEFAULT, COLOR_DIR, curr_dir_without_full_path, COLOR_DEFAULT);
 }

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 15:49:30 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:32:04 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,14 @@
 # define CHILD_PROCESS	0
 # define NUM_INTERNAL_CMDS	6
 
+/*
+**MINISHELL_HISTORY
+*/
+# define SIZE_DATE		25
+
 extern char	*g_internal_commands[];
+
+typedef unsigned long long t_key;
 
 enum			e_stdstream
 {
@@ -96,13 +103,20 @@ struct			s_entry
 	char curr_dir[MAX_SIZE_PATH];
 };
 
+struct			s_minishell_history
+{
+	char	date[SIZE_DATE + 1]; //!Тут подумать про размер
+	t_key	key;
+};
+
 typedef struct	s_argv
 {
 	char			**argv;
+	int				argc;
 	struct s_argv	*next;
 }				t_argv;
 
-void			minishell_greeting(void);
+void			minishell_greeting(const char *home_dir);
 char			*minishell_read_stdio(void);
 t_argv			*minishell_parse_str(const char *str_for_parse);
 void			minishell_command_execution(t_argv *beg, char *const env[]);

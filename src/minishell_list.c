@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 21:33:41 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/24 21:45:28 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/27 16:02:12 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static t_argv	*list_create(char *cmd_argv)
 		if (!new)
 			return (NULL);
 		new->argv = SPLIT_COMMANDS(cmd_argv, ' ');
+		new->argc = ft_lineslen(new->argv);
 		new->next = NULL;
 	}
 	return (new);
