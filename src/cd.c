@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/28 19:30:20 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/28 20:12:27 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int			check_dir_and_path_for_err(char *const argv[])
 
 int			cd(char *const argv[], char *const env[])
 {
-	char	cur_dir[MAX_SIZE_PATH];
+	char	cur_dir[MAX_SIZE_PATH + 1];
 	char	*home_dir;
 	int		n;
 
