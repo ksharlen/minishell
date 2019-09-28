@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_command_search_path_env.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 21:21:01 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/28 17:32:08 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
