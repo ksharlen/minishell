@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/28 18:27:09 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/28 19:30:20 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,33 @@ static int	check_dots_and_hyphen(char *const argv[], char *cur_dir, char *const 
 	return (1);
 }
 
+int			check_dir_and_path_for_err(char *const argv[])
+{
+	int i;
+	int check;
+
+	i = -1;
+	check = 0;
+	while (argv[1][++i])
+	{
+		if (i == MAX_SIZE_PATH)
+		{
+			PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
+			return (-1);
+		}
+		if (argv[1][i] == '/')
+		{
+			if (check > 255)
+			{
+				PRINT_ERROR(argv[0], N_TOO_LONG, argv[1]);
+				return (-1);
+			}
+		}
+		++check;
+	}
+	return (0);
+}
+
 int			cd(char *const argv[], char *const env[])
 {
 	char	cur_dir[MAX_SIZE_PATH];
@@ -85,13 +112,21 @@ int			cd(char *const argv[], char *const env[])
 		my_setenv("PWD", home_dir, cur_dir);
 	}
 	else if (argv[2])
-		error();
+	{
+		PRINT_ERROR(argv[0], "string not in pwd:", argv[1]);
+		return (-1);
+	}
 	else
 	{
+		if (check_dir_and_path_for_err(argv))
+			return (-1);
 		if (check_dots_and_hyphen(argv, cur_dir, env))
 		{
 			if (chdir(argv[1]))
-				exit(0);
+			{
+				PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
+				return (-1);
+			}
 			my_setenv("PWD", argv[1], cur_dir);
 		}
 	}
