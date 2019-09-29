@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/28 20:12:27 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/29 17:59:35 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,11 @@ int			cd(char *const argv[], char *const env[])
 {
 	char	cur_dir[MAX_SIZE_PATH + 1];
 	char	*home_dir;
+	char	full_path;
 	int		n;
 
 	n = -1;
+	full_path = NULL;
 	while (env[++n])
 		if (ft_strstr(env[n], "HOME="))
 			home_dir = ft_strdup(ft_strchr(env[n], '/'));
@@ -118,11 +120,13 @@ int			cd(char *const argv[], char *const env[])
 	}
 	else
 	{
+		if (ft_strstr(argv[1], "~/"))
+			full_path = ft_strjoin(home_dir, argv[1]);
 		if (check_dir_and_path_for_err(argv))
 			return (-1);
 		if (check_dots_and_hyphen(argv, cur_dir, env))
 		{
-			if (chdir(argv[1]))
+			if (chdir(!full_path ? argv[1] : full_path))
 			{
 				PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
 				return (-1);
