@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2019/09/27 21:13:02 by rloraine          #+#    #+#             */
 /*   Updated: 2019/09/27 21:13:04 by rloraine         ###   ########.fr       */
+=======
+/*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
+/*   Updated: 2019/09/27 17:55:49 by ksharlen         ###   ########.fr       */
+>>>>>>> ksharlen
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +67,11 @@
 //# define CMD_NOT_FOUND(x) PRINT(x)
 
 /*
-**PATH_TO_EX
+**PATH
 */
-# define INTERNAL_PATH_CMD	"/Users/ksharlen/git_clones/minishell/utilities/"
+# define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
+# define MHISTORY "/Users/ksharlen/git_clones/minishell/.minishell_history"
+# define MRC	"/Users/ksharlen/git_clones/minishell/.minishellrc"
 
 /*
 **OTHER
@@ -73,8 +80,19 @@
 # define PATH_SPLIT		':'
 # define SPLIT_COMMANDS ft_strsplit_skip_space
 # define NEW_PROCESS	fork
+# define CMD_NAME		argv[0]
+# define CHILD_PROCESS	0
+# define NUM_INTERNAL_CMDS	6
+# define NUMBERS		"0123456789"
+
+/*
+**MINISHELL_HISTORY
+*/
+# define SIZE_DATE		25
 
 extern char	*g_internal_commands[];
+
+typedef unsigned long long t_key;
 
 enum			e_stdstream
 {
@@ -97,13 +115,20 @@ struct			s_entry
 	char curr_dir[MAX_SIZE_PATH];
 };
 
+struct			s_minishell_history
+{
+	char	date_ex_cmd[SIZE_DATE + 1]; //!Тут подумать про размер
+	t_key	key;
+};
+
 typedef struct	s_argv
 {
 	char			**argv;
+	int				argc;
 	struct s_argv	*next;
 }				t_argv;
 
-void			minishell_greeting(void);
+void			minishell_greeting(const char *home_dir);
 char			*minishell_read_stdio(void);
 t_argv			*minishell_parse_str(const char *str_for_parse);
 void			minishell_command_execution(t_argv *beg, char *const env[]);
@@ -113,6 +138,11 @@ int				minishell_command_search(const char *cmd, char *path_ex);
 int				find_in_the_var_path_env(const char *path_env,
 	const char *cmd, char *path_ex);
 void			strddel(char ***del);
+void			push_path(const char *cmd, const char *path, char *path_ex);
+int				search_path(const char *path, const char *cmd, char *path_ex);
+void			minishell_push_minishell_history(const char *str_stdio, t_key *key);
+
+t_key			getkey_internal(void);
 
 /*
 **	----UTILS----

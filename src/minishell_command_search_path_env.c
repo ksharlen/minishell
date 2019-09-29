@@ -6,20 +6,20 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/28 18:27:22 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/29 14:13:27 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void		push_path(const char *cmd, const char *path, char *path_ex)
+void		push_path(const char *cmd, const char *path, char *path_ex)
 {
 	ft_strcpy(path_ex, path);
 	ft_strcat(path_ex, "/");
 	ft_strcat(path_ex, cmd);
 }
 
-static int		search_path(const char *path, const char *cmd, char *path_ex)
+int			search_path(const char *path, const char *cmd, char *path_ex)
 {
 	DIR				*dir;
 	struct dirent	*dent;
@@ -32,7 +32,7 @@ static int		search_path(const char *path, const char *cmd, char *path_ex)
 		if (!ft_strcmp(dent->d_name, cmd))
 		{
 			push_path(cmd, path, path_ex);
-			search = FOUND_PATH_ENV;
+			search = FOUND;
 			break ;
 		}
 	}
@@ -47,7 +47,7 @@ int				find_in_the_var_path_env(const char *path_env,
 	char		**p_paths;
 	enum e_find	search;
 
-	ft_bzero(path_ex, MAX_SIZE_PATH + 1);
+	ft_bzero(path_ex, MAX_UNAME + 1);
 	paths = NULL;
 	search = NOT_FOUND;
 	if (path_env && cmd && path_ex && *path_env && *cmd)
@@ -56,7 +56,7 @@ int				find_in_the_var_path_env(const char *path_env,
 		p_paths = paths;
 		while (*p_paths)
 		{
-			if (search_path(*p_paths, cmd, path_ex) == FOUND_PATH_ENV)
+			if (search_path(*p_paths, cmd, path_ex) == FOUND)
 			{
 				search = FOUND_PATH_ENV;
 				break ;
