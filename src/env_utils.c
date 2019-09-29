@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/28 20:26:15 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/29 17:22:28 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	check_key_for_env(char *const argv[], char *const env[])
 {
 	if (ft_strequ(argv[1], "-i") || ft_strequ(argv[1], "--ignore-environment"))
 	{
+		//!! place for fork)))
 		return (1);
 	}
 	else if (ft_strequ(argv[1], "-u") || ft_strstr(argv[1], "--unset="))
@@ -50,11 +51,7 @@ static int	check_key_for_env(char *const argv[], char *const env[])
 		if (ft_strequ(argv[1], "-u"))
 			my_unsetenv(argv[2]);
 		else
-			my_unsetenv(ft_strchr(argv[1], '=') + 1);
-		return (1);
-	}
-	else if (ft_strequ(argv[1], "--help"))
-	{
+			my_unsetenv(ft_strsub(argv[1], *argv[1] - ft_strrchr(argv[1], '=')));
 		return (1);
 	}
 	else if (ft_strequ(argv[1], "--version"))
@@ -76,7 +73,7 @@ int			env(char *const argv[], char *const env[])
 	int n;
 
 	n = -1;
-	if (!argv[1])
+	if (!argv[1] || ft_strequ(argv[1], "-v"))
 	{
 		while (env[++n])
 			ft_printf("%s\n", env[n]);
