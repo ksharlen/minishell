@@ -5,13 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-<<<<<<< HEAD
-/*   Created: 2019/09/27 21:13:02 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/27 21:13:04 by rloraine         ###   ########.fr       */
-=======
-/*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 17:55:49 by ksharlen         ###   ########.fr       */
->>>>>>> ksharlen
+/*   Created: 2019/09/30 20:09:55 by rloraine          #+#    #+#             */
+/*   Updated: 2019/09/30 20:10:14 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +43,7 @@
 # define COLOR_DIR		"\e[36m"
 # define COLOR_UNAME	"\e[33m"
 # define COLOR_DEFAULT	"\e[0m"
+# define INF			1
 
 /*
 **ERRORS
@@ -72,6 +68,7 @@
 # define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
 # define MHISTORY "/Users/ksharlen/git_clones/minishell/.minishell_history"
 # define MRC	"/Users/ksharlen/git_clones/minishell/.minishellrc"
+# define KEY_LAST_CMD_MHISTORY "KEY"
 
 /*
 **OTHER
@@ -88,7 +85,7 @@
 /*
 **MINISHELL_HISTORY
 */
-# define SIZE_DATE		25
+# define SIZE_DATE		24
 
 extern char	*g_internal_commands[];
 
@@ -105,7 +102,8 @@ enum			e_find
 	NOT_FOUND = -1,
 	FOUND_OUR_DIR,
 	FOUND_PATH_ENV,
-	FOUND_INTERNAL
+	FOUND,
+	FOUND_EXIT
 };
 
 struct			s_entry
@@ -115,11 +113,11 @@ struct			s_entry
 	char curr_dir[MAX_SIZE_PATH];
 };
 
-struct			s_minishell_history
-{
-	char	date_ex_cmd[SIZE_DATE + 1]; //!Тут подумать про размер
-	t_key	key;
-};
+// struct			s_minishell_history
+// {
+// 	char	date_ex_cmd[SIZE_DATE + 1]; //!Тут подумать про размер
+// 	t_key	key;
+// };
 
 typedef struct	s_argv
 {
@@ -128,10 +126,18 @@ typedef struct	s_argv
 	struct s_argv	*next;
 }				t_argv;
 
+struct			s_key_data
+{
+	int			fd_ms_history;
+	int			key;
+	char		*key_str;
+	char		date_ex_cmd[SIZE_DATE + 1];
+};
+
 void			minishell_greeting(const char *home_dir);
 char			*minishell_read_stdio(void);
 t_argv			*minishell_parse_str(const char *str_for_parse);
-void			minishell_command_execution(t_argv *beg, char *const env[]);
+int				minishell_command_execution(t_argv *beg, char *const env[]);
 void			list_add_end(t_argv **beg, char *cmd_argv);
 void			garbage_collector_internal(t_argv **beg);
 int				minishell_command_search(const char *cmd, char *path_ex);
@@ -140,9 +146,16 @@ int				find_in_the_var_path_env(const char *path_env,
 void			strddel(char ***del);
 void			push_path(const char *cmd, const char *path, char *path_ex);
 int				search_path(const char *path, const char *cmd, char *path_ex);
-void			minishell_push_minishell_history(const char *str_stdio, t_key *key);
+void			minishell_push_minishell_history(const char *str_stdio, struct s_key_data *k_data);
 
-t_key			getkey_internal(void);
+void			getkey_internal(struct s_key_data *key);
+
+/*
+**MSHELL_HISTORY
+*/
+void			minishell_history_init(struct s_key_data *k_data);
+void			minishell_history_close(struct s_key_data *k_data);
+
 
 /*
 **	----UTILS----

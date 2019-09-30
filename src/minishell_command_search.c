@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/29 14:13:44 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/30 20:05:21 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ static int	find_internal_cmd(const char *cmd, char *path_ex)
 	p_internal_cmd = g_internal_commands;
 	while (*p_internal_cmd)
 	{
-		if (!ft_strcmp(*p_internal_cmd, cmd))
-			return (FOUND_OUR_DIR);
+		if (!ft_strcmp(cmd, "exit"))
+			return (FOUND_EXIT);
+		else if (!ft_strcmp(cmd, *(p_internal_cmd) + 1))
+		{
+			ft_strcpy(path_ex, *p_internal_cmd);
+			search_cmd = FOUND_INTERNAL_CMD;
+			break ;
+		}
 		++p_internal_cmd;
 	}
 	return (search_cmd);
@@ -35,12 +41,13 @@ int			minishell_command_search(const char *cmd, char *path_ex)
 	search = NOT_FOUND;
 	if (cmd && path_ex && *cmd)
 	{
-		if (find_from_interlnal_dir_ex(cmd) == FOUND_OUR_DIR)
-		{
-			ft_strcpy(path_ex, INTERNAL_PATH_CMD);
-			ft_strcat(path_ex, cmd);
-			search = FOUND_OUR_DIR;
-		}
+		ft_bzero(path_ex, MAX_UNAME + 1);
+		if (find_internal_cmd(cmd, path_ex) == FOUND_EXIT)
+			return (FOUND_EXIT);
+		else if (search == FOUND_INTERNAL_CMD)
+			return (search);
+		else if (search_path(INTERNAL_DIR_CMD, cmd, path_ex) == FOUND)
+			search = FOUND_SHELL_DIR;
 		else if (find_in_the_var_path_env(getenv("PATH"),
 		cmd, path_ex) == FOUND_PATH_ENV)
 			search = FOUND_PATH_ENV;

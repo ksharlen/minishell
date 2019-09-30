@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/29 14:13:27 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/30 20:05:25 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int				find_in_the_var_path_env(const char *path_env,
 			++p_paths;
 		}
 		ft_strdel_split(paths);
-		strddel(&paths);
+		free(paths);
 	}
 	return (search);
 }
