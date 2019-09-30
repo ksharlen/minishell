@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 16:38:40 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 17:57:51 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		main(int argc, char **argv, char **env)
 	char				*str_stdio;
 	t_argv				*beg;
 	struct s_key_data	key_minishell_history;
+	enum e_rw			rw;
 
 	P_UNUSED(argc);
 	P_UNUSED(argv);
@@ -37,9 +38,10 @@ int		main(int argc, char **argv, char **env)
 		str_stdio = minishell_read_stdio();
 		minishell_push_minishell_history(str_stdio, &key_minishell_history);
 		beg = minishell_parse_str(str_stdio);
-		if (minishell_command_execution(beg, env) == FOUND_EXIT)
-			break ;
+		rw = minishell_command_execution(beg, env);
 		garbage_collector_internal(&beg);
+		if (rw == FOUND_EXIT);
+			break ;
 	}
 	minishell_history_close(&key_minishell_history);
 	return (0);

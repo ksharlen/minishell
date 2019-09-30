@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:45:31 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 16:06:28 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 17:43:19 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void			minishell_history_close(struct s_key_data *k_data)
 	char *key;
 
 	key = ft_itoa(k_data->key);
-	ft_printf("k_data->key: %d\n", k_data->key);
 	close(k_data->fd_ms_history);
 	W_FVAL(MRC, KEY_LAST_CMD_MHISTORY, key);
 	ft_strdel(&k_data->key_str);
@@ -61,10 +60,21 @@ void			minishell_history_close(struct s_key_data *k_data)
 void			minishell_history_init(struct s_key_data *k_data)
 {
 	mode_t		st_mode;
+	int			fd;
 
 	st_mode = 0;
 	st_mode = S_IRWXU | S_IRGRP | S_IROTH;
 	k_data->key_str = R_FVAL(MRC, KEY_LAST_CMD_MHISTORY);
-	k_data->key = ft_atoi(k_data->key_str);
+	ft_printf("here\n");
+	if (!k_data->key_str)
+	{
+		fd = open(MRC, O_CREAT | O_WRONLY | O_APPEND, st_mode);
+		ft_printf("%v%s=%s", fd, KEY_LAST_CMD_MHISTORY, "0");
+		k_data->key = 0;
+		k_data->key_str = ft_strdup("0");
+		close(fd);
+	}
+	else
+		k_data->key = ft_atoi(k_data->key_str);
 	k_data->fd_ms_history = open(MHISTORY, O_CREAT | O_WRONLY | O_APPEND, st_mode);
 }

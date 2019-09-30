@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:12:57 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 21:20:31 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 17:49:54 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void		strddel(char ***del)
 	}
 }
 
-static void	argvdel(t_argv **del)
-{
-	if (del && *del)
-	{
-		free(*del);
-		*del = NULL;
-	}
-}
+// static void	argvdel(t_argv **del)
+// {
+// 	if (del && *del)
+// 	{
+// 		free(*del);
+// 		*del = NULL;
+// 	}
+// }
 
 static void	clean_struct(t_argv **beg)
 {
@@ -41,9 +41,9 @@ static void	clean_struct(t_argv **beg)
 		free((*beg)->argv);
 		tmp = (*beg);
 		(*beg) = (*beg)->next;
-		argvdel(&tmp);
+		free(tmp);
 	}
-	(*beg) = NULL;
+	// (*beg) = NULL;
 }
 
 void		garbage_collector_internal(t_argv **beg)
