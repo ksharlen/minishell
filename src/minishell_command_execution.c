@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 16:44:17 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 16:39:49 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void execute_cmd(char *const argv[], char *const env[], const char *path_
 		wait(&status_child);
 }
 
-void	minishell_command_execution(t_argv *beg, char *const env[])
+int		minishell_command_execution(t_argv *beg, char *const env[])
 {
 	enum e_find	search;
 	char		cmd_for_ex[MAX_UNAME + 1];
@@ -103,7 +103,9 @@ void	minishell_command_execution(t_argv *beg, char *const env[])
 	while (beg)
 	{
 		search = minishell_command_search(beg->CMD_NAME, cmd_for_ex);
-		if (search == FOUND_INTERNAL_CMD)
+		if (search == FOUND_EXIT)
+			return (FOUND_EXIT);
+		else if (search == FOUND_INTERNAL_CMD)
 			execute_internal_cmd(beg->argv, env, beg->argc, cmd_for_ex);
 		else if (search == FOUND_SHELL_DIR || search == FOUND_PATH_ENV)
 			execute_cmd(beg->argv, env, cmd_for_ex);
@@ -111,4 +113,5 @@ void	minishell_command_execution(t_argv *beg, char *const env[])
 			CMD_NOT_FOUND(beg->CMD_NAME);
 		beg = beg->next;
 	}
+	return (search);
 }

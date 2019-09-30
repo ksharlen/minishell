@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 17:55:40 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 16:38:40 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,24 @@ char	*g_internal_commands[] = {
 
 int		main(int argc, char **argv, char **env)
 {
-	char	*str_stdio;
-	t_argv	*beg;
-	t_key	key_minishell_history;
+	char				*str_stdio;
+	t_argv				*beg;
+	struct s_key_data	key_minishell_history;
 
 	P_UNUSED(argc);
 	P_UNUSED(argv);
-	key_minishell_history = getkey_internal();
+	minishell_history_init(&key_minishell_history);
 	system("clear");
-	while (1)
+	while (INF)
 	{
 		minishell_greeting(getenv("HOME"));
 		str_stdio = minishell_read_stdio();
 		minishell_push_minishell_history(str_stdio, &key_minishell_history);
 		beg = minishell_parse_str(str_stdio);
-		minishell_command_execution(beg, env);
+		if (minishell_command_execution(beg, env) == FOUND_EXIT)
+			break ;
 		garbage_collector_internal(&beg);
 	}
+	minishell_history_close(&key_minishell_history);
 	return (0);
 }
