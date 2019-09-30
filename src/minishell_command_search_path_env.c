@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 19:16:30 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 20:26:14 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ int			search_path(const char *path, const char *cmd, char *path_ex)
 
 	search = NOT_FOUND;
 	dir = opendir(path);
-	while ((dent = readdir(dir)))
+	if (dir)
 	{
-		if (!ft_strcmp(dent->d_name, cmd))
+		while ((dent = readdir(dir)))
 		{
-			push_path(cmd, path, path_ex);
-			search = FOUND;
-			break ;
+			if (!ft_strcmp(dent->d_name, cmd))
+			{
+				push_path(cmd, path, path_ex);
+				search = FOUND;
+				break ;
+			}
 		}
+		closedir(dir);
 	}
-	closedir(dir);
 	return (search);
 }
 
@@ -54,7 +57,7 @@ int				find_in_the_var_path_env(const char *path_env,
 	{
 		paths = ft_strsplit_skip_space((char *)path_env, PATH_SPLIT);
 		p_paths = paths;
-		while (*p_paths)
+		while (p_paths && *p_paths)
 		{
 			if (search_path(*p_paths, cmd, path_ex) == FOUND)
 			{
