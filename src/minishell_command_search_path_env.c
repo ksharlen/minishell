@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 15:21:25 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 19:16:30 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int				find_in_the_var_path_env(const char *path_env,
 			++p_paths;
 		}
 		ft_strdel_split(paths);
-		strddel(&paths);
+		free(paths);
 	}
 	return (search);
 }

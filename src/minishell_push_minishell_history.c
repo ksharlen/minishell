@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:45:31 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 17:43:19 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/09/30 19:06:47 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void			minishell_history_init(struct s_key_data *k_data)
 	st_mode = 0;
 	st_mode = S_IRWXU | S_IRGRP | S_IROTH;
 	k_data->key_str = R_FVAL(MRC, KEY_LAST_CMD_MHISTORY);
-	ft_printf("here\n");
 	if (!k_data->key_str)
 	{
 		fd = open(MRC, O_CREAT | O_WRONLY | O_APPEND, st_mode);
