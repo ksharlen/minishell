@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/29 17:59:35 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/30 21:18:11 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int			check_dir_and_path_for_err(char *const argv[])
 		{
 			if (check > 255)
 			{
-				PRINT_ERROR(argv[0], N_TOO_LONG, argv[1]);
+				PRINT_ERROR(argv[0], FILE_TO_LONG, argv[1]);
 				return (-1);
 			}
 		}
@@ -97,7 +97,7 @@ int			cd(char *const argv[], char *const env[])
 {
 	char	cur_dir[MAX_SIZE_PATH + 1];
 	char	*home_dir;
-	char	full_path;
+	char	*full_path;
 	int		n;
 
 	n = -1;

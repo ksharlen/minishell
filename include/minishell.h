@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/30 20:09:55 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/30 20:10:14 by rloraine         ###   ########.fr       */
+/*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
+/*   Updated: 2019/09/30 21:18:59 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,7 @@
 **ERRORS
 */
 # define NOT_FOUND_CMD		"command not found:"
-# define N_TOO_LONG			"file name too long:"
-# define PRINT(p_name, e_str, out) ft_printf("%s: %s %s\n", p_name, e_str, out)
-// # define PRINT(x) ft_printf("%s: %s %s\n", PROGRAM_NAME, NOT_FOUND_CMD, (x))
-// # define CMD_NOT_FOUND(x) PRINT(x)
-// # define N_TOO_LNG(p_name, )
-
+# define FILE_TO_LONG		"file name too long:" //worging for file and cmd
 
 # define PRINT(p_name, e_name, out) ft_printf("%s: %s %s\n", p_name, e_name, out)
 # define PRINT_ERROR(p_name, e_name, out) PRINT(p_name, e_name, out)
@@ -100,7 +95,8 @@ enum			e_stdstream
 enum			e_find
 {
 	NOT_FOUND = -1,
-	FOUND_OUR_DIR,
+	FOUND_INTERNAL_CMD,
+	FOUND_SHELL_DIR,
 	FOUND_PATH_ENV,
 	FOUND,
 	FOUND_EXIT
@@ -156,13 +152,16 @@ void			getkey_internal(struct s_key_data *key);
 void			minishell_history_init(struct s_key_data *k_data);
 void			minishell_history_close(struct s_key_data *k_data);
 
-
 /*
 **	----UTILS----
 */
-int			cd(char *const argv[], char *const env[]);
-void		my_setenv(char *key, char *value, char *old_pwd);
-void		my_unsetenv(char *key);
-void		pwd(char *const *argv[], char *const env[]);
+
+int				cd(char *const argv[], char *const env[]);
+int				check_dir_and_path_for_err(char *const argv[]);
+int				echo(char *const argv[]);
+void			pwd(char *const *argv[], char *const env[]);
+int				env(char *const argv[], char *const env[]);
+void			my_setenv(char *key, char *value, char *old_pwd);
+void			my_unsetenv(char *key);
 
 #endif

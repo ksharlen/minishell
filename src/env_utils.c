@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/29 18:01:43 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/09/30 21:23:55 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ void		my_setenv(char *key, char *value, char *old_pwd)
 	}
 	else
 	{
-		if (setenv(key, value, 1));
+		if (setenv(key, value, 1))
 			exit(0);
 	}
 }
 
-static int	check_key_for_env(char *const argv[], char *const env[])
+static int	check_key_for_env(char *const argv[])
 {
 	if (ft_strequ(argv[1], "-i") || ft_strequ(argv[1], "--ignore-environment"))
 	{
@@ -51,7 +51,7 @@ static int	check_key_for_env(char *const argv[], char *const env[])
 		if (ft_strequ(argv[1], "-u"))
 			my_unsetenv(argv[2]);
 		else
-			my_unsetenv(ft_strsub(argv[1], *argv[1] - ft_strrchr(argv[1], '=')));
+			my_unsetenv(ft_strsub(argv[1], 0, *argv[1] - (int)ft_strrchr(argv[1], '=')));
 		return (1);
 	}
 	else if (ft_strequ(argv[1], "--version"))
@@ -82,7 +82,7 @@ int			env(char *const argv[], char *const env[])
 	}
 	else
 	{
-		if (!check_key_for_env(argv, env))
+		if (!check_key_for_env(argv))
 			my_setenv(argv[1], argv[2], NULL);
 		return (0);
 	}
