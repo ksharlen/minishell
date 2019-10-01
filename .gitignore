@@ -56,3 +56,6 @@ minishell
 bin/
 tmp/
 temp/
+
+.minishell_history
+.minishellrc

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 16:39:49 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/01 14:42:52 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,21 +78,33 @@ static void	execute_internal_cmd(char *const argv[], char *const enval[], int ar
 	internal_cmd[ft_atoi(cmd)](argc, (char **)argv, (char **)enval);
 }
 
+void	tmp(int sig)
+{
+	P_UNUSED(sig);
+	ft_printf("minishell: segmentation fault\n");
+	// exit(EXIT_SUCCESS);
+}
+
 static void execute_cmd(char *const argv[], char *const env[], const char *path_cmd)
 {
 	pid_t	pid;
 	int		status_child;
 
+	signal(SIGSEGV, tmp);
 	pid = NEW_PROCESS();
 	if (pid == CHILD_PROCESS)
 	{
 		if (execve(path_cmd, argv, env) == NOT_FOUND)
 			CMD_NOT_FOUND(CMD_NAME);
 		else
+		{
 			exit(EXIT_SUCCESS);
+		}
 	}
 	else
+	{
 		wait(&status_child);
+	}
 }
 
 int		minishell_command_execution(t_argv *beg, char *const env[])
