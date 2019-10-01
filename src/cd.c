@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/30 21:18:11 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/01 20:13:45 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,21 @@ int			check_dir_and_path_for_err(char *const argv[])
 			}
 		}
 		++check;
+	}
+	if (!access(argv[0], F_OK))
+	{
+		if (!access(argv[0], W_OK))
+			return (0);
+		else
+		{
+			PRINT_ERROR(argv[0], "premission denied:", argv[1]);
+			return (-1);
+		}		
+	}
+	else
+	{
+		PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
+		return (-1);
 	}
 	return (0);
 }

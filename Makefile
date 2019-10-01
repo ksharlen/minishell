@@ -6,7 +6,7 @@
 #    By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/09/29 14:14:08 by rloraine         ###   ########.fr        #
+#    Updated: 2019/10/01 20:03:52 by rloraine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS					:=	main.c minishell_greeting.c\
 							minishell_garbage_collector_internal.c\
 							minishell_command_search.c\
 							minishell_command_search_path_env.c\
+							minishell_push_minishell_history.c\
 							cd.c\
 							env_utils.c
 
