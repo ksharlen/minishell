@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 23:24:17 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 00:15:11 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,35 +18,42 @@ static void	execute_internal_cmd(char *const argv[], char *const enval[], int ar
 	P_UNUSED(enval);
 	P_UNUSED(argc);
 	P_UNUSED(cmd);
-	int	(*internal_cmd[NUM_INTERNAL_CMDS])();
+	int	(*internal_cmd[NUM_INTERNAL_CMDS])(int argc, char *argv[], char *env[]);
 
-	ft_printf("here\n");
 	internal_cmd[0] = cd;
 	internal_cmd[1] = echo;
 	internal_cmd[2] = env;
-	internal_cmd[3] = my_unsetenv;
-	internal_cmd[4] = my_setenv;
-	internal_cmd[5] = pwd;
+	internal_cmd[3] = pwd;
+	// internal_cmd[3] = my_unsetenv;
+	// internal_cmd[4] = my_setenv;
+	// internal_cmd[5] = pwd;
 
-	internal_cmd[ft_atoi(cmd)]();
+	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, (char **)enval);
 }
 
-// void	tmp(int sig)
-// {
-// 	P_UNUSED(sig);
-// 	ft_printf("minishell: segmentation fault\n");
-// 	// exit(EXIT_SUCCESS);
-// }
+void	tmp(int sig)
+{
+	if (sig == SIGSEGV)
+	{
+		ft_printf("minishell: segmentation fault\n");
+	}
+	else if (sig == SIGINT)
+	{
+		exit(EXIT_SUCCESS);
+	}
+	// exit(EXIT_SUCCESS);
+}
 
 static void execute_cmd(char *const argv[], char *const env[], const char *path_cmd)
 {
 	pid_t	pid;
 	int		status_child;
 
-	// signal(SIGSEGV, tmp);
+	signal(SIGSEGV, tmp);
 	pid = NEW_PROCESS();
 	if (pid == CHILD_PROCESS)
 	{
+		signal(SIGINT, tmp);
 		if (execve(path_cmd, argv, env) == NOT_FOUND)
 			CMD_NOT_FOUND(CMD_NAME);
 		else

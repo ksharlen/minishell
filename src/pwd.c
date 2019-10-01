@@ -6,13 +6,13 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:59:27 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/01 23:08:30 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:37:51 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		pwd(int argc, char *const *argv[], char *const env[])
+int		pwd(int argc, char *argv[], char *env[])
 {
 	char	*tmp;
 	int		n;

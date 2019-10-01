@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 23:03:47 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:42:45 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,11 +156,11 @@ void			minishell_history_close(struct s_key_data *k_data);
 **	----UTILS----
 */
 
-int				cd(int argc, char *const argv[], char *const env[]);
+int				cd(int argc, char *argv[], char *env[]);
 int				check_dir_and_path_for_err(char *const argv[]);
-int				echo(int argc, char *const argv[], char *const env[]);
-int				pwd(int argc, char *const *argv[], char *const env[]);
-int				env(int argc, char *const argv[], char *const env[]);
+int				echo(int argc, char *argv[], char *env[]);
+int				pwd(int argc, char *argv[], char *env[]);
+int				env(int argc, char *argv[], char *env[]);
 int				my_setenv(char *key, char *value, char *old_pwd);
 int				my_unsetenv(char *key);
 

@@ -6,13 +6,13 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 23:29:11 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/01 23:06:33 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:42:16 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		echo(int argc, char *const argv[], char *const env[])
+int		echo(int argc, char *argv[], char *env[])
 {
 	int n;
 	int flag;

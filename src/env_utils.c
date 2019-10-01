@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/01 23:07:43 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:42:32 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int	check_key_for_env(char *const argv[])
 	return (0);
 }
 
-int			env(int argc, char *const argv[], char *const env[])
+int			env(int argc, char *argv[], char *env[])
 {
 	int n;
 

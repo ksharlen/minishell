@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 22:56:26 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 00:18:15 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,18 @@ char	*g_internal_commands[] = {
 	"0cd",
 	"1echo",
 	"2env",
-	"3setenv",
-	"4unsetenv",
-	"5exit",
-	"6pwd"
+	"3pwd"
+	// "3setenv",
+	// "4unsetenv",
+	// "5pwd"
+	// "5exit",
 };
+
+static void tmp1(int sig)
+{
+	if (sig == SIGINT)
+		return ;
+}
 
 int		main(int argc, char **argv, char **env)
 {
@@ -29,6 +36,7 @@ int		main(int argc, char **argv, char **env)
 	struct s_key_data	key_minishell_history;
 	enum e_find			search;
 
+	signal(SIGINT, tmp1);
 	P_UNUSED(argc);
 	P_UNUSED(argv);
 	search = NOT_FOUND;
