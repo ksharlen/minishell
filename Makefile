@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+         #
+#    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/10/01 20:03:52 by rloraine         ###   ########.fr        #
+#    Updated: 2019/10/01 23:00:14 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRCS					:=	main.c minishell_greeting.c\
 							minishell_command_search_path_env.c\
 							minishell_push_minishell_history.c\
 							cd.c\
-							env_utils.c
+							echo.c\
+							env_utils.c\
+							pwd.c
 
 
 OBJS					:= $(SRCS:.c=.o)

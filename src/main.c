@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 19:12:49 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/01 22:56:26 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ char	*g_internal_commands[] = {
 	"2env",
 	"3setenv",
 	"4unsetenv",
-	"5exit"
+	"5exit",
+	"6pwd"
 };
 
 int		main(int argc, char **argv, char **env)

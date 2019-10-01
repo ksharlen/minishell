@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/01 20:13:45 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:26:16 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			check_dir_and_path_for_err(char *const argv[])
 		{
 			PRINT_ERROR(argv[0], "premission denied:", argv[1]);
 			return (-1);
-		}		
+		}
 	}
 	else
 	{
@@ -108,18 +108,20 @@ int			check_dir_and_path_for_err(char *const argv[])
 	return (0);
 }
 
-int			cd(char *const argv[], char *const env[])
+int			cd(int argc, char *const argv[], char *const env[])
 {
 	char	cur_dir[MAX_SIZE_PATH + 1];
 	char	*home_dir;
 	char	*full_path;
 	int		n;
 
+	P_UNUSED(argc);
 	n = -1;
 	full_path = NULL;
 	while (env[++n])
 		if (ft_strstr(env[n], "HOME="))
 			home_dir = ft_strdup(ft_strchr(env[n], '/'));
+	// ft_printf("cd: seg\n");
 	if (!(getcwd(cur_dir, MAX_SIZE_PATH)))
 		error();
 	if (!argv[1] || ft_strequ(argv[1], "~") || ft_strequ(argv[1], "--"))

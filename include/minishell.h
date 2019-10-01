@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 22:53:41 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:03:47 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@
 /*
 **PATH
 */
-# define INTERNAL_DIR_CMD	"/Users/rloraine/Desktop/minishell/utilities"
-# define MHISTORY "/Users/rloraine/Desktop/minishell/.minishell_history"
-# define MRC	"/Users/rloraine/Desktop/minishell/.minishellrc"
+# define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
+# define MHISTORY "/Users/ksharlen/git_clones/minishell/.minishell_history"
+# define MRC	"/Users/ksharlen/git_clones/minishell/.minishellrc"
 # define KEY_LAST_CMD_MHISTORY "KEY"
 
 /*
@@ -74,7 +74,7 @@
 # define NEW_PROCESS	fork
 # define CMD_NAME		argv[0]
 # define CHILD_PROCESS	0
-# define NUM_INTERNAL_CMDS	6
+# define NUM_INTERNAL_CMDS	7
 # define NUMBERS		"0123456789"
 
 /*
@@ -156,12 +156,12 @@ void			minishell_history_close(struct s_key_data *k_data);
 **	----UTILS----
 */
 
-int				cd(char *const argv[], char *const env[]);
+int				cd(int argc, char *const argv[], char *const env[]);
 int				check_dir_and_path_for_err(char *const argv[]);
-int				echo(char *const argv[]);
-void			pwd(char *const *argv[], char *const env[]);
-int				env(char *const argv[], char *const env[]);
-void			my_setenv(char *key, char *value, char *old_pwd);
-void			my_unsetenv(char *key);
+int				echo(int argc, char *const argv[], char *const env[]);
+int				pwd(int argc, char *const *argv[], char *const env[]);
+int				env(int argc, char *const argv[], char *const env[]);
+int				my_setenv(char *key, char *value, char *old_pwd);
+int				my_unsetenv(char *key);
 
 #endif

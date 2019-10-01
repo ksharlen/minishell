@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_command_search.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 19:58:28 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:20:27 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int			minishell_command_search(const char *cmd, char *path_ex)
 	if (cmd && path_ex && *cmd)
 	{
 		ft_bzero(path_ex, MAX_UNAME + 1);
-		if (find_internal_cmd(cmd, path_ex) == FOUND_EXIT)
+		if ((search = find_internal_cmd(cmd, path_ex)) == FOUND_EXIT)
 			return (FOUND_EXIT);
 		else if (search == FOUND_INTERNAL_CMD)
 			return (search);
