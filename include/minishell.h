@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 21:18:59 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/01 19:59:13 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@
 /*
 **PATH
 */
-# define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
-# define MHISTORY "/Users/ksharlen/git_clones/minishell/.minishell_history"
-# define MRC	"/Users/ksharlen/git_clones/minishell/.minishellrc"
+# define INTERNAL_DIR_CMD	"/Users/rloraine/Desktop/minishell/utilities"
+# define MHISTORY "/Users/rloraine/Desktop/minishell/.minishell_history"
+# define MRC	"/Users/rloraine/Desktop/minishell/.minishellrc"
 # define KEY_LAST_CMD_MHISTORY "KEY"
 
 /*
