@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 20:12:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 16:13:27 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 18:58:53 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		get_uname(char *uname)
 
 	uid = getuid();
 	pw_name = getpwuid(uid)->pw_name;
-	bzero(uname, MAX_UNAME);
+	ft_bzero(uname, MAX_UNAME);
 	ft_strcat(uname, pw_name);
 }
 

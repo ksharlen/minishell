@@ -6,19 +6,19 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 00:15:11 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 13:39:27 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	execute_internal_cmd(char *const argv[], char *const enval[], int argc, const char *cmd)
+static void execute_internal_cmd(char *const argv[], char *const enval[], int argc, const char *cmd)
 {
 	P_UNUSED(argv);
 	P_UNUSED(enval);
 	P_UNUSED(argc);
 	P_UNUSED(cmd);
-	int	(*internal_cmd[NUM_INTERNAL_CMDS])(int argc, char *argv[], char *env[]);
+	int (*internal_cmd[NUM_INTERNAL_CMDS])(int argc, char *argv[], char *env[]);
 
 	internal_cmd[0] = cd;
 	internal_cmd[1] = echo;
@@ -31,7 +31,7 @@ static void	execute_internal_cmd(char *const argv[], char *const enval[], int ar
 	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, (char **)enval);
 }
 
-void	tmp(int sig)
+void tmp(int sig)
 {
 	if (sig == SIGSEGV)
 	{
@@ -46,8 +46,8 @@ void	tmp(int sig)
 
 static void execute_cmd(char *const argv[], char *const env[], const char *path_cmd)
 {
-	pid_t	pid;
-	int		status_child;
+	pid_t pid;
+	int status_child;
 
 	signal(SIGSEGV, tmp);
 	pid = NEW_PROCESS();
@@ -67,10 +67,10 @@ static void execute_cmd(char *const argv[], char *const env[], const char *path_
 	}
 }
 
-int		minishell_command_execution(t_argv *beg, char *const env[])
+int minishell_command_execution(t_argv *beg, char *const env[])
 {
-	enum e_find	search;
-	char		cmd_for_ex[MAX_UNAME + 1];
+	enum e_find search;
+	char cmd_for_ex[MAX_UNAME + 1];
 
 	while (beg)
 	{

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 23:42:45 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:10:29 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,30 @@
 
 # define PROG_NAME		"minishell"
 # define SHELL			minishell
+
+/*
+**MINISHELL_ERRORS
+*/
+# define E_OPEN		0
+# define E_CLOSE	1
+# define E_READ		2
+# define E_OPENDIR	3
+# define E_CLOSEDIR 4
+# define E_READDIR	5
+# define E_FORK		6
+# define E_EXECVE	7
+# define E_WAIT		8
+# define E_SIGNAL	9
+# define E_TIME		10
+# define E_CTIME	11
+# define E_WAITPID	12
+# define E_KILL		13
+# define E_GETCWD	14
+# define E_MALLOC	15
+# define E_CHDIR	16
+# define E_STAT		17
+# define E_FSTAT	18
+# define E_LSTAT	19
 
 /*
 **macro for entry shell
@@ -84,7 +108,8 @@
 
 extern char	*g_internal_commands[];
 
-typedef unsigned long long t_key;
+typedef unsigned long long	t_key;
+typedef unsigned int		t_error;
 
 enum			e_stdstream
 {

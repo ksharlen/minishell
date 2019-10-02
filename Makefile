@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/10/01 23:00:14 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/10/02 20:00:31 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS					:=	main.c minishell_greeting.c\
 							cd.c\
 							echo.c\
 							env_utils.c\
-							pwd.c
+							pwd.c\
+							errors.c
 
 
 OBJS					:= $(SRCS:.c=.o)
