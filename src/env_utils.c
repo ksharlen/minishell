@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/09/30 21:23:55 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/01 21:08:49 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	check_key_for_env(char *const argv[])
 		if (ft_strequ(argv[1], "-u"))
 			my_unsetenv(argv[2]);
 		else
-			my_unsetenv(ft_strsub(argv[1], 0, *argv[1] - (int)ft_strrchr(argv[1], '=')));
+			my_unsetenv(ft_strchr(argv[1], '=') + 1);
 		return (1);
 	}
 	else if (ft_strequ(argv[1], "--version"))
