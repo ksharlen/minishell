@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 23:42:45 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 21:26:02 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,16 @@
 /*
 **ERRORS
 */
+# define PERM_DENIED		"permission denied:"
+# define NO_SUCH_F_OR_D		"no such file or directory:"
+# define STR_NOT_IN_PWD		"string not in pwd:"
+# define ILLEGAL_OPT		"illegal option --e"
 # define NOT_FOUND_CMD		"command not found:"
 # define FILE_TO_LONG		"file name too long:" //worging for file and cmd
 
 # define PRINT(p_name, e_name, out) ft_printf("%s: %s %s\n", p_name, e_name, out)
 # define PRINT_ERROR(p_name, e_name, out) PRINT(p_name, e_name, out)
+# define PRINT_ERROR_AND_RET(p_name, e_name, out) PRINT_ERROR(p_name, e_name, out); return (-1);
 # define CMD_NOT_FOUND(p_name) PRINT_ERROR(PROG_NAME, NOT_FOUND_CMD, p_name)
 //# define PRINT(x) ft_printf("%s: %s %s\n", PROGRAM_NAME, NOT_FOUND_CMD, (x))
 //# define CMD_NOT_FOUND(x) PRINT(x)
@@ -60,9 +65,9 @@
 /*
 **PATH
 */
-# define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
-# define MHISTORY "/Users/ksharlen/git_clones/minishell/.minishell_history"
-# define MRC	"/Users/ksharlen/git_clones/minishell/.minishellrc"
+# define INTERNAL_DIR_CMD	"/Users/rloraine/Desktop/minishell/utilities"
+# define MHISTORY "/Users/rloraine/Desktop/minishell/.minishell_history"
+# define MRC	"/Users/rloraine/Desktop/minishell/.minishellrc"
 # define KEY_LAST_CMD_MHISTORY "KEY"
 
 /*

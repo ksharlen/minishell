@@ -6,18 +6,15 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/02 18:46:46 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/02 21:13:02 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define MYERROR 1
-
 int			my_unsetenv(char *key)
 {
-	if (unsetenv(key))
-		exit(0);
+	unsetenv(key);//!need to defense
 	return (0);
 }
 
@@ -28,16 +25,11 @@ int			my_setenv(char *key, char *value, char *old_pwd)
 	n = -1;
 	if (ft_strequ(key, "PWD"))
 	{
-		if (setenv(key, value, 1))
-			exit(0);
-		if (setenv("OLDPWD", old_pwd, 1))
-			exit(0);
+		setenv(key, value, 1);//!need to defense
+		setenv("OLDPWD", old_pwd, 1);//!need to defense
 	}
 	else
-	{
-		if (setenv(key, value, 1))
-			exit(0);
-	}
+		setenv(key, value, 1);//!need to defense
 	return (0);
 }
 
@@ -56,14 +48,9 @@ static int	check_key_for_env(char *const argv[])
 			my_unsetenv(ft_strchr(argv[1], '=') + 1);
 		return (1);
 	}
-	else if (ft_strequ(argv[1], "--version"))
+	else if (ft_strstr(argv[1], "--") || ft_strstr(argv[1], "-"))
 	{
-		// i don't know what to do here
-		return (1);
-	}
-	else
-	{
-		PRINT_ERROR(argv[0], "illegal opiton -- e", NULL);
+		PRINT_ERROR(argv[0], ILLEGAL_OPT, argv[1]);
 		ft_printf("usage: env [-iv] [-P utilpath] [-S string] [-u name]\n");
 		ft_printf("           [name=value ...] [utility [argument ...]]\n");
 		return (-1);
@@ -73,7 +60,8 @@ static int	check_key_for_env(char *const argv[])
 
 int			env(int argc, char *argv[], char *env[])
 {
-	int n;
+	int		n;
+	char	**key_and_value;
 
 	P_UNUSED(argc);
 	n = -1;
@@ -86,7 +74,10 @@ int			env(int argc, char *argv[], char *env[])
 	else
 	{
 		if (!check_key_for_env(argv))
-			my_setenv(argv[1], argv[2], NULL);
+		{
+			key_and_value = ft_strsplit(argv[1], '=');
+			my_setenv(key_and_value[0], key_and_value[1], NULL);
+		}
 		return (0);
 	}
 	return (-1);
