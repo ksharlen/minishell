@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/01 21:08:49 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/02 18:46:46 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 #define MYERROR 1
 
-void		my_unsetenv(char *key)
+int			my_unsetenv(char *key)
 {
 	if (unsetenv(key))
 		exit(0);
+	return (0);
 }
 
-void		my_setenv(char *key, char *value, char *old_pwd)
+int			my_setenv(char *key, char *value, char *old_pwd)
 {
 	int n;
 
@@ -37,6 +38,7 @@ void		my_setenv(char *key, char *value, char *old_pwd)
 		if (setenv(key, value, 1))
 			exit(0);
 	}
+	return (0);
 }
 
 static int	check_key_for_env(char *const argv[])
@@ -69,10 +71,11 @@ static int	check_key_for_env(char *const argv[])
 	return (0);
 }
 
-int			env(char *const argv[], char *const env[])
+int			env(int argc, char *argv[], char *env[])
 {
 	int n;
 
+	P_UNUSED(argc);
 	n = -1;
 	if (!argv[1] || ft_strequ(argv[1], "-v"))
 	{

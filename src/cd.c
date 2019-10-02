@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/01 20:13:45 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/01 23:49:10 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,55 +66,56 @@ static int	check_dots_and_hyphen(char *const argv[], char *cur_dir, char *const 
 	return (1);
 }
 
-int			check_dir_and_path_for_err(char *const argv[])
-{
-	int i;
-	int check;
+// int			check_dir_and_path_for_err(char *const argv[])
+// {
+// 	int i;
+// 	int check;
 
-	i = -1;
-	check = 0;
-	while (argv[1][++i])
-	{
-		if (i == MAX_SIZE_PATH)
-		{
-			PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
-			return (-1);
-		}
-		if (argv[1][i] == '/')
-		{
-			if (check > 255)
-			{
-				PRINT_ERROR(argv[0], FILE_TO_LONG, argv[1]);
-				return (-1);
-			}
-		}
-		++check;
-	}
-	if (!access(argv[0], F_OK))
-	{
-		if (!access(argv[0], W_OK))
-			return (0);
-		else
-		{
-			PRINT_ERROR(argv[0], "premission denied:", argv[1]);
-			return (-1);
-		}		
-	}
-	else
-	{
-		PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
-		return (-1);
-	}
-	return (0);
-}
+// 	i = -1;
+// 	check = 0;
+// 	while (argv[1][++i])
+// 	{
+// 		if (i == MAX_SIZE_PATH)
+// 		{
+// 			PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
+// 			return (-1);
+// 		}
+// 		if (argv[1][i] == '/')
+// 		{
+// 			if (check > 255)
+// 			{
+// 				PRINT_ERROR(argv[0], FILE_TO_LONG, argv[1]);
+// 				return (-1);
+// 			}
+// 		}
+// 		++check;
+// 	}
+// 	if (!access(argv[0], F_OK))
+// 	{
+// 		if (!access(argv[0], W_OK))
+// 			return (0);
+// 		else
+// 		{
+// 			PRINT_ERROR(argv[0], "premission denied:", argv[1]);
+// 			return (-1);
+// 		}
+// 	}
+// 	else
+// 	{
+// 		PRINT_ERROR(argv[0], "no such file or directory:", argv[1]);
+// 		return (-1);
+// 	}
+// 	return (0);
+// }
 
-int			cd(char *const argv[], char *const env[])
+int			cd(int argc, char *argv[], char *env[])
 {
 	char	cur_dir[MAX_SIZE_PATH + 1];
 	char	*home_dir;
 	char	*full_path;
 	int		n;
 
+	P_UNUSED(argc);
 	n = -1;
 	full_path = NULL;
 	while (env[++n])
@@ -137,8 +138,8 @@ int			cd(char *const argv[], char *const env[])
 	{
 		if (ft_strstr(argv[1], "~/"))
 			full_path = ft_strjoin(home_dir, argv[1]);
-		if (check_dir_and_path_for_err(argv))
-			return (-1);
+		// if (check_dir_and_path_for_err(argv))
+			// return (-1);
 		if (check_dots_and_hyphen(argv, cur_dir, env))
 		{
 			if (chdir(!full_path ? argv[1] : full_path))
