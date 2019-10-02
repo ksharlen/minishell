@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 22:10:52 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/02 21:13:02 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/02 21:52:05 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int			my_unsetenv(char *key)
 
 int			my_setenv(char *key, char *value, char *old_pwd)
 {
-	int n;
-
-	n = -1;
 	if (ft_strequ(key, "PWD"))
 	{
 		setenv(key, value, 1);//!need to defense
