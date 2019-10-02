@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   minishell_errors.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 16:46:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:08:55 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:35:40 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-const char *const g_merrors[] = {
+static const char *const g_merrors[] = {
 	"open_error",
 	"close_error",
 	"read_error",
@@ -20,7 +20,6 @@ const char *const g_merrors[] = {
 	"closedir_error",
 	"readdir_error",
 	"fork_error",
-	"execve_error",
 	"wait_error",
 	"signal_error",
 	"time_error",
@@ -32,7 +31,8 @@ const char *const g_merrors[] = {
 	"chdir_error",
 	"stat_error",
 	"fstat_error",
-	"lstat_error"
+	"lstat_error",
+	"getpwduid_error"
 };
 
 void	err_str(t_error merror, const char *add_text)

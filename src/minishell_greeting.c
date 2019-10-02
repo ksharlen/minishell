@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 20:12:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 18:58:53 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:45:53 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ static void		get_curr_time(char *curr_time)
 	char	*str_date;
 
 	ft_bzero(curr_time, SIZE_TIME + 1);
-	time(&date);
-	str_date = ctime(&date);
+	if (time(&date) == RET_ERROR)
+		err_exit(E_TIME, "minishell");
+	if (!(str_date = ctime(&date)))
+		err_exit(E_TIME, "minishell");
 	ft_memcpy(curr_time, str_date + TO_TIME, SIZE_TIME);
 }
 
@@ -29,7 +31,8 @@ static void		get_uname(char *uname)
 	char	*pw_name;
 
 	uid = getuid();
-	pw_name = getpwuid(uid)->pw_name;
+	if (!(pw_name = getpwuid(uid)->pw_name))
+		err_exit(E_GETPWUID, "minishell");
 	ft_bzero(uname, MAX_UNAME);
 	ft_strcat(uname, pw_name);
 }
@@ -39,7 +42,8 @@ static char		*get_curr_dir(char *curr_dir, const char *home_dir)
 	char	*p_str;
 
 	ft_bzero(curr_dir, MAX_SIZE_PATH);
-	getcwd(curr_dir, MAX_SIZE_PATH);
+	if (!getcwd(curr_dir, MAX_SIZE_PATH))
+		err_exit(E_GETCWD, "minishell");
 	if (!ft_strcmp(home_dir, curr_dir))
 		return ("~/");
 	else if (*(curr_dir) && *(curr_dir + 1))

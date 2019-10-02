@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:11:39 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:39:30 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 /*
 **MINISHELL_ERRORS
 */
+# define RET_ERROR	-1
 # define E_OPEN		0
 # define E_CLOSE	1
 # define E_READ		2
@@ -43,19 +44,19 @@
 # define E_CLOSEDIR 4
 # define E_READDIR	5
 # define E_FORK		6
-# define E_EXECVE	7
-# define E_WAIT		8
-# define E_SIGNAL	9
-# define E_TIME		10
-# define E_CTIME	11
-# define E_WAITPID	12
-# define E_KILL		13
-# define E_GETCWD	14
-# define E_MALLOC	15
-# define E_CHDIR	16
-# define E_STAT		17
-# define E_FSTAT	18
-# define E_LSTAT	19
+# define E_WAIT		7
+# define E_SIGNAL	8
+# define E_TIME		9
+# define E_CTIME	10
+# define E_WAITPID	11
+# define E_KILL		12
+# define E_GETCWD	13
+# define E_MALLOC	14
+# define E_CHDIR	15
+# define E_STAT		16
+# define E_FSTAT	17
+# define E_LSTAT	18
+# define E_GETPWUID	19
 
 /*
 **macro for entry shell
