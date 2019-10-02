@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:10:29 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:11:39 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,5 +188,11 @@ int				pwd(int argc, char *argv[], char *env[]);
 int				env(int argc, char *argv[], char *env[]);
 int				my_setenv(char *key, char *value, char *old_pwd);
 int				my_unsetenv(char *key);
+
+/*
+**ERRORS
+*/
+void			err_str(t_error merror, const char *add_text);
+void			err_exit(t_error merror, const char *add_text);
 
 #endif
