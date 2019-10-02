@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 23:20:27 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 21:15:02 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	find_internal_cmd(const char *cmd, char *path_ex)
 {
-	enum e_find search_cmd;
-	char **p_internal_cmd;
+	enum e_find	search_cmd;
+	char		**p_internal_cmd;
 
 	search_cmd = NOT_FOUND;
 	p_internal_cmd = g_internal_commands;

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:33:39 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 21:16:48 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int			search_path(const char *path, const char *cmd, char *path_ex)
 	return (search);
 }
 
-int				find_in_the_var_path_env(const char *path_env,
+int			find_in_the_var_path_env(const char *path_env,
 	const char *cmd, char *path_ex)
 {
 	char		**paths;
@@ -52,7 +52,6 @@ int				find_in_the_var_path_env(const char *path_env,
 	enum e_find	search;
 
 	ft_bzero(path_ex, MAX_UNAME + 1);
-	paths = NULL;
 	search = NOT_FOUND;
 	if (path_env && cmd && path_ex && *path_env && *cmd)
 	{

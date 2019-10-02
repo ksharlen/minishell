@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:45:31 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:46:13 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:51:11 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void			minishell_push_minishell_history(const char *str_stdio, struct s_key_data
 		getdate_internal(k_data->date_ex_cmd);
 		push_mhistory(k_data, str_stdio);
 		k_data->key++;
-		//! Тут все зафришить!!!!!!
 	}
 }
 
