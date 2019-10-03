@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/03 21:45:24 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/03 22:22:09 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@
 /*
 **PATH
 */
-# define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
 # define MHISTORY ".minishell_history"
 # define MRC ".minishellrc"
 # define KEY_LAST_CMD_MHISTORY "KEY"
