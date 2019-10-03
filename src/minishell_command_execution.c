@@ -6,11 +6,19 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/03 21:32:16 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/03 23:01:41 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void handler_exec(int sig)
+{
+	P_UNUSED(sig);
+	printf("here\n");
+	strsignal(SIGSEGV);
+	exit(EXIT_SUCCESS);
+}
 
 static void	execute_internal_cmd(char *const argv[],
 	int argc, const char *cmd)
@@ -29,12 +37,11 @@ static void	execute_cmd(char *const argv[], const char *path_cmd)
 	pid_t	pid;
 	int		status_child;
 
-	// signal(SIGSEGV, tmp);
 	if ((pid = NEW_PROCESS()) == RET_ERROR)
 		err_exit(E_FORK, "minishell");
 	if (pid == CHILD_PROCESS)
 	{
-		// signal(SIGINT, tmp);
+		signal(SIGSEGV, handler_exec);
 		if (execve(path_cmd, argv, environ) == NOT_FOUND)
 			CMD_NOT_FOUND(CMD_NAME);
 		else
