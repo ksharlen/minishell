@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:39:30 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/03 21:45:24 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 
 # if __linux__
 #  include <sys/wait.h>
-#  include <sys/types.h>
 # endif
 
 # include "libft.h"
@@ -86,8 +85,8 @@
 **PATH
 */
 # define INTERNAL_DIR_CMD	"/Users/ksharlen/git_clones/minishell/utilities"
-# define MHISTORY "/Users/ksharlen/git_clones/minishell/.minishell_history"
-# define MRC	"/Users/ksharlen/git_clones/minishell/.minishellrc"
+# define MHISTORY ".minishell_history"
+# define MRC ".minishellrc"
 # define KEY_LAST_CMD_MHISTORY "KEY"
 
 /*
@@ -108,6 +107,7 @@
 # define SIZE_DATE		24
 
 extern char	*g_internal_commands[];
+extern char **environ;
 
 typedef unsigned long long	t_key;
 typedef unsigned int		t_error;
@@ -135,12 +135,6 @@ struct			s_entry
 	char curr_dir[MAX_SIZE_PATH];
 };
 
-// struct			s_minishell_history
-// {
-// 	char	date_ex_cmd[SIZE_DATE + 1]; //!Тут подумать про размер
-// 	t_key	key;
-// };
-
 typedef struct	s_argv
 {
 	char			**argv;
@@ -159,7 +153,7 @@ struct			s_key_data
 void			minishell_greeting(const char *home_dir);
 char			*minishell_read_stdio(void);
 t_argv			*minishell_parse_str(const char *str_for_parse);
-int				minishell_command_execution(t_argv *beg, char *const env[]);
+int				minishell_command_execution(t_argv *beg);
 void			list_add_end(t_argv **beg, char *cmd_argv);
 void			garbage_collector_internal(t_argv **beg);
 int				minishell_command_search(const char *cmd, char *path_ex);

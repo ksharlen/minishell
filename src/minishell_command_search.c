@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 21:15:02 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/03 21:56:13 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ static int	find_internal_cmd(const char *cmd, char *path_ex)
 int			minishell_command_search(const char *cmd, char *path_ex)
 {
 	enum e_find	search;
+	char		*utilits_dir;
 
 	search = NOT_FOUND;
+	utilits_dir = NULL;
 	if (cmd && path_ex && *cmd)
 	{
 		ft_bzero(path_ex, MAX_UNAME + 1);
@@ -51,6 +53,7 @@ int			minishell_command_search(const char *cmd, char *path_ex)
 		else if (find_in_the_var_path_env(getenv("PATH"),
 		cmd, path_ex) == FOUND_PATH_ENV)
 			search = FOUND_PATH_ENV;
+		ft_strdel(&utilits_dir);
 	}
 	return (search);
 }

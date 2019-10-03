@@ -6,14 +6,14 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 21:13:41 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/03 21:32:16 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	execute_internal_cmd(char *const argv[],
-	char *const enval[], int argc, const char *cmd)
+	int argc, const char *cmd)
 {
 	int (*internal_cmd[NUM_INTERNAL_CMDS])(int argc, char *argv[], char *env[]);
 
@@ -21,11 +21,10 @@ static void	execute_internal_cmd(char *const argv[],
 	internal_cmd[1] = echo;
 	internal_cmd[2] = env;
 	internal_cmd[3] = pwd;
-	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, (char **)enval);
+	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, environ);
 }
 
-static void	execute_cmd(char *const argv[],
-	char *const env[], const char *path_cmd)
+static void	execute_cmd(char *const argv[], const char *path_cmd)
 {
 	pid_t	pid;
 	int		status_child;
@@ -36,7 +35,7 @@ static void	execute_cmd(char *const argv[],
 	if (pid == CHILD_PROCESS)
 	{
 		// signal(SIGINT, tmp);
-		if (execve(path_cmd, argv, env) == NOT_FOUND)
+		if (execve(path_cmd, argv, environ) == NOT_FOUND)
 			CMD_NOT_FOUND(CMD_NAME);
 		else
 			exit(EXIT_SUCCESS);
@@ -45,7 +44,7 @@ static void	execute_cmd(char *const argv[],
 		err_exit(E_WAIT, "minishell");
 }
 
-int			minishell_command_execution(t_argv *beg, char *const env[])
+int			minishell_command_execution(t_argv *beg)
 {
 	enum e_find	search;
 	char		cmd_for_ex[MAX_UNAME + 1];
@@ -56,9 +55,9 @@ int			minishell_command_execution(t_argv *beg, char *const env[])
 		if (search == FOUND_EXIT)
 			return (FOUND_EXIT);
 		else if (search == FOUND_INTERNAL_CMD)
-			execute_internal_cmd(beg->argv, env, beg->argc, cmd_for_ex);
+			execute_internal_cmd(beg->argv, beg->argc, cmd_for_ex);
 		else if (search == FOUND_SHELL_DIR || search == FOUND_PATH_ENV)
-			execute_cmd(beg->argv, env, cmd_for_ex);
+			execute_cmd(beg->argv, cmd_for_ex);
 		else
 			CMD_NOT_FOUND(beg->CMD_NAME);
 		beg = beg->next;
