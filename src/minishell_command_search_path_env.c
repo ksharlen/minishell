@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_command_search_path_env.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 16:12:04 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/01 19:58:24 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/02 21:16:48 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ int			search_path(const char *path, const char *cmd, char *path_ex)
 				break ;
 			}
 		}
-		closedir(dir);
+		if (closedir(dir) == RET_ERROR)
+			err_exit(E_CLOSEDIR, "minishell");
 	}
 	return (search);
 }
 
-int				find_in_the_var_path_env(const char *path_env,
+int			find_in_the_var_path_env(const char *path_env,
 	const char *cmd, char *path_ex)
 {
 	char		**paths;
@@ -51,11 +52,12 @@ int				find_in_the_var_path_env(const char *path_env,
 	enum e_find	search;
 
 	ft_bzero(path_ex, MAX_UNAME + 1);
-	paths = NULL;
 	search = NOT_FOUND;
 	if (path_env && cmd && path_ex && *path_env && *cmd)
 	{
 		paths = ft_strsplit_skip_space((char *)path_env, PATH_SPLIT);
+		if (!paths)
+			err_exit(E_MALLOC, "minishell");
 		p_paths = paths;
 		while (p_paths && *p_paths)
 		{

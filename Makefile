@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/10/01 23:00:14 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/10/03 21:24:46 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,19 +18,21 @@ DIR_INCLUDE_LIBFT		:= ./libft/include
 DIR_BIN					:= bin/
 DIRS_INCLUDE			:= $(DIR_INCLUDE_MINISHELL) $(DIR_INCLUDE_LIBFT)
 
-SRCS					:=	main.c minishell_greeting.c\
-							minishell_read_stdio.c\
-							minishell_parse_str.c\
-							minishell_command_execution.c\
-							minishell_list.c\
-							minishell_garbage_collector_internal.c\
-							minishell_command_search.c\
-							minishell_command_search_path_env.c\
-							minishell_push_minishell_history.c\
-							cd.c\
-							echo.c\
-							env_utils.c\
-							pwd.c
+SRCS					:=	main.c\
+								minishell_greeting.c\
+								minishell_read_stdio.c\
+								minishell_parse_str.c\
+								minishell_command_execution.c\
+								minishell_list.c\
+								minishell_garbage_collector_internal.c\
+								minishell_command_search.c\
+								minishell_command_search_path_env.c\
+								minishell_push_minishell_history.c\
+								minishell_errors.c\
+								cd.c\
+								echo.c\
+								env_utils.c\
+								pwd.c
 
 
 OBJS					:= $(SRCS:.c=.o)

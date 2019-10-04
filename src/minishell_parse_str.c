@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:18:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 21:21:56 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:40:03 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_argv		*minishell_parse_str(const char *str_for_parse)
 	if (str_for_parse && *str_for_parse)
 	{
 		parsed_str = SPLIT_COMMANDS((char *)str_for_parse, COMMAND_SPLIT);
+		if (!parsed_str)
+			err_exit(E_MALLOC, "minishell");
 		ptr_parsed_str = parsed_str;
 		while (*ptr_parsed_str)
 		{
