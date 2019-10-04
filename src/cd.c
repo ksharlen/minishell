@@ -6,7 +6,7 @@
 /*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/02 22:07:00 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/04 20:05:01 by rloraine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* need to rename and push into libft */
 
-static char	*find_env(char *const env[], char *key)
+static char	*find_env(char *env[], char *key)
 {
 	char	*tmp;
 	int		n;
@@ -26,7 +26,7 @@ static char	*find_env(char *const env[], char *key)
 	return (tmp);
 }
 
-static void	get_new_path(char *old_dir)
+static void	back_step(char *cur_dir, char **full_path)
 {
 	char	*new_dir;
 	int		i;
@@ -34,84 +34,77 @@ static void	get_new_path(char *old_dir)
 
 	i = -1;
 	new_len = 0;
-	while (old_dir[new_len])
+	while (cur_dir[new_len])
 		++new_len;
-	while (old_dir[new_len] != '/')
+	while (cur_dir[new_len] != '/')
 		--new_len;
 	new_dir = (char*)malloc(sizeof(char) * (new_len + 1));//!need to defense
 	while (++i < new_len)
-		new_dir[i] = old_dir[i];
+		new_dir[i] = cur_dir[i];
 	new_dir[i] = '\0';
-	chdir(new_dir);//!need to defense
-	my_setenv("PWD", new_dir, old_dir);
-	free(new_dir);
+	(*full_path) = new_dir;
+	ft_strdel(&new_dir);
 }
 
-static int	check_dots_and_hyphen(char *const argv[], char *cur_dir,\
-	char *const env[])
+static int	valid(char *argv[], char *home_dir)
 {
-	char *tmp;
-
-	tmp = find_env(env, "OLDPWD=");
-	printf("%s\n", tmp);
-	if (ft_strequ(argv[1], "."))
-		return (0);
-	else if (ft_strequ(argv[1], ".."))
-	{
-		get_new_path(cur_dir);
-		return (0);
-	}
-	else if (ft_strequ(argv[1], "-"))
-	{
-		ft_printf("here\n");
-		chdir(tmp);//!need to defense
-		my_setenv("PWD", tmp, cur_dir);
-		ft_printf("%s\n", tmp);
-		free(tmp);
-		return (0);
-	}
-	return (1);
-}
-
-int			check_dir_and_path_for_err(char *const argv[], char *path)
-{
-	int i;
-	int check;
+	int		i;
+	int		check;
+	char	*check_path;
 
 	i = -1;
 	check = 0;
-	printf("%s\n", path);
-	while (path[++i] && ++check)
+	if (!argv)
+		return (0);
+	if (!ft_strstr(argv[1], home_dir))
+		check_path = ft_strjoin(home_dir, argv[1] + 1);
+	else
+		check_path = ft_strdup(argv[1]);
+	while (argv[1][++i] && ++check)
 	{
 		if (i == MAX_SIZE_PATH)
-			PRINT_ERROR_AND_RET(argv[0], NO_SUCH_F_OR_D, path);
+			PRINT_ERROR_AND_RET(argv[0], NO_SUCH_F_OR_D, argv[1]);
 		if (argv[1][i] == '/')
-		{
-			if (check > 255)
-				PRINT_ERROR_AND_RET(argv[0], FILE_TO_LONG, path);
-		}
-		printf("here\n");
+			if (check > MAX_UNAME)
+				PRINT_ERROR_AND_RET(argv[0], FILE_TO_LONG, argv[1]);
 	}
-	if (!access(path, F_OK))
+	if (!(access(check_path, F_OK)))
 	{
-		if (!access(argv[1], W_OK))
-			return (0);
-		else
+		if (access(check_path, W_OK))
+		{
+			ft_strdel(&check_path);
 			PRINT_ERROR_AND_RET(argv[0], PERM_DENIED, argv[1]);
+		}
+		ft_strdel(&check_path);
+		return (0);
 	}
-	return (-1);
+	PRINT_ERROR_AND_RET(argv[0], NO_SUCH_F_OR_D, argv[1]);
 }
 
-static int	correct_cd_work(char *const argv[], char *const env[],\
-char *cur_dir, char *full_path)
+static int	check_first_arg(char *argv[], char *env[], char *home_dir, char **full_path)
 {
-	// if (check_dir_and_path_for_err(argv, !full_path ? argv[1] : full_path))//! move step again
-	// 	return (-1);
-	if (check_dots_and_hyphen(argv, cur_dir, env))
+	char	*tmp;
+	char	cur_dir[MAX_SIZE_PATH + 1];
+
+	tmp = find_env(env, "OLDPWD=");
+	getcwd(cur_dir, MAX_SIZE_PATH);
+	if (!argv[1] || ft_strequ(argv[1], "~") || ft_strequ(argv[1], "--"))
+		(*full_path) = home_dir;
+	else if (ft_strstr(argv[1], "~/"))
+		(*full_path) = ft_strjoin(home_dir, argv[1] + 1);
+	else if (ft_strequ(argv[1], "."))
+		my_setenv("OLDPWD", cur_dir, NULL);
+	else if (ft_strequ(argv[1], ".."))
+		back_step(cur_dir, full_path);
+	else if (ft_strequ(argv[1], "-"))
+		(*full_path) = tmp;
+	else
 	{
-		chdir(!full_path ? argv[1] : full_path);//!need to defense
-		my_setenv("PWD", argv[1], cur_dir);
+		(*full_path) = argv[1];
+		if (valid(argv, home_dir))
+			return (-1);
 	}
+	ft_strdel(&tmp);
 	return (0);
 }
 
@@ -124,23 +117,18 @@ int			cd(int argc, char *argv[], char *env[])
 	P_UNUSED(argc);
 	full_path = NULL;
 	home_dir = find_env(env, "HOME=");
-	getcwd(cur_dir, MAX_SIZE_PATH);//!need to defense
+	getcwd(cur_dir, MAX_SIZE_PATH);
 	if (argv[2])
 	{
 		PRINT_ERROR_AND_RET(argv[0], STR_NOT_IN_PWD, argv[1]);
 	}
-	else if (!argv[1] || ft_strequ(argv[1], "~") || ft_strequ(argv[1], "--"))
-	{
-		chdir(home_dir);//!need to defense
-		my_setenv("PWD", home_dir, cur_dir);
-	}
 	else
 	{
-		if (ft_strstr(argv[1], "~/"))
-			full_path = ft_strjoin(home_dir, argv[1] + 1);//!need to defense
-		correct_cd_work(argv, env, cur_dir, full_path);
+		if (check_first_arg(argv, env, home_dir, &full_path))
+			return (-1);
+		chdir(full_path);
+		my_setenv("PWD", full_path, cur_dir);
 	}
 	ft_strdel(&home_dir);
-	ft_strdel(&full_path);
 	return (0);
 }
