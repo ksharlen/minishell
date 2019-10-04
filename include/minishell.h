@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/03 22:22:09 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/04 15:14:28 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <signal.h>
 # include <dirent.h>
 # include <fcntl.h>
+# include <limits.h>
 
 # if __linux__
 #  include <sys/wait.h>
