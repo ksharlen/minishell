@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/04 15:15:13 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/04 17:55:41 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,48 @@ static void		minishell_handler(int sig)
 	}
 }
 
+static size_t	skip_tabs(const char *str)
+{
+	size_t len;
+
+	len = 0;
+	if (str)
+	{
+		while (str && *str && !(TABS(*str)))
+		{
+			++len;
+			++str;
+		}
+	}
+	return (len);
+}
+
+static void		insert_env(char *buf, const char *read_stdio)
+{
+	char		buf_env[MAX_SIZE_PATH];
+	size_t		len_w;
+	char		*val_env;
+
+	while(read_stdio && *read_stdio)
+	{
+		ft_bzero(buf_env, MAX_SIZE_PATH);
+		read_stdio = ft_strscat(buf, (char *)read_stdio, '$');
+		//!ПРоверить на конец
+		if (*read_stdio)
+		{
+			len_w = skip_tabs(read_stdio);
+			if (len_w)
+			{
+				ft_strncpy(buf_env, read_stdio, len_w);
+				val_env = getenv(buf_env);
+				if (val_env)
+					ft_strcat(buf, val_env);
+				read_stdio += len_w;
+			}
+		}
+	}
+}
+
 char			*minishell_read_stdio(void)
 {
 	char	*read_stdio;
@@ -32,6 +74,7 @@ char			*minishell_read_stdio(void)
 	signal(SIGQUIT, minishell_handler);
 	if ((stat_gnl = get_next_line(STDIN, &read_stdio, FLAG_OFF)) == RET_ERROR)
 		err_exit(E_MALLOC, "minishell");
-	// find_symbal('$', read_stdio);
-	return (read_stdio);
+	insert_env(buf, read_stdio);
+	ft_strdel(&read_stdio);
+	return (ft_strdup(buf));
 }
