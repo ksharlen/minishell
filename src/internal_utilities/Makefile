@@ -2,7 +2,8 @@ NAME	:= main
 SRCS	:= main_test.c\
 			minishell_cd.c\
 			minishell_pwd.c\
-			minishell_setenv.c
+			minishell_setenv.c\
+			minishell_unsetenv.c
 
 HEADERS	:= internal_utilities.h
 
