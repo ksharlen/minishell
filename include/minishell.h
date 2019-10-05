@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/04 18:31:58 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/05 12:32:43 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,11 @@
 # define PRINT_ERROR(p_name, e_name, out) PRINT(p_name, e_name, out)
 # define PRINT_ERROR_AND_RET(p_name, e_name, out) PRINT_ERROR(p_name, e_name, out); return (-1);
 # define CMD_NOT_FOUND(p_name) PRINT_ERROR(PROG_NAME, NOT_FOUND_CMD, p_name)
-//# define PRINT(x) ft_printf("%s: %s %s\n", PROGRAM_NAME, NOT_FOUND_CMD, (x))
-//# define CMD_NOT_FOUND(x) PRINT(x)
 
 /*
 **PATH
 */
+# define UTILITIES	"utilities"
 # define MHISTORY ".minishell_history"
 # define MRC ".minishellrc"
 # define KEY_LAST_CMD_MHISTORY "KEY"
@@ -106,13 +105,18 @@
 # define NUM_INTERNAL_CMDS	7
 # define NUMBERS		"0123456789"
 
+# define P_INT_CMD	path_internal_cmd
+# define P_MSRC		path_mshellrc
+# define P_MSHIST	path_mshell_history
+
 /*
 **MINISHELL_HISTORY
 */
 # define SIZE_DATE		24
 
-extern char	*g_internal_commands[];
-extern char **environ;
+extern char				*g_internal_commands[];
+extern char 			**environ;
+extern struct s_path	g_path;
 
 typedef unsigned long long	t_key;
 typedef unsigned int		t_error;
@@ -138,6 +142,13 @@ struct			s_entry
 	char time[SIZE_TIME + 1];
 	char uname[MAX_UNAME];
 	char curr_dir[MAX_SIZE_PATH];
+};
+
+struct			s_path
+{
+	char	path_internal_cmd[MAX_SIZE_PATH + 1];
+	char	path_mshellrc[MAX_SIZE_PATH + 1];
+	char	path_mshell_history[MAX_SIZE_PATH + 1];
 };
 
 typedef struct	s_argv
@@ -194,5 +205,10 @@ int				my_unsetenv(char *key);
 */
 void			err_str(t_error merror, const char *add_text);
 void			err_exit(t_error merror, const char *add_text);
+
+/*
+**INIT
+*/
+void			minishell_paths_init(void);
 
 #endif

@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   minishell_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/26 22:59:27 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/05 14:33:12 by ksharlen         ###   ########.fr       */
+/*   Created: 2019/10/05 11:54:26 by ksharlen          #+#    #+#             */
+/*   Updated: 2019/10/05 12:36:20 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		pwd(int argc, char *argv[], char *env[])
+void	minishell_paths_init(void)
 {
-	char *pwd;
+	char cwd[MAX_SIZE_PATH + 1];
 
-	P_UNUSED(argc);
-	P_UNUSED(argv);
-	P_UNUSED(env);
-	pwd = (char[MAX_SIZE_PATH + 1]){0};
-	if (getcwd(pwd, MAX_SIZE_PATH))
-	{
-		ft_printf("%s\n", pwd);
-		return (0);
-	}
-	return (-1);
+	ft_bzero(cwd, MAX_SIZE_PATH + 1);
+	ft_bzero(g_path.P_INT_CMD, MAX_SIZE_PATH + 1);
+	ft_bzero(g_path.P_MSRC, MAX_SIZE_PATH + 1);
+	ft_bzero(g_path.P_MSHIST, MAX_SIZE_PATH + 1);
+	getcwd(cwd, MAX_SIZE_PATH);
+	push_path(MRC, cwd, g_path.P_MSRC);
+	push_path(MHISTORY, cwd, g_path.P_MSHIST);
+	push_path(UTILITIES, cwd, g_path.P_INT_CMD);
 }

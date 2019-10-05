@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:45:31 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/03 21:26:12 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 12:36:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		minishell_history_init(struct s_key_data *k_data)
 	k_data->key_str = R_FVAL(MRC, KEY_LAST_CMD_MHISTORY);
 	if (!k_data->key_str)
 	{
-		if ((fd = open(MRC, O_CREAT | O_WRONLY | O_APPEND,
+		if ((fd = open(g_path.P_MSRC, O_CREAT | O_WRONLY | O_APPEND,
 			st_mode)) == RET_ERROR)
 			err_exit(E_OPEN, "minishell");
 		ft_printf("%v%s=%s", fd, KEY_LAST_CMD_MHISTORY, "0");
@@ -78,7 +78,7 @@ void		minishell_history_init(struct s_key_data *k_data)
 	}
 	else
 		k_data->key = ft_atoi(k_data->key_str);
-	if ((k_data->fd_ms_history = open(MHISTORY, O_CREAT | O_WRONLY | O_APPEND,
+	if ((k_data->fd_ms_history = open(g_path.P_MSHIST, O_CREAT | O_WRONLY | O_APPEND,
 		st_mode)) == RET_ERROR)
 		err_exit(E_OPEN, "minishell");
 }

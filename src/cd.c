@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/04 20:30:05 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/05 14:54:32 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 /* need to rename and push into libft */
 
-static char	*find_env(char *env[], char *key)
-{
-	char	*tmp;
-	int		n;
+// static char	*find_env(char *env[], char *key)
+// {
+// 	char	*tmp;
+// 	int		n;
 
-	n = -1;
-	while (env[++n])
-		if (ft_strstr(env[n], key))
-			tmp = ft_strdup(ft_strchr(env[n], '/'));//!need to defense
-	return (tmp);
-}
+// 	n = -1;
+// 	while (env[++n])
+// 		if (ft_strstr(env[n], key))
+// 			tmp = ft_strdup(ft_strchr(env[n], '/'));//!need to defense
+// 	return (tmp);
+// }
 
-static void	back_step(char *cur_dir, char **full_path)
-{
-	char	*new_dir;
-	int		new_len;
+// static void	back_step(char *cur_dir, char **full_path)
+// {
+// 	char	*new_dir;
+// 	int		new_len;
 
-	new_len = 0;
-	while (cur_dir[new_len])
-		++new_len;
-	while (cur_dir[new_len] != '/')
-		--new_len;
-	new_dir = ft_strsub(cur_dir, 0, new_len);//!need to defense
-	(*full_path) = ft_strdup(new_dir);
-	ft_strdel(&new_dir);
-}
+// 	new_len = 0;
+// 	while (cur_dir[new_len])
+// 		++new_len;
+// 	while (cur_dir[new_len] != '/')
+// 		--new_len;
+// 	new_dir = ft_strsub(cur_dir, 0, new_len);//!need to defense
+// 	(*full_path) = ft_strdup(new_dir);
+// 	ft_strdel(&new_dir);
+// }
 
 // static int	check_access(char *argv[], char **check_path)
 // {
@@ -88,57 +88,61 @@ static void	back_step(char *cur_dir, char **full_path)
 // 	PRINT_ERROR_AND_RET(argv[0], NO_SUCH_F_OR_D, argv[1]);
 // }
 
-static int	check_first_arg(char *argv[], char *env[], char *home_dir,\
-char **full_path)
-{
-	char	*tmp;
-	char	cur_dir[MAX_SIZE_PATH + 1];
+// static int	check_first_arg(char *argv[], char *env[], char *home_dir,\
+// char **full_path)
+// {
+// 	char	*tmp;
+// 	char	cur_dir[MAX_SIZE_PATH + 1];
 
-	tmp = find_env(env, "OLDPWD=");//!need to defense
-	getcwd(cur_dir, MAX_SIZE_PATH);//!need to defense
-	if (!argv[1] || ft_strequ(argv[1], "~") || ft_strequ(argv[1], "--"))
-		(*full_path) = ft_strdup(home_dir);
-	else if (ft_strstr(argv[1], "~/"))
-		(*full_path) = ft_strjoin(home_dir, argv[1] + 1);//!need to defense
-	else if (ft_strequ(argv[1], "."))
-		(*full_path) = ft_strdup(cur_dir);
-	else if (ft_strequ(argv[1], ".."))
-		back_step(cur_dir, full_path);
-	else if (ft_strequ(argv[1], "-"))
-		(*full_path) = tmp;
-	else
-	{
-		(*full_path) = argv[1];
-		// if (valid(argv, full_path, home_dir))
-		// 	return (-1);
-	}
-	ft_strdel(&tmp);
-	return (0);
-}
+// 	tmp = find_env(env, "OLDPWD=");//!need to defense
+// 	getcwd(cur_dir, MAX_SIZE_PATH);//!need to defense
+// 	if (!argv[1] || ft_strequ(argv[1], "~") || ft_strequ(argv[1], "--"))
+// 		(*full_path) = ft_strdup(home_dir);
+// 	else if (ft_strstr(argv[1], "~/"))
+// 		(*full_path) = ft_strjoin(home_dir, argv[1] + 1);//!need to defense
+// 	else if (ft_strequ(argv[1], "."))
+// 		(*full_path) = ft_strdup(cur_dir);
+// 	else if (ft_strequ(argv[1], ".."))
+// 		back_step(cur_dir, full_path);
+// 	else if (ft_strequ(argv[1], "-"))
+// 		(*full_path) = tmp;
+// 	else
+// 	{
+// 		(*full_path) = argv[1];
+// 		// if (valid(argv, full_path, home_dir))
+// 		// 	return (-1);
+// 	}
+// 	ft_strdel(&tmp);
+// 	return (0);
+// }
 
 int			cd(int argc, char *argv[], char *env[])
 {
-	char	cur_dir[MAX_SIZE_PATH + 1];
-	char	*home_dir;
-	char	*full_path;
+	// char	cur_dir[MAX_SIZE_PATH + 1];
+	// char	*home_dir;
+	// char	*full_path;
 
 	P_UNUSED(argc);
-	full_path = NULL;
-	home_dir = find_env(env, "HOME=");//!need to defense
-	getcwd(cur_dir, MAX_SIZE_PATH);
-	if (argv[2])
-	{
-		PRINT_ERROR_AND_RET(argv[0], STR_NOT_IN_PWD, argv[1]);
-	}
-	else
-	{
-		if (check_first_arg(argv, env, home_dir, &full_path))
-			return (-1);
-		chdir(full_path);//!need to defense
-		my_setenv("PWD", full_path, cur_dir);
-	}
-	ft_strdel(&home_dir);
-	if (ft_strequ(argv[1], "-"))
-		pwd(argc, argv, env);
+	P_UNUSED(argv);
+	P_UNUSED(env);
+	chdir(argv[1]);
 	return (0);
+	// full_path = NULL;
+	// home_dir = find_env(env, "HOME=");//!need to defense
+	// getcwd(cur_dir, MAX_SIZE_PATH);
+	// if (argv[2])
+	// {
+	// 	PRINT_ERROR_AND_RET(argv[0], STR_NOT_IN_PWD, argv[1]);
+	// }
+	// else
+	// {
+	// 	if (check_first_arg(argv, env, home_dir, &full_path))
+	// 		return (-1);
+	// 	chdir(full_path);//!need to defense
+	// 	my_setenv("PWD", full_path, cur_dir);
+	// }
+	// ft_strdel(&home_dir);
+	// if (ft_strequ(argv[1], "-"))
+	// 	pwd(argc, argv, env);
+	// return (0);
 }

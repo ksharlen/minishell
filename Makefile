@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/10/03 21:24:46 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/10/05 11:57:15 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS					:=	main.c\
 								minishell_command_search.c\
 								minishell_command_search_path_env.c\
 								minishell_push_minishell_history.c\
+								minishell_init.c\
 								minishell_errors.c\
 								cd.c\
 								echo.c\

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/03 21:28:55 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 12:24:11 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*g_internal_commands[] = {
 	"3pwd"
 };
 
+struct s_path	g_path;
+
 int		main(void)
 {
 	char				*str_stdio;
@@ -27,6 +29,7 @@ int		main(void)
 	enum e_find			search;
 
 	search = NOT_FOUND;
+	minishell_paths_init();
 	minishell_history_init(&key_minishell_history);
 	system("clear");
 	while (INF)
