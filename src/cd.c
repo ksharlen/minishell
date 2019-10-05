@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 22:35:31 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/05 14:54:32 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 23:26:43 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@
 // 	PRINT_ERROR_AND_RET(argv[0], NO_SUCH_F_OR_D, argv[1]);
 // }
 
-// static int	check_first_arg(char *argv[], char *env[], char *home_dir,\
+// static int	check_first_arg(char *argv[], char *env[], char *home_dir,
 // char **full_path)
 // {
 // 	char	*tmp;

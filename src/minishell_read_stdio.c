@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_read_stdio.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/04 19:33:09 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/05 23:26:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,12 @@ char			*minishell_read_stdio(void)
 	int		stat_gnl;
 	char	*buf;
 
+#if __APPLE__
 	buf = (char[ARG_MAX]){0};
+#endif
+#if __linux__
+	buf = (char[PATH_MAX]){0};
+#endif
 	signal(SIGINT, minishell_handler);
 	signal(SIGQUIT, minishell_handler);
 	if ((stat_gnl = get_next_line(STDIN, &read_stdio, FLAG_OFF)) == RET_ERROR)
