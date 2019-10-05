@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/05 15:38:59 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 16:27:56 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 
 # define CD_ERR(err, var_name) ft_printf("cd: %s: %s\n", err, var_name)
 
+# define P_ARGS_UNUSED(...) (void)(__VA_ARGS__)
+
 int		minishell_pwd(int argc, char **argv, char **env);
+int		minishell_setenv(const char *name, const char *value, int replace);
 
 #endif
