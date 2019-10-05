@@ -6,19 +6,80 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/26 19:39:25 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 23:26:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*minishell_read_stdio(void)
+static void		minishell_handler(int sig)
+{
+	if (sig == SIGINT || sig == SIGQUIT)
+	{
+		ft_printf("\n");
+		minishell_greeting(getenv("HOME"));
+	}
+}
+
+static size_t	skip_tabs(const char *str)
+{
+	size_t len;
+
+	len = 0;
+	if (str)
+	{
+		while (str && *str && !(TABS(*str)))
+		{
+			++len;
+			++str;
+		}
+	}
+	return (len);
+}
+
+static void		insert_env(char *buf, const char *read_stdio)
+{
+	char		buf_env[MAX_SIZE_PATH];
+	size_t		len_w;
+	char		*val_env;
+
+	while(read_stdio && *read_stdio)
+	{
+		ft_bzero(buf_env, MAX_SIZE_PATH);
+		read_stdio = ft_strscat(buf, (char *)read_stdio, '$');
+		//!ПРоверить на конец
+		if (*read_stdio)
+		{
+			len_w = skip_tabs(read_stdio);
+			if (len_w)
+			{
+				ft_strncpy(buf_env, read_stdio, len_w);
+				val_env = getenv(buf_env);
+				if (val_env)
+					ft_strcat(buf, val_env);
+				read_stdio += len_w;
+			}
+		}
+	}
+}
+
+char			*minishell_read_stdio(void)
 {
 	char	*read_stdio;
 	int		stat_gnl;
+	char	*buf;
 
-	stat_gnl = get_next_line(STDIN, &read_stdio, FLAG_OFF);
-	if (!stat_gnl || stat_gnl == -1)
-		return (NULL);
-	return (read_stdio);
+#if __APPLE__
+	buf = (char[ARG_MAX]){0};
+#endif
+#if __linux__
+	buf = (char[PATH_MAX]){0};
+#endif
+	signal(SIGINT, minishell_handler);
+	signal(SIGQUIT, minishell_handler);
+	if ((stat_gnl = get_next_line(STDIN, &read_stdio, FLAG_OFF)) == RET_ERROR)
+		err_exit(E_MALLOC, "minishell");
+	insert_env(buf, read_stdio);
+	ft_strdel(&read_stdio);
+	return (ft_strdup(buf));
 }

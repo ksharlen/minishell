@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/30 19:12:49 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 12:24:11 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,20 @@ char	*g_internal_commands[] = {
 	"0cd",
 	"1echo",
 	"2env",
-	"3setenv",
-	"4unsetenv",
-	"5exit"
+	"3pwd"
 };
 
-int		main(int argc, char **argv, char **env)
+struct s_path	g_path;
+
+int		main(void)
 {
 	char				*str_stdio;
 	t_argv				*beg;
 	struct s_key_data	key_minishell_history;
 	enum e_find			search;
 
-	P_UNUSED(argc);
-	P_UNUSED(argv);
 	search = NOT_FOUND;
+	minishell_paths_init();
 	minishell_history_init(&key_minishell_history);
 	system("clear");
 	while (INF)
@@ -39,7 +38,7 @@ int		main(int argc, char **argv, char **env)
 		str_stdio = minishell_read_stdio();
 		minishell_push_minishell_history(str_stdio, &key_minishell_history);
 		beg = minishell_parse_str(str_stdio);
-		search = minishell_command_execution(beg, env);
+		search = minishell_command_execution(beg);
 		garbage_collector_internal(&beg);
 		if (search == FOUND_EXIT)
 			break ;

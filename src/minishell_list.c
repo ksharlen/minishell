@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 21:33:41 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/09/27 16:02:12 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/02 20:39:02 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static t_argv	*list_create(char *cmd_argv)
 	{
 		new = (t_argv *)ft_memalloc(sizeof(t_argv));
 		if (!new)
-			return (NULL);
+			err_exit(E_MALLOC, "minishell");
 		new->argv = SPLIT_COMMANDS(cmd_argv, ' ');
+		if (!new->argv)
+			err_exit(E_MALLOC, "minishell");
 		new->argc = ft_lineslen(new->argv);
 		new->next = NULL;
 	}
@@ -34,7 +36,8 @@ void			list_add_end(t_argv **beg, char *cmd_argv)
 	t_argv *res;
 	t_argv *new;
 
-	new = list_create(cmd_argv);
+	if (!(new = list_create(cmd_argv)))
+		err_exit(E_MALLOC, "minishell");
 	if (beg)
 	{
 		if (*beg)

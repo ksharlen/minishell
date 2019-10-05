@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/09/27 16:51:24 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/10/05 23:24:11 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,21 +16,30 @@ DIR_INCLUDE_MINISHELL	:= ./include
 DIR_LIBFT				:= ./libft/
 DIR_INCLUDE_LIBFT		:= ./libft/include
 DIR_BIN					:= bin/
-DIRS_INCLUDE			:= $(DIR_INCLUDE_MINISHELL) $(DIR_INCLUDE_LIBFT)
+DIR_UTILITIES			:= ./src/internal_utilities
+DIRS_INCLUDE			:= $(DIR_INCLUDE_MINISHELL) $(DIR_INCLUDE_LIBFT) $(DIR_UTILITIES)
 
-SRCS					:=	main.c minishell_greeting.c\
-							minishell_read_stdio.c\
-							minishell_parse_str.c\
-							minishell_command_execution.c\
-							minishell_list.c\
-							minishell_garbage_collector_internal.c\
-							minishell_command_search.c\
-							minishell_command_search_path_env.c\
-							minishell_push_minishell_history.c
+SRCS					:=	main.c\
+								minishell_greeting.c\
+								minishell_read_stdio.c\
+								minishell_parse_str.c\
+								minishell_command_execution.c\
+								minishell_list.c\
+								minishell_garbage_collector_internal.c\
+								minishell_command_search.c\
+								minishell_command_search_path_env.c\
+								minishell_push_minishell_history.c\
+								minishell_init.c\
+								minishell_errors.c\
+								minishell_pwd.c\
+								cd.c\
+								echo.c\
+								env_utils.c
+
 
 OBJS					:= $(SRCS:.c=.o)
 OBJS_WITH_DIR			:= $(addprefix $(DIR_BIN), $(OBJS))
-HEADERS					:= minishell.h
+HEADERS					:= minishell.h internal_utilities.h
 LIBFT					:= libft.a
 
 CFLAGS					:= -Wextra -Werror -Wall -g
@@ -42,15 +51,16 @@ CC						:= gcc
 MAKE_LIBFT				:= make -C $(DIR_LIBFT)
 REMOVE					:= rm -rf
 
-vpath %.c $(DIR_SRC)
+vpath %.c $(DIR_SRC) $(DIR_UTILITIES)
 vpath %.o $(DIR_BIN)
-vpath %.h $(DIR_INCLUDE_MINISHELL)
+vpath %.h $(DIR_INCLUDE_MINISHELL) $(DIR_UTILITIES)
 vpath %.a $(DIR_LIBFT)
 
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS_WITH_DIR) $(NFLAG) $@ $(DIR_LIBFT)$(LIBFT) -framework CoreFoundation
+	$(CC) $(CFLAGS) $(OBJS_WITH_DIR) $(NFLAG) $@ $(DIR_LIBFT)$(LIBFT)
+#-framework CoreFoundation
 
 $(OBJS): %.o:%.c $(HEADERS) | $(DIR_BIN)
 	$(CC) $(CFLAG) $(CFLAGS) $< $(addprefix $(IFLAG), $(DIRS_INCLUDE)) $(NFLAG) $(DIR_BIN)$@
@@ -71,6 +81,9 @@ fclean: clean
 	$(MAKE_LIBFT) fclean
 
 re: fclean all
+
+echo:
+	echo $(DIR_INCLUDE_MINISHELL)
 
 .PHONY: clean fclean re
 .SILENT: all $(NAME) $(OBJS) $(DIR_BIN) $(LIBFT) clean fclean re
