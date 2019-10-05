@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/05 12:32:43 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 15:40:57 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # endif
 
 # include "libft.h"
+# include "internal_utilities.h"
 
 # define PROG_NAME		"minishell"
 # define SHELL			minishell

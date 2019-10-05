@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   internal_utilities.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/26 22:59:27 by rloraine          #+#    #+#             */
-/*   Updated: 2019/10/05 14:33:12 by ksharlen         ###   ########.fr       */
+/*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
+/*   Updated: 2019/10/05 15:38:59 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef INTERNAL_UTILITIES_H
+# define INTERNAL_UTILITIES_H
 
-int		pwd(int argc, char *argv[], char *env[])
-{
-	char *pwd;
+# include "minishell.h"
 
-	P_UNUSED(argc);
-	P_UNUSED(argv);
-	P_UNUSED(env);
-	pwd = (char[MAX_SIZE_PATH + 1]){0};
-	if (getcwd(pwd, MAX_SIZE_PATH))
-	{
-		ft_printf("%s\n", pwd);
-		return (0);
-	}
-	return (-1);
-}
+/*
+**ERRORS
+*/
+# define S_NO_SUCH "no such file or directory"
+# define S_TOO_MANY "too many arguments"
+
+# define PWD_ERR(err) ft_printf("pwd: %s\n", err)
+
+# define CD_ERR(err, var_name) ft_printf("cd: %s: %s\n", err, var_name)
+
+int		minishell_pwd(int argc, char **argv, char **env);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/03 23:01:41 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/05 15:40:18 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	execute_internal_cmd(char *const argv[],
 	internal_cmd[0] = cd;
 	internal_cmd[1] = echo;
 	internal_cmd[2] = env;
-	internal_cmd[3] = pwd;
+	internal_cmd[3] = minishell_pwd;
 	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, environ);
 }
 
