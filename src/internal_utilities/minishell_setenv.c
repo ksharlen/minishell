@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:09:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/06 17:33:37 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/06 18:10:47 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ char			**find_var_env(const char *name)
 	while (environ[i] && environ[i][0])
 	{
 		if ((!ft_memcmp(environ[i], name, len_name = ft_strnlen(name, '='))) && environ[i][len_name] == '=')
-		{
-			ft_printf("1\n");
 			return (&environ[i]);
-		}
 		++i;
 	}
 	return (NULL);

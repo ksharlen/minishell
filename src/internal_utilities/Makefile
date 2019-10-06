@@ -3,7 +3,8 @@ SRCS	:= main_test.c\
 			minishell_cd.c\
 			minishell_pwd.c\
 			minishell_setenv.c\
-			minishell_unsetenv.c
+			minishell_unsetenv.c\
+			minishell_env.c
 
 HEADERS	:= internal_utilities.h
 

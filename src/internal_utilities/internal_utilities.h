@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/05 18:39:07 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/06 18:09:32 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ int		minishell_pwd(int argc, char **argv, char **env);
 int		minishell_setenv(const char *name, const char *value, const int replace);
 int		minishell_unsetenv(const char *name);
 char	**find_var_env(const char *name);
+int		minishell_env(int argc, char **argv, char **env);
 
 #endif
