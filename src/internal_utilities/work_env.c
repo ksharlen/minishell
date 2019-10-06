@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 00:47:10 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 00:54:11 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	work_opt(char *const *p_argv, t_env *env)
 	char	**copy_environ;
 	char	**p_split;
 
-	// ft_printf("here\n");
-	// ft_printf("p_argv: %s\n", *p_argv);
 	copy_environ = ft_linedup(environ);//?тут лежат наши переменные окружения для родителя
 	if (env->opt & F_I)
 		environ = NULL;//Подумать
@@ -71,30 +69,18 @@ void	work_opt(char *const *p_argv, t_env *env)
 	}
 	if (*p_argv && !ft_strcmp(*p_argv, "-u") && !(env->opt & F_I))
 	{
-		// ++p_argv;
 		if (*(++p_argv) && !ft_strcmp(*p_argv, "-S"))
-		{
-		ft_printf("here\n");
 			p_argv = u_flag(++p_argv);
-			// // ++p_argv;
-			// p_split = split_s_key(*p_argv++);
-			// // delete_name_env(p_split);//!Временно
 			// //!Зафришить
-		}
 		else
 			minishell_unsetenv(*p_argv++);
 	}
 	if (*p_argv && !ft_strcmp(*p_argv, "-S"))
 	{
 		++p_argv;
-		// ft_printf("p_argv: %s\n", *p_argv);
 		p_split = split_s_key(*p_argv);
 		change_value_name(p_split);
 	}
 	else if (*p_argv)
-	{
-		// minishell_setenv(*p_argv, ) //!ПОдумать
-	}
-	ft_print_lines(environ);
-	exit(EXIT_FAILURE);
+		change_value_name((char **)*&p_argv);
 }
