@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 18:17:43 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/06 15:02:19 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/06 17:39:00 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int			minishell_unsetenv(const char *name)
 	char			**find_env;
 	enum e_u_err	err;
 
+	err = FAILURE;
 	if (name && *name)
 	{
 		find_env = find_var_env(name);

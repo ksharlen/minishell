@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:29:05 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/06 15:15:53 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/06 17:35:10 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		main(void)
 	int ret_setenv;
 	size_t	len_env;
 
-	ret_setenv = minishell_unsetenv("");
+	ret_setenv = minishell_unsetenv("XPC_");
 	if (ret_setenv == SUCCESS)
 		ft_printf("\e[32;1m========SUCCESS=========\n");
 	else if (ret_setenv == FAILURE)
