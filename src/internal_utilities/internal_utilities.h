@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 16:09:45 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 16:43:57 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,8 @@ typedef struct	s_env
 {
 	t_opts	opt;
 	char	*path_exec;
-	char	*string;
 	char	*cmd;
-	char	**cmd_argc;
+	char	**cmd_argv;
 }				t_env;
 
 int			minishell_pwd(int argc, char **argv, char **env);

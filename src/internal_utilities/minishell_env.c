@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 00:20:49 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 16:57:01 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void		env_init(t_env *env)
 {
 	env->cmd = NULL;
-	env->string = NULL;
 	env->opt = 0;
 }
 

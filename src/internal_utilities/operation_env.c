@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 00:27:17 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 16:10:46 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 16:44:00 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,4 @@ char	**s_flag(const char *str)
 	if (str)
 		split = ft_strsplit_skip_space((char *)str, ' ');
 	return (split);
-}
-
-void	p_flag()
-{
-	
 }

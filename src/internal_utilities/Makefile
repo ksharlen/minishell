@@ -6,7 +6,7 @@ SRCS	:= main_test.c\
 			minishell_unsetenv.c\
 			minishell_env.c\
 			work_env.c\
-			operation_env.c
+			operation_env.c\
 
 HEADERS	:= internal_utilities.h
 
