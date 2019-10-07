@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 23:33:40 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 23:58:03 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int		get_opt(int argc, char **opts, t_env *env)
 
 	ch = 0;
 	err = SUCCESS;
+	optind = 1;
 	while ((ch = getopt(argc, opts, ENV_OPT)) != -1)
 	{
 		if (ch == 'P')
@@ -37,8 +38,8 @@ static int		get_opt(int argc, char **opts, t_env *env)
 			env->opt |= F_U;
 		else if (ch == '?')
 		{
-			ft_printf("%v%s\n	   %s\n", STDERR_FILENO, USG, USG_1);
 			err = FAILURE;
+			ft_printf("%v%s\n	   %s\n", STDERR_FILENO, USG, USG_1);
 		}
 	}
 	return (err);
@@ -56,7 +57,9 @@ int		minishell_env(int argc, char **argv, char **env)
 		ft_print_lines(environ);
 	else
 	{
+		//ft_printf("\e[32mone");
 		err = get_opt(argc, argv, &m_env);
+		ft_printf("err: %d\n", err);
 		if (err == SUCCESS)
 		{
 			++argv;
