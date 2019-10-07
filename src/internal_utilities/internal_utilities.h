@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 00:37:06 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 16:09:45 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ int			minishell_env(int argc, char **argv, char **env);
 void		work_opt(char *const *p_argv, t_env *env);
 char		**split_s_key(const char *str);
 
-char *const	*u_flag(char *const argv[]);
+
+/*
+**WORK_FLAGS
+*/
+char *const			*u_flag(char *const argv[]);
+char				**s_flag(const char *str);
+char *const			*change_value_name(char *const argv[]);
+struct s_nameval	split_name_val(const char *nameval);
 
 #endif
