@@ -1,0 +1,68 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/10/07 17:05:57 by ksharlen          #+#    #+#              #
+#    Updated: 2019/10/07 20:26:11 by ksharlen         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME			:= libminishell_utilits.a
+DIR_SRC			:= . ./minishell_env/
+DIR_SRC_MSHELL	:= ../
+DIR_LIBFT		:= ../../libft/
+DIR_INCLUDE		:= . ../../include ../../libft/include
+DIR_BIN			:= ./bin/
+
+SRCS			:= minishell_pwd.c\
+						minishell_command_execution.c\
+						minishell_command_search_path_env.c\
+						minishell_command_search.c\
+						minishell_errors.c\
+						minishell_setenv.c\
+						minishell_unsetenv.c\
+						minishell_env.c\
+						operation_env.c\
+						work_env.c
+
+OBJS			:= $(SRCS:.c=.o)
+OBJS_WITH_DIR	:= $(addprefix $(DIR_BIN), $(OBJS))
+HEADERS			:= internal_utilities.h minishell.h libft.h
+LIBFT			:= libft.a
+
+CC				:= gcc
+CFLAGS			:= -Wall -Werror -Wextra
+
+vpath %.c $(DIR_SRC) $(DIR_SRC_MSHELL)
+vpath %.o $(DIR_BIN)
+vpath %.h $(DIR_INCLUDE)
+vpath %.a $(DIR_LIBFT)
+
+all: $(LIBFT) $(NAME)
+
+$(NAME): $(LIBFT) $(OBJS)
+	ar rcu $@ $(OBJS_WITH_DIR) $(DIR_LIBFT)$(LIBFT)
+
+$(OBJS): %.o:%.c $(HEADERS) | $(DIR_BIN)
+	$(CC) -c $(CFLAGS) $< -o $(DIR_BIN)$@ $(addprefix -I , $(DIR_INCLUDE))
+
+$(DIR_BIN):
+	mkdir -p $@
+
+$(LIBFT):
+	make -C $(DIR_LIBFT)
+
+clean:
+	rm -rf $(OBJS_WITH_DIR)
+	rm $(DIR_BIN)
+
+fclean: clean
+	rm -rf $(NAME)
+
+re: fclean all
+
+echo:
+	echo $(OBJS)

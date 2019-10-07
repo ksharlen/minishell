@@ -6,17 +6,18 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/10/06 18:10:07 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/10/07 20:33:48 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME					:= minishell
 DIR_SRC					:= src/
+DIR_SRC_UTILITES		:= src/internal_utilities src/internal_utilities/minishell_env
 DIR_INCLUDE_MINISHELL	:= ./include
 DIR_LIBFT				:= ./libft/
 DIR_INCLUDE_LIBFT		:= ./libft/include
 DIR_BIN					:= bin/
-DIR_UTILITIES			:= ./src/internal_utilities
+# DIR_UTILITIES			:= ./src/internal_utilities
 DIRS_INCLUDE			:= $(DIR_INCLUDE_MINISHELL) $(DIR_INCLUDE_LIBFT) $(DIR_UTILITIES)
 
 SRCS					:=	main.c\
@@ -32,9 +33,11 @@ SRCS					:=	main.c\
 								minishell_init.c\
 								minishell_errors.c\
 								minishell_pwd.c\
-								cd.c\
-								echo.c\
-								env_utils.c
+								minishell_setenv.c\
+								minishell_unsetenv.c\
+								minishell_env.c\
+								operation_env.c\
+								work_env.c
 
 
 OBJS					:= $(SRCS:.c=.o)
@@ -51,9 +54,9 @@ CC						:= gcc
 MAKE_LIBFT				:= make -C $(DIR_LIBFT)
 REMOVE					:= rm -rf
 
-vpath %.c $(DIR_SRC) $(DIR_UTILITIES)
+vpath %.c $(DIR_SRC) $(DIR_SRC_UTILITES)
 vpath %.o $(DIR_BIN)
-vpath %.h $(DIR_INCLUDE_MINISHELL) $(DIR_UTILITIES)
+vpath %.h $(DIR_INCLUDE_MINISHELL)
 vpath %.a $(DIR_LIBFT)
 
 all: $(LIBFT) $(NAME)

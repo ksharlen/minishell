@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 16:57:21 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 21:20:37 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,24 @@ struct s_nameval	split_name_val(const char *nameval)
 	return (nval);
 }
 
+static void	push_env(t_env *env, char *const argv[])
+{
+	size_t	len_argv;
+	char	*const *p_argv;
+	char	**p_cmd_argv;
+
+	len_argv = ft_lineslen(argv);
+	p_argv = argv;
+	env->cmd_argv = (char **)ft_memalloc(sizeof(char *) * (len_argv + 1));
+	p_cmd_argv = env->cmd_argv;
+	while (*p_argv)
+	{
+		*p_cmd_argv = ft_strdup(*p_argv);
+		++p_argv;
+		++p_cmd_argv;
+	}
+}
+
 int		work_cmd(char *const argv[], t_env *env)
 {
 	char		path_ex[MAX_SIZE_PATH + 1];
@@ -36,16 +54,14 @@ int		work_cmd(char *const argv[], t_env *env)
 	search = NOT_FOUND;
 	if (argv)
 	{
-		env->cmd = *argv++;
-		env->cmd_argv = argv;
+		env->cmd = *argv;
+		push_env(env, argv);
+		//!Зафришить
 		search = (find_in_the_var_path_env(env->opt & F_P ? env->path_exec : getenv("PATH"), env->cmd, path_ex));
 		if (search == NOT_FOUND)
-			NO_SUCH(env->cmd);
+			ENV_PRINT(S_NO_SUCH, env->cmd);
 		else
-		{
-			ft_printf("path_ex: %s\n", path_ex);
-			exit(EXIT_FAILURE);
-		}
+			execute_cmd(env->cmd_argv, path_ex);
 	}
 	return (search);
 }
@@ -53,15 +69,14 @@ int		work_cmd(char *const argv[], t_env *env)
 void	work_opt(char *const *p_argv, t_env *env)
 {
 	char	**copy_environ;
-	char	**p_split;
 
 	copy_environ = ft_linedup(environ);//?тут лежат наши переменные окружения для родителя
 	if (env->opt & F_I)
 		environ = NULL;//Подумать
-	if (env->opt & F_P)
+	if (!ft_strcmp(*p_argv, "-P"))
 	{
-		env->path_exec = *p_argv;
 		++p_argv;
+		env->path_exec = *p_argv++;
 	}
 	if (*p_argv)
 		p_argv = change_value_name(p_argv);
@@ -69,5 +84,5 @@ void	work_opt(char *const *p_argv, t_env *env)
 		p_argv = u_flag(++p_argv); //?Переходим на следующий аргумент после флага u
 	//!тут этап сборки программы с ее аргументами
 	work_cmd(p_argv, env);
-
+	environ = copy_environ;
 }

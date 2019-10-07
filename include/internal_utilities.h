@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 16:43:57 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 21:19:04 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ enum	e_u_err
 /*
 **ENV
 */
+# define ENV_PRINT(err, filename) ft_printf("env: %s: %s\n", filename, err)
 # define ENV_OPT "PiuS"
 # define USG	"usage: env [-iv] [-P utilpath] [-S string] [-u name]"
 # define USG_1	"[name=value ...] [utility [argument ...]]"
@@ -56,19 +57,19 @@ struct	s_nameval
 
 typedef struct	s_env
 {
-	t_opts	opt;
-	char	*path_exec;
-	char	*cmd;
-	char	**cmd_argv;
+	t_opts		opt;
+	char		*path_exec;
+	char		*cmd;
+	char 		**cmd_argv;
 }				t_env;
 
-int			minishell_pwd(int argc, char **argv, char **env);
-int			minishell_setenv(const char *name, const char *value, const int replace);
-int			minishell_unsetenv(const char *name);
-char		**find_var_env(const char *name);
-int			minishell_env(int argc, char **argv, char **env);
-void		work_opt(char *const *p_argv, t_env *env);
-char		**split_s_key(const char *str);
+int					minishell_pwd(int argc, char **argv, char **env);
+int					minishell_setenv(const char *name, const char *value, const int replace);
+int					minishell_unsetenv(const char *name);
+char				**find_var_env(const char *name);
+int					minishell_env(int argc, char **argv, char **env);
+void				work_opt(char *const *p_argv, t_env *env);
+char				**split_s_key(const char *str);
 
 
 /*

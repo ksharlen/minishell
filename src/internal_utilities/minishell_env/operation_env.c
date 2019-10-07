@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 00:27:17 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 16:44:00 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 18:43:57 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,20 @@ char	*const*	change_value_name(char *const argv[])
 	char **split;
 
 	split = NULL;
-	if (!ft_strcmp(*argv, "-S"))
+	if (ft_strchr((char *)argv + 1, '='))
 	{
+		if (!ft_strcmp(*argv, "-S"))
+		{
+			++argv;
+			split = s_flag(*argv);
+			change_value(split);
+		}
+		else
+			change_value((char *const *)*&argv);
 		++argv;
-		split = s_flag(*argv);
-		change_value(split);
 	}
-	else
-		change_value((char *const *)*&argv);
-	++argv;
 	return (argv);
-	// struct s_nameval nval;
-//
-	// if (need_add && *need_add)
-	// {
-	// 	while (*need_add)
-	// 	{
-	// 		nval = split_name_val(*need_add);
-	// 		//!Зафришить!!!!!!!!!!!!!!!!!!!
-	// 		minishell_setenv(nval.name, nval.value, FLAG_ON);
-	// 		++need_add;
-	// 	}
-	// }
+	//!Зафришить!!!!!!!!!!!!!!!!!!!
 }
 
 char	**s_flag(const char *str)

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 16:57:01 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 20:43:41 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static char	*const *skip_opt(char *const argv[])
 static int	work_env(const int argc, char **argv, t_env *env)
 {
 	char *const *p_argv;
-	char **flag_s;
 
+	P_UNUSED(argc);
 	p_argv = skip_opt(argv + 1);
 	if (!p_argv)
 	{
@@ -67,7 +67,6 @@ static int	work_env(const int argc, char **argv, t_env *env)
 		exit(EXIT_FAILURE);
 	}
 	work_opt(p_argv, env);
-	// env_exec(env->opt);//!tmp
 	return (SUCCESS);
 }
 

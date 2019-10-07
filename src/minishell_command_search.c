@@ -6,11 +6,18 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/05 12:38:00 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 19:58:47 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*g_internal_commands[] = {
+	"0cd",
+	"1echo",
+	"2env",
+	"3pwd"
+};
 
 static int	find_internal_cmd(const char *cmd, char *path_ex)
 {

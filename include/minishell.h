@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/05 15:40:57 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 19:58:54 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@
 */
 # define SIZE_DATE		24
 
-extern char				*g_internal_commands[];
+// extern char				*g_internal_commands[];
 extern char 			**environ;
 extern struct s_path	g_path;
 
@@ -180,6 +180,7 @@ void			strddel(char ***del);
 void			push_path(const char *cmd, const char *path, char *path_ex);
 int				search_path(const char *path, const char *cmd, char *path_ex);
 void			minishell_push_minishell_history(const char *str_stdio, struct s_key_data *k_data);
+void			execute_cmd(char *const argv[], const char *path_cmd);
 
 void			getkey_internal(struct s_key_data *key);
 

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/05 15:40:18 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 20:36:18 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void handler_exec(int sig)
 {
 	P_UNUSED(sig);
-	printf("here\n");
 	strsignal(SIGSEGV);
 	exit(EXIT_SUCCESS);
 }
@@ -23,16 +22,19 @@ static void handler_exec(int sig)
 static void	execute_internal_cmd(char *const argv[],
 	int argc, const char *cmd)
 {
+	P_UNUSED(argv);
+	P_UNUSED(argc);
+	P_UNUSED(cmd);
 	int (*internal_cmd[NUM_INTERNAL_CMDS])(int argc, char *argv[], char *env[]);
 
-	internal_cmd[0] = cd;
-	internal_cmd[1] = echo;
-	internal_cmd[2] = env;
+	// internal_cmd[0] = cd;
+	// internal_cmd[1] = echo;
+	internal_cmd[2] = minishell_env;
 	internal_cmd[3] = minishell_pwd;
 	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, environ);
 }
 
-static void	execute_cmd(char *const argv[], const char *path_cmd)
+void		execute_cmd(char *const argv[], const char *path_cmd)
 {
 	pid_t	pid;
 	int		status_child;
