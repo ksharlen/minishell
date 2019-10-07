@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 21:20:37 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 22:39:23 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,13 @@ int		work_cmd(char *const argv[], t_env *env)
 		env->cmd = *argv;
 		push_env(env, argv);
 		//!Зафришить
-		search = (find_in_the_var_path_env(env->opt & F_P ? env->path_exec : getenv("PATH"), env->cmd, path_ex));
+		search = (find_in_the_var_path_env(env->opt & F_P ? env->path_exec : env->path_dflt, env->cmd, path_ex));
 		if (search == NOT_FOUND)
 			ENV_PRINT(S_NO_SUCH, env->cmd);
 		else
+		{
 			execute_cmd(env->cmd_argv, path_ex);
+		}
 	}
 	return (search);
 }
@@ -70,10 +72,16 @@ void	work_opt(char *const *p_argv, t_env *env)
 {
 	char	**copy_environ;
 
-	copy_environ = ft_linedup(environ);//?тут лежат наши переменные окружения для родителя
-	if (env->opt & F_I)
-		environ = NULL;//Подумать
-	if (!ft_strcmp(*p_argv, "-P"))
+	copy_environ = ft_linedup(environ);
+	env->path_dflt = getenv("PATH");
+	if (*p_argv && !ft_strcmp(*p_argv, "-i"))
+	{
+		// environ = NULL;//Подумать
+		environ = (char **)ft_memalloc(sizeof(char *));
+		environ[0] = NULL;
+		++p_argv;
+	}
+	if (p_argv && *p_argv && !ft_strcmp(*p_argv, "-P"))
 	{
 		++p_argv;
 		env->path_exec = *p_argv++;
@@ -81,8 +89,7 @@ void	work_opt(char *const *p_argv, t_env *env)
 	if (*p_argv)
 		p_argv = change_value_name(p_argv);
 	if (*p_argv && !ft_strcmp(*p_argv, "-u"))
-		p_argv = u_flag(++p_argv); //?Переходим на следующий аргумент после флага u
-	//!тут этап сборки программы с ее аргументами
+		p_argv = u_flag(++p_argv);
 	work_cmd(p_argv, env);
 	environ = copy_environ;
 }

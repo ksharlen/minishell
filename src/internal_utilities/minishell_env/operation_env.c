@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 00:27:17 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 18:43:57 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 22:39:01 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*const*	change_value_name(char *const argv[])
 	char **split;
 
 	split = NULL;
-	if (ft_strchr((char *)argv + 1, '='))
+	if (ft_strchr((char *)*argv, '=') || (*(argv + 1) && ft_strchr((char *)*(argv + 1), '=')))
 	{
 		if (!ft_strcmp(*argv, "-S"))
 		{
@@ -71,7 +71,9 @@ char	*const*	change_value_name(char *const argv[])
 			change_value(split);
 		}
 		else
+		{
 			change_value((char *const *)*&argv);
+		}
 		++argv;
 	}
 	return (argv);
