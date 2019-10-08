@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 00:27:17 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 20:18:43 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 20:22:37 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	*const	*change_value_name(char *const argv[])
 
 char			**s_flag(const char *str)
 {
-	char **split;
+	char	**split;
 
 	split = NULL;
 	if (str)

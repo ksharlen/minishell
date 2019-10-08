@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/10/07 20:33:48 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/10/08 20:34:36 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRCS					:=	main.c\
 								minishell_unsetenv.c\
 								minishell_env.c\
 								operation_env.c\
-								work_env.c
+								work_env.c\
+								minishell_echo.c
 
 
 OBJS					:= $(SRCS:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 14:20:15 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 20:36:00 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ enum	e_u_err
 # define F_U 4
 # define F_S 8
 
+/*
+**ECHO
+*/
+# define ECHO_OPT "n"
+
 typedef unsigned char t_opts;
 
 struct	s_nameval
@@ -67,6 +72,8 @@ typedef struct	s_env
 int					minishell_pwd(int argc, char **argv, char **env);
 int					minishell_setenv(const char *name, const char *value, const int replace);
 int					minishell_unsetenv(const char *name);
+int					minishell_echo(int argc, char **argv, char **env);
+
 char				**find_var_env(const char *name);
 int					minishell_env(int argc, char **argv, char **env);
 void				work_opt(char *const *p_argv, t_env *env);
