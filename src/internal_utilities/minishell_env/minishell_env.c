@@ -6,11 +6,16 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 23:59:06 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 14:20:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal_utilities.h"
+
+// int		err_env(const char *err, const char *filename)
+// {
+	
+// }
 
 static void		env_init(t_env *env)
 {

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 22:37:04 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 14:20:15 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ enum	e_u_err
 **ENV
 */
 # define ENV_PRINT(err, filename) ft_printf("env: %s: %s\n", filename, err)
-# define ENV_OPT "PiuS"
+# define ENV_OPT "P:i:u:S:"
 # define USG	"usage: env [-iv] [-P utilpath] [-S string] [-u name]"
 # define USG_1	"[name=value ...] [utility [argument ...]]"
 # define ENV_ERR(err, filename) ft_printf("env: %s: %s\n", filename, err)

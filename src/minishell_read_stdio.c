@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_read_stdio.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rloraine <rloraine@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/04 19:33:09 by rloraine         ###   ########.fr       */
+/*   Updated: 2019/10/08 18:14:00 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ static size_t	skip_tabs(const char *str)
 
 static void		insert_env(char *buf, const char *read_stdio)
 {
-	char		buf_env[MAX_SIZE_PATH];
+	char		buf_env[MAX_SIZE_PATH + 1];
 	size_t		len_w;
 	char		*val_env;
 
 	while(read_stdio && *read_stdio)
 	{
-		ft_bzero(buf_env, MAX_SIZE_PATH);
+		ft_bzero(buf_env, MAX_SIZE_PATH + 1);
 		read_stdio = ft_strscat(buf, (char *)read_stdio, '$');
 		//!ПРоверить на конец
-		if (*read_stdio)
+		if (read_stdio && *read_stdio)
 		{
 			len_w = skip_tabs(read_stdio);
 			if (len_w)

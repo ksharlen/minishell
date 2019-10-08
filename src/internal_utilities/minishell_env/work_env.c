@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 14:04:00 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 18:55:24 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct s_nameval	split_name_val(const char *nameval)
 	if (nameval && *nameval)
 	{
 		nval.name = ft_strsub(nameval, 0, len_name = ft_strnlen(nameval, '='));
-		nval.value = ft_strdup(nameval + len_name + 1);
+		nval.value = ft_strtabdup(nameval + len_name + 1);
 	}
 	//!Тут зафришить!!!!!!!!
 	return (nval);
@@ -55,6 +55,11 @@ int		work_cmd(char *const argv[], t_env *env)
 	if (argv)
 	{
 		env->cmd = *argv;
+		if (!env->cmd)
+		{
+			ft_print_lines(environ);
+			return (search);
+		}
 		push_env(env, argv);
 		//!Зафришить
 		search = (find_in_the_var_path_env(env->opt & F_P ? env->path_exec : env->path_dflt, env->cmd, path_ex));
@@ -64,6 +69,9 @@ int		work_cmd(char *const argv[], t_env *env)
 		{
 			execute_cmd(env->cmd_argv, path_ex);
 		}
+		ft_strdel_split(env->cmd_argv);
+		free(env->cmd_argv);
+		env->cmd_argv = NULL;
 	}
 	return (search);
 }
@@ -76,17 +84,20 @@ void	work_opt(char *const *p_argv, t_env *env)
 	env->path_dflt = getenv("PATH");
 	if (*p_argv && !ft_strcmp(*p_argv, "-i"))
 	{
-		environ = NULL;
+		environ = (char **)ft_memalloc(sizeof(char *));
+		environ[0] = NULL;
 		++p_argv;
 	}
 	if (p_argv && *p_argv && !ft_strcmp(*p_argv, "-P"))
 	{
 		++p_argv;
-		env->path_exec = *p_argv++;
+		env->path_exec = *p_argv;
+		if (*p_argv)
+			p_argv++;
 	}
-	if (*p_argv)
+	if (p_argv && *p_argv)
 		p_argv = change_value_name(p_argv);
-	if (*p_argv && !ft_strcmp(*p_argv, "-u"))
+	if (p_argv && *p_argv && !ft_strcmp(*p_argv, "-u"))
 		p_argv = u_flag(++p_argv);
 	work_cmd(p_argv, env);
 	environ = copy_environ;

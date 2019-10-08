@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:09:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/06 18:10:47 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 17:09:03 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ static int		create_new_name_val(const char *name, const char *value)
 		return (FAILURE);
 	push_new_environ(new_environ, len_env, name, value);
 	environ = new_environ;
+	new_environ = NULL;
 	return (SUCCESS);
 }
 

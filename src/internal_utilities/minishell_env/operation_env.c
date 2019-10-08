@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 00:27:17 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 22:39:01 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 16:09:32 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ char *const	*u_flag(char *const argv[])
 	return (argv);
 }
 
-static void	change_value(char *const *need_add)
+static void		change_value(char *const *need_add)
 {
 	struct s_nameval nval;
 
-	if (need_add && need_add)
+	if (need_add && *need_add)
 	{
 		while (*need_add)
 		{
@@ -59,22 +59,25 @@ static void	change_value(char *const *need_add)
 
 char	*const*	change_value_name(char *const argv[])
 {
-	char **split;
+	char 		**split;
 
 	split = NULL;
-	if (ft_strchr((char *)*argv, '=') || (*(argv + 1) && ft_strchr((char *)*(argv + 1), '=')))
+	if (*argv && !ft_strcmp(*argv, "-S"))
 	{
-		if (!ft_strcmp(*argv, "-S"))
+		++argv;
+		if (*argv && ft_strtabchr((char *)*argv, '='))
 		{
-			++argv;
 			split = s_flag(*argv);
 			change_value(split);
 		}
-		else
+	}
+	else
+	{
+		if (*argv && ft_strtabchr(*argv, '='))
 		{
 			change_value((char *const *)*&argv);
+			++argv;
 		}
-		++argv;
 	}
 	return (argv);
 	//!Зафришить!!!!!!!!!!!!!!!!!!!
