@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 23:58:03 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/07 23:59:06 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ int		minishell_env(int argc, char **argv, char **env)
 		ft_print_lines(environ);
 	else
 	{
-		//ft_printf("\e[32mone");
 		err = get_opt(argc, argv, &m_env);
-		ft_printf("err: %d\n", err);
 		if (err == SUCCESS)
 		{
 			++argv;

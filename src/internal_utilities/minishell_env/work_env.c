@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 22:39:23 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 14:04:00 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,7 @@ void	work_opt(char *const *p_argv, t_env *env)
 	env->path_dflt = getenv("PATH");
 	if (*p_argv && !ft_strcmp(*p_argv, "-i"))
 	{
-		// environ = NULL;//Подумать
-		environ = (char **)ft_memalloc(sizeof(char *));
-		environ[0] = NULL;
+		environ = NULL;
 		++p_argv;
 	}
 	if (p_argv && *p_argv && !ft_strcmp(*p_argv, "-P"))
