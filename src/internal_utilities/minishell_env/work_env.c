@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 18:55:24 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 19:38:03 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ struct s_nameval	split_name_val(const char *nameval)
 	nval.value = NULL;
 	if (nameval && *nameval)
 	{
-		nval.name = ft_strsub(nameval, 0, len_name = ft_strnlen(nameval, '='));
+		len_name = ft_strnlen(nameval, '=');
+		nval.name = ft_strsub(nameval, 0, len_name);
 		nval.value = ft_strtabdup(nameval + len_name + 1);
 	}
-	//!Тут зафришить!!!!!!!!
 	return (nval);
 }
 
-static void	push_env(t_env *env, char *const argv[])
+static void			push_env(t_env *env, char *const argv[])
 {
-	size_t	len_argv;
-	char	*const *p_argv;
-	char	**p_cmd_argv;
+	size_t		len_argv;
+	char *const	*p_argv;
+	char		**p_cmd_argv;
 
 	len_argv = ft_lineslen(argv);
 	p_argv = argv;
@@ -46,7 +46,7 @@ static void	push_env(t_env *env, char *const argv[])
 	}
 }
 
-int		work_cmd(char *const argv[], t_env *env)
+int					work_cmd(char *const argv[], t_env *env)
 {
 	char		path_ex[MAX_SIZE_PATH + 1];
 	enum e_find	search;
@@ -61,14 +61,12 @@ int		work_cmd(char *const argv[], t_env *env)
 			return (search);
 		}
 		push_env(env, argv);
-		//!Зафришить
-		search = (find_in_the_var_path_env(env->opt & F_P ? env->path_exec : env->path_dflt, env->cmd, path_ex));
+		search = (find_in_the_var_path_env(env->opt & F_P ?
+			env->path_exec : env->path_dflt, env->cmd, path_ex));
 		if (search == NOT_FOUND)
 			ENV_PRINT(S_NO_SUCH, env->cmd);
 		else
-		{
 			execute_cmd(env->cmd_argv, path_ex);
-		}
 		ft_strdel_split(env->cmd_argv);
 		free(env->cmd_argv);
 		env->cmd_argv = NULL;
@@ -76,7 +74,7 @@ int		work_cmd(char *const argv[], t_env *env)
 	return (search);
 }
 
-void	work_opt(char *const *p_argv, t_env *env)
+void				work_opt(char *const *p_argv, t_env *env)
 {
 	char	**copy_environ;
 

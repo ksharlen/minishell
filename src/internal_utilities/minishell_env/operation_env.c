@@ -6,20 +6,20 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 00:27:17 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 16:09:32 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 20:18:43 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal_utilities.h"
 
-static void	delete_name(char *const *need_delete)
+static void		delete_name(char *const *need_delete)
 {
 	if (need_delete)
 		while (*need_delete)
 			minishell_unsetenv(*need_delete++);
 }
 
-char *const	*u_flag(char *const argv[])
+char *const		*u_flag(char *const argv[])
 {
 	char	**split;
 
@@ -30,7 +30,9 @@ char *const	*u_flag(char *const argv[])
 			++argv;
 			split = s_flag((char *)*argv);
 			delete_name(split);
-			//!Зафришить
+			ft_strdel_split(split);
+			free(split);
+			split = NULL;
 		}
 		else
 			minishell_unsetenv(*argv);
@@ -48,7 +50,6 @@ static void		change_value(char *const *need_add)
 		while (*need_add)
 		{
 			nval = split_name_val(*need_add);
-			//!зафришить
 			minishell_setenv(nval.name, nval.value, FLAG_ON);
 			ft_strdel(&nval.name);
 			ft_strdel(&nval.value);
@@ -57,9 +58,9 @@ static void		change_value(char *const *need_add)
 	}
 }
 
-char	*const*	change_value_name(char *const argv[])
+char	*const	*change_value_name(char *const argv[])
 {
-	char 		**split;
+	char	**split;
 
 	split = NULL;
 	if (*argv && !ft_strcmp(*argv, "-S"))
@@ -69,6 +70,9 @@ char	*const*	change_value_name(char *const argv[])
 		{
 			split = s_flag(*argv);
 			change_value(split);
+			ft_strdel_split(split);
+			free(split);
+			split = NULL;
 		}
 	}
 	else
@@ -80,10 +84,9 @@ char	*const*	change_value_name(char *const argv[])
 		}
 	}
 	return (argv);
-	//!Зафришить!!!!!!!!!!!!!!!!!!!
 }
 
-char	**s_flag(const char *str)
+char			**s_flag(const char *str)
 {
 	char **split;
 

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 18:14:00 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/08 19:57:12 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ static size_t	skip_tabs(const char *str)
 	size_t len;
 
 	len = 0;
-	if (str)
+	while (*str && !(TABS(*str)))
 	{
-		while (str && *str && !(TABS(*str)))
-		{
-			++len;
-			++str;
-		}
+		++len;
+		++str;
 	}
 	return (len);
 }
@@ -43,12 +40,14 @@ static void		insert_env(char *buf, const char *read_stdio)
 	size_t		len_w;
 	char		*val_env;
 
-	while(read_stdio && *read_stdio)
+	len_w = 0;
+	if (read_stdio)
+	while(read_stdio)
 	{
 		ft_bzero(buf_env, MAX_SIZE_PATH + 1);
 		read_stdio = ft_strscat(buf, (char *)read_stdio, '$');
 		//!ПРоверить на конец
-		if (read_stdio && *read_stdio)
+		if (read_stdio)
 		{
 			len_w = skip_tabs(read_stdio);
 			if (len_w)
