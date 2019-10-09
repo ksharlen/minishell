@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 20:36:00 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/09 17:03:15 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define S_TOO_MANY "too many arguments"
 
 # define PWD_ERR(err) ft_printf("pwd: %s\n", err)
-
-# define CD_ERR(err, var_name) ft_printf("cd: %s: %s\n", err, var_name)
 
 # define P_ARGS_UNUSED(...) (void)(__VA_ARGS__)
 
@@ -52,6 +50,16 @@ enum	e_u_err
 */
 # define ECHO_OPT "n"
 
+/*
+**CD
+*/
+# define CD_TOO_MANY S_TOO_MANY
+# define CD_ERR(err, filename) ft_printf("cd: %s %s\n", err, filename)
+# define EMPTY_STR ""
+# define PATH argv[1]
+# define N_TOO_LONG "File name too long"
+# define NOT_DIR	"Not a directory"
+
 typedef unsigned char t_opts;
 
 struct	s_nameval
@@ -73,6 +81,7 @@ int					minishell_pwd(int argc, char **argv, char **env);
 int					minishell_setenv(const char *name, const char *value, const int replace);
 int					minishell_unsetenv(const char *name);
 int					minishell_echo(int argc, char **argv, char **env);
+int					minishell_cd(int argc, char **argv, char **env);
 
 char				**find_var_env(const char *name);
 int					minishell_env(int argc, char **argv, char **env);
