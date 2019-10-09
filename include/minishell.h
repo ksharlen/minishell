@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 17:55:45 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 00:24:26 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 # define PROG_NAME		"minishell"
 # define SHELL			minishell
+# define SHLVL			"SHLVL"
 
 /*
 **MINISHELL_ERRORS
@@ -81,6 +82,16 @@
 # define ILLEGAL_OPT		"illegal option --e"
 # define NOT_FOUND_CMD		"command not found:"
 # define FILE_TO_LONG		"file name too long:" //worging for file and cmd
+
+/*
+**SIG_ERRORS
+*/
+# define PRINT_SIG_ERR(lvl, pid, err, file) ft_printf("[%s]    %d %s  %s\n", lvl, pid, err, file)
+# define ESIG	"Segmentation fault"
+# define EBUS	"Bus error"
+# define QUIT	"Quit"
+# define EABR	"Abort trap"
+# define FPOT	"Floating point exception"
 
 # define PRINT(p_name, e_name, out) ft_printf("%s: %s %s\n", p_name, e_name, out)
 # define PRINT_ERROR(p_name, e_name, out) PRINT(p_name, e_name, out)

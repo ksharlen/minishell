@@ -6,17 +6,31 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 15:54:16 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 00:30:59 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void handler_exec(int sig)
+static void handler_child(int status_child, pid_t pid_child, const char *path_cmd)
 {
-	P_UNUSED(sig);
-	strsignal(SIGSEGV);
-	exit(EXIT_SUCCESS);
+	char	*lvl_proccess;
+
+	lvl_proccess = getenv(SHLVL);
+	if (!lvl_proccess)
+		lvl_proccess = "1";
+	if (status_child == SIGINT)
+		;
+	else if (status_child == SIGSEGV)
+		PRINT_SIG_ERR(lvl_proccess, pid_child, ESIG, path_cmd);
+	else if (status_child == SIGABRT)
+		PRINT_SIG_ERR(lvl_proccess, pid_child, EABR, path_cmd);
+	else if (status_child == SIGBUS)
+		PRINT_SIG_ERR(lvl_proccess, pid_child, EBUS, path_cmd);
+	else if (status_child == SIGFPE)
+		PRINT_SIG_ERR(lvl_proccess, pid_child, FPOT, path_cmd);
+	else if (status_child == SIGQUIT)
+		PRINT_SIG_ERR(lvl_proccess, pid_child, QUIT, path_cmd);
 }
 
 static void	execute_internal_cmd(char *const argv[],
@@ -39,11 +53,11 @@ void		execute_cmd(char *const argv[], const char *path_cmd)
 	pid_t	pid;
 	int		status_child;
 
+	status_child = 0;
 	if ((pid = NEW_PROCESS()) == RET_ERROR)
 		err_exit(E_FORK, "minishell");
 	if (pid == CHILD_PROCESS)
 	{
-		signal(SIGSEGV, handler_exec);
 		if (execve(path_cmd, argv, environ) == NOT_FOUND)
 			CMD_NOT_FOUND(CMD_NAME);
 		else
@@ -51,6 +65,7 @@ void		execute_cmd(char *const argv[], const char *path_cmd)
 	}
 	else if (wait(&status_child) == RET_ERROR)
 		err_exit(E_WAIT, "minishell");
+	handler_child(status_child, pid, path_cmd);
 }
 
 int			minishell_command_execution(t_argv *beg)
