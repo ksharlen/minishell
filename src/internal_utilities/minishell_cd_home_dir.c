@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 18:17:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 22:26:56 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/09 22:57:48 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,18 @@ static void		push_curr_home_path(const char *old_path, char *new_path)
 	uhome_dir = getpwuid(uid)->pw_dir;
 	ft_strcpy(new_path, uhome_dir);
 	ft_strcat(new_path, old_path);
-	ft_printf("new_path: %s\n", new_path);
 }
 
 static void		push_any_users(const char *old_path, char *new_path)
 {
 	ft_strcpy(new_path, "/Users/");
 	ft_strcat(new_path, old_path);
-	ft_printf("new_path: %s\n", new_path);
 }
 
 void			work_home_dir(const char *old_path, char *new_path)
 {
-	++old_path;
+	if (old_path && *old_path)
+		++old_path;
 	if (*old_path == '/' || !(*old_path))
 		push_curr_home_path(old_path, new_path);
 	else if (ft_isalpha(*old_path))

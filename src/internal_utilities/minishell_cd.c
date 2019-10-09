@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:44:40 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 18:24:05 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/09 23:23:01 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	check_file(const char *path)
 {
 	struct stat		st;
-	enum	e_u_err	err;
+	enum e_u_err	err;
 
 	err = FAILURE;
 	stat(path, &st);
@@ -62,7 +62,7 @@ static int	valid_path(const char *path)
 
 	p_path = path;
 	len_full_path = 0;
-	while (*p_path)
+	while (p_path && *p_path)
 	{
 		if (*p_path == '/')
 			++p_path;
@@ -86,13 +86,25 @@ static int	valid_path(const char *path)
 static int	work_cd(const char *path)
 {
 	enum e_u_err	err;
+	char			*buf_path;
 
 	err = FAILURE;
-	if (*path)
+	if (path)
 	{
 		err = valid_path(path);
 		if (err != FAILURE)
-			err = goto_path(path);
+		{
+			if (*path == '~' || !(*path))
+			{
+				buf_path = (char[MAX_SIZE_PATH + 1]){0};
+				work_home_dir(path, buf_path);
+				err = goto_path(buf_path);
+			}
+			else if (!ft_strcmp(path, "-"))
+				err = goto_path(getenv("OLDPWD"));
+			else
+				err = goto_path(path);
+		}
 	}
 	return (err);
 }
@@ -100,27 +112,25 @@ static int	work_cd(const char *path)
 int			minishell_cd(int argc, char **argv, char **env)
 {
 	enum e_u_err	err;
-	char			*buf_path;
+	char			*cwd;
 
 	P_UNUSED(env);
-	buf_path = (char[MAX_SIZE_PATH + 1]){0};
 	err = FAILURE;
 	if (argv[0] && argc > 0)
 	{
-		if (argc == 1)//Сделать проверку на спец символы (~/ / и тд.)
-		{
-			//!вызов ф-ии с переходом в home_dir
-		}
+		if (argc == 1)
+			err = work_cd("");
 		else if (argc > 2)
 			CD_ERR(CD_TOO_MANY, EMPTY_STR);
 		else
-		{
-			if (argv[1][0] == '~')
-				work_home_dir(PATH, buf_path);
 			err = work_cd(PATH);
-		}
 		if (err == SUCCESS)
-			;//меняем pwd
+		{
+			cwd = (char[MAX_SIZE_PATH + 1]){0};
+			getcwd(cwd, MAX_SIZE_PATH);
+			minishell_setenv("OLDPWD", getenv("PWD"), FLAG_ON);
+			minishell_setenv("PWD", cwd, FLAG_ON);
+		}
 	}
 	return (0);
 }

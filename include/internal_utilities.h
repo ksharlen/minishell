@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 22:12:34 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/09 22:38:02 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int					minishell_setenv(const char *name, const char *value, const int replace)
 int					minishell_unsetenv(const char *name);
 int					minishell_echo(int argc, char **argv, char **env);
 int					minishell_cd(int argc, char **argv, char **env);
-int					work_home_dir(const char *old_path, char *new_path);
+void				work_home_dir(const char *old_path, char *new_path);
 
 char				**find_var_env(const char *name);
 int					minishell_env(int argc, char **argv, char **env);
