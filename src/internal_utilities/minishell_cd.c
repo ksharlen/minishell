@@ -6,16 +6,52 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:44:40 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 17:13:03 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/09 18:24:05 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal_utilities.h"
 
+static int	check_file(const char *path)
+{
+	struct stat		st;
+	enum	e_u_err	err;
+
+	err = FAILURE;
+	stat(path, &st);
+	if (st.st_mode & S_IFDIR)
+		err = SUCCESS;
+	else
+		CD_ERR(NOT_DIR, path);
+	return (err);
+}
+
 static int	goto_path(const char *path)
 {
-	P_UNUSED(path);
-	return (SUCCESS);
+	int				ret_chdir;
+	enum e_u_err	err;
+
+	err = FAILURE;
+	ret_chdir = access(path, F_OK);
+	if (ret_chdir == FAILURE)
+		CD_ERR(S_NO_SUCH, path);
+	else
+	{
+		if (check_file(path) == FAILURE)
+			return (FAILURE);
+		ret_chdir = access(path, X_OK);
+		if (ret_chdir == FAILURE)
+			CD_ERR(PERM, path);
+		else
+		{
+			ret_chdir = chdir(path);
+			if (ret_chdir == FAILURE)
+				CD_ERR(NOT_DIR, path);
+			else
+				err = SUCCESS;
+		}
+	}
+	return (err);
 }
 
 static int	valid_path(const char *path)
@@ -63,7 +99,12 @@ static int	work_cd(const char *path)
 
 int			minishell_cd(int argc, char **argv, char **env)
 {
+	enum e_u_err	err;
+	char			*buf_path;
+
 	P_UNUSED(env);
+	buf_path = (char[MAX_SIZE_PATH + 1]){0};
+	err = FAILURE;
 	if (argv[0] && argc > 0)
 	{
 		if (argc == 1)//Сделать проверку на спец символы (~/ / и тд.)
@@ -74,11 +115,12 @@ int			minishell_cd(int argc, char **argv, char **env)
 			CD_ERR(CD_TOO_MANY, EMPTY_STR);
 		else
 		{
-			work_cd(PATH);
+			if (argv[1][0] == '~')
+				work_home_dir(PATH, buf_path);
+			err = work_cd(PATH);
 		}
-		//меняем pwd
+		if (err == SUCCESS)
+			;//меняем pwd
 	}
 	return (0);
 }
-
-// dfdfdfdfdfdfsdafasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfsdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfsdfasdfasdfasdfasdfasdfasdfsadfasdfasdfasdfsadfasdfasdfasdfasfsdfasdfasdfasfsdfasfsdfasdfasdfasdfsadfasdfasdfasdfasfsdfasdfasdfsadfsadfsdfsdfsdafasdfddf

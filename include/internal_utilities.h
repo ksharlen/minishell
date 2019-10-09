@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 17:03:15 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/09 22:12:34 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 /*
 **ERRORS
 */
-# define S_NO_SUCH "no such file or directory"
+# define S_NO_SUCH "no such file or directory:"
 # define S_TOO_MANY "too many arguments"
 
 # define PWD_ERR(err) ft_printf("pwd: %s\n", err)
@@ -58,7 +58,8 @@ enum	e_u_err
 # define EMPTY_STR ""
 # define PATH argv[1]
 # define N_TOO_LONG "File name too long"
-# define NOT_DIR	"Not a directory"
+# define NOT_DIR	"Not a directory:"
+# define PERM		"Permission denied:"
 
 typedef unsigned char t_opts;
 
@@ -82,6 +83,7 @@ int					minishell_setenv(const char *name, const char *value, const int replace)
 int					minishell_unsetenv(const char *name);
 int					minishell_echo(int argc, char **argv, char **env);
 int					minishell_cd(int argc, char **argv, char **env);
+int					work_home_dir(const char *old_path, char *new_path);
 
 char				**find_var_env(const char *name);
 int					minishell_env(int argc, char **argv, char **env);

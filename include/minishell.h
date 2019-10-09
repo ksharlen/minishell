@@ -6,23 +6,24 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 19:58:54 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/09 17:55:45 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <sys/types.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/types.h>
 # include <time.h>
 # include <pwd.h>
 # include <signal.h>
 # include <dirent.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <sys/stat.h>
 
 # if __linux__
 #  include <sys/wait.h>
