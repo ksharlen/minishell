@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 19:57:12 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 16:14:59 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 static void		minishell_handler(int sig)
 {
-	if (sig == SIGINT || sig == SIGQUIT)
+	if (sig == SIGINT)
 	{
 		ft_printf("\n");
 		minishell_greeting(getenv("HOME"));
 	}
+	else if (sig == SIGQUIT)
+		;
 }
 
 static size_t	skip_tabs(const char *str)
@@ -46,7 +48,6 @@ static void		insert_env(char *buf, const char *read_stdio)
 	{
 		ft_bzero(buf_env, MAX_SIZE_PATH + 1);
 		read_stdio = ft_strscat(buf, (char *)read_stdio, '$');
-		//!ПРоверить на конец
 		if (read_stdio)
 		{
 			len_w = skip_tabs(read_stdio);
