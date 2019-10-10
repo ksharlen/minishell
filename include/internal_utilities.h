@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 22:38:02 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 23:24:06 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct	s_env
 
 int					minishell_pwd(int argc, char **argv, char **env);
 int					minishell_setenv(const char *name, const char *value, const int replace);
+char				*minishell_getenv(const char *name);
 int					minishell_unsetenv(const char *name);
 int					minishell_echo(int argc, char **argv, char **env);
 int					minishell_cd(int argc, char **argv, char **env);

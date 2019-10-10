@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 22:15:24 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void		insert_env(char *buf, const char *read_stdio)
 			if (len_w)
 			{
 				ft_strncpy(buf_env, read_stdio, len_w);
-				val_env = getenv(buf_env);
+				val_env = minishell_getenv(buf_env);
 				if (val_env)
 					ft_strcat(buf, val_env);
 				read_stdio += len_w;

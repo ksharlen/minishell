@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 11:54:26 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 17:42:27 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	set_shlvl(void)
 	char	*str_shlvl;
 	int		shlvl;
 
-	str_shlvl = getenv("SHLVL");
+	str_shlvl = minishell_getenv("SHLVL");
 	if (str_shlvl)
 	{
 		shlvl = ft_atoi(str_shlvl);

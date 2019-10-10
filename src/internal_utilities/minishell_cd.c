@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:44:40 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 21:45:15 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ static int	work_cd(const char *path)
 				err = goto_path(buf_path);
 			}
 			else if (!ft_strcmp(path, "-"))
-				err = goto_path(getenv("OLDPWD"));
+				err = goto_path(minishell_getenv("OLDPWD"));
 			else
 				err = goto_path(path);
 		}
@@ -128,7 +128,7 @@ int			minishell_cd(int argc, char **argv, char **env)
 		{
 			cwd = (char[MAX_SIZE_PATH + 1]){0};
 			getcwd(cwd, MAX_SIZE_PATH);
-			minishell_setenv("OLDPWD", getenv("PWD"), FLAG_ON);
+			minishell_setenv("OLDPWD", minishell_getenv("PWD"), FLAG_ON);
 			minishell_setenv("PWD", cwd, FLAG_ON);
 		}
 	}

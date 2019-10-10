@@ -6,7 +6,7 @@
 #    By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/22 10:29:34 by ksharlen          #+#    #+#              #
-#    Updated: 2019/10/10 22:08:06 by ksharlen         ###   ########.fr        #
+#    Updated: 2019/10/10 23:15:36 by ksharlen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRCS					:=	main.c\
 								minishell_echo.c\
 								minishell_cd.c\
 								minishell_cd_home_dir.c\
-								minishell_signals.c
+								minishell_signals.c\
+								minishell_getenv.c
 
 
 OBJS					:= $(SRCS:.c=.o)

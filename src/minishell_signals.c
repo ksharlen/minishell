@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 22:05:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 22:22:33 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			status_child(int stat_child, pid_t pid_child, const char *path_cmd)
 {
 	char	*lvl_proccess;
 
-	lvl_proccess = getenv(SHLVL);
+	lvl_proccess = minishell_getenv(SHLVL);
 	if (!lvl_proccess)
 		lvl_proccess = "1";
 	if (stat_child == SIGINT)

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 19:38:03 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void				work_opt(char *const *p_argv, t_env *env)
 	char	**copy_environ;
 
 	copy_environ = ft_linedup(environ);
-	env->path_dflt = getenv("PATH");
+	env->path_dflt = minishell_getenv("PATH");
 	if (*p_argv && !ft_strcmp(*p_argv, "-i"))
 	{
 		environ = (char **)ft_memalloc(sizeof(char *));
