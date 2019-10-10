@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 17:05:44 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:12:56 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,22 +101,22 @@
 /*
 **PATH
 */
-# define UTILITIES	"utilities"
-# define MHISTORY ".minishell_history"
-# define MRC ".minishellrc"
+# define UTILITIES				"utilities"
+# define MHISTORY 				".minishell_history"
+# define MRC 					".minishellrc"
 # define KEY_LAST_CMD_MHISTORY "KEY"
 
 /*
 **OTHER
 */
-# define COMMAND_SPLIT	';'
-# define PATH_SPLIT		':'
-# define SPLIT_COMMANDS ft_strsplit_skip_space
-# define NEW_PROCESS	fork
-# define CMD_NAME		argv[0]
-# define CHILD_PROCESS	0
+# define COMMAND_SPLIT		';'
+# define PATH_SPLIT			':'
+# define SPLIT_COMMANDS 	ft_strsplit_skip_space
+# define NEW_PROCESS		fork
+# define CMD_NAME			argv[0]
+# define CHILD_PROCESS		0
 # define NUM_INTERNAL_CMDS	7
-# define NUMBERS		"0123456789"
+# define NUMBERS			"0123456789"
 
 # define P_INT_CMD	path_internal_cmd
 # define P_MSRC		path_mshellrc
