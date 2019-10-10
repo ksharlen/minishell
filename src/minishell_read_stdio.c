@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 17:20:10 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 21:38:48 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 static void		minishell_handler(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT || sig == SIGQUIT)
 	{
 		ft_printf("\n");
 		minishell_greeting();
 	}
-	else if (sig == SIGQUIT)
-		;
 }
 
 static size_t	skip_tabs(const char *str)

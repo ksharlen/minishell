@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 18:17:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 22:57:48 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 21:46:44 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void			work_home_dir(const char *old_path, char *new_path)
 		++old_path;
 	if (*old_path == '/' || !(*old_path))
 		push_curr_home_path(old_path, new_path);
+	else if (*old_path == '-')
+		push_curr_home_path("", new_path);
 	else if (ft_isalpha(*old_path))
 		push_any_users(old_path, new_path);
 }

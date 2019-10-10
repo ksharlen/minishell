@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:44:40 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 23:23:01 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 21:45:15 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static int	work_cd(const char *path)
 		err = valid_path(path);
 		if (err != FAILURE)
 		{
-			if (*path == '~' || !(*path))
+			if (*path == '~' || !(*path) || !ft_strcmp(path, "--"))
 			{
 				buf_path = (char[MAX_SIZE_PATH + 1]){0};
 				work_home_dir(path, buf_path);
