@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/07 19:58:47 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 16:09:30 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ int			minishell_command_search(const char *cmd, char *path_ex)
 		else if (find_in_the_var_path_env(getenv("PATH"),
 		cmd, path_ex) == FOUND_PATH_ENV)
 			search = FOUND_PATH_ENV;
+		else
+		{
+			ft_strcpy(path_ex, cmd);
+			search = FOUND;
+		}
 	}
 	return (search);
 }

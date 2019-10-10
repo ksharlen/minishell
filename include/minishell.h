@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 00:24:26 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 16:02:16 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ enum			e_find
 	FOUND_SHELL_DIR,
 	FOUND_PATH_ENV,
 	FOUND,
-	FOUND_EXIT
+	FOUND_EXIT,
 };
 
 struct			s_entry
@@ -192,7 +192,7 @@ void			strddel(char ***del);
 void			push_path(const char *cmd, const char *path, char *path_ex);
 int				search_path(const char *path, const char *cmd, char *path_ex);
 void			minishell_push_minishell_history(const char *str_stdio, struct s_key_data *k_data);
-void			execute_cmd(char *const argv[], const char *path_cmd);
+int				execute_cmd(char *const argv[], const char *path_cmd);
 
 void			getkey_internal(struct s_key_data *key);
 
