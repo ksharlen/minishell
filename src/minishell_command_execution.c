@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 16:11:24 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:06:30 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void handler_child(int status_child, pid_t pid_child, const char *path_cm
 	if (!lvl_proccess)
 		lvl_proccess = "1";
 	if (status_child == SIGINT)
-		;
+		ft_printf("\n");
 	else if (status_child == SIGSEGV)
 		PRINT_SIG_ERR(lvl_proccess, pid_child, ESIG, path_cmd);
 	else if (status_child == SIGABRT)
@@ -36,9 +36,6 @@ static void handler_child(int status_child, pid_t pid_child, const char *path_cm
 static void	execute_internal_cmd(char *const argv[],
 	int argc, const char *cmd)
 {
-	P_UNUSED(argv);
-	P_UNUSED(argc);
-	P_UNUSED(cmd);
 	int (*internal_cmd[NUM_INTERNAL_CMDS])(int argc, char *argv[], char *env[]);
 
 	internal_cmd[0] = minishell_cd;
