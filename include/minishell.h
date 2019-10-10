@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 16:02:16 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:05:44 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@
 /*
 **SIG_ERRORS
 */
-# define PRINT_SIG_ERR(lvl, pid, err, file) ft_printf("[%s]    %d %s  %s\n", lvl, pid, err, file)
+# define PRINT_SIG_ERR(lvl, pid, err, file) ft_printf("%v[%s]    %d %s  %s\n", STDERR_FILENO, lvl, pid, err, file)
 # define ESIG	"Segmentation fault"
 # define EBUS	"Bus error"
 # define QUIT	"Quit"
 # define EABR	"Abort trap"
 # define FPOT	"Floating point exception"
 
-# define PRINT(p_name, e_name, out) ft_printf("%s: %s %s\n", p_name, e_name, out)
+# define PRINT(p_name, e_name, out) ft_printf("%v%s: %s %s\n", STDERR_FILENO, p_name, e_name, out)
 # define PRINT_ERROR(p_name, e_name, out) PRINT(p_name, e_name, out)
 # define PRINT_ERROR_AND_RET(p_name, e_name, out) PRINT_ERROR(p_name, e_name, out); return (-1);
 # define CMD_NOT_FOUND(p_name) PRINT_ERROR(PROG_NAME, NOT_FOUND_CMD, p_name)
@@ -127,7 +127,6 @@
 */
 # define SIZE_DATE		24
 
-// extern char				*g_internal_commands[];
 extern char 			**environ;
 extern struct s_path	g_path;
 
@@ -137,7 +136,7 @@ typedef unsigned int		t_error;
 enum			e_stdstream
 {
 	STDIN,
-	STDOUT
+	STDOUT,
 };
 
 enum			e_find

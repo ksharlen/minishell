@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 16:46:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:35:40 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:00:47 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static const char *const g_merrors[] = {
 void	err_str(t_error merror, const char *add_text)
 {
 	if (add_text && *add_text)
-		ft_printf("%s: %s\n", add_text, g_merrors[merror]);
+		ft_printf("%v%s: %s\n", STDERR_FILENO, add_text, g_merrors[merror]);
 	else
-		ft_printf("%s\n", g_merrors[merror]);
+		ft_printf("%v%s\n", STDERR_FILENO, g_merrors[merror]);
 }
 
 void	err_exit(t_error merror, const char *add_text)
