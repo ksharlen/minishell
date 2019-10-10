@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 17:12:56 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:37:00 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ struct			s_key_data
 	char		date_ex_cmd[SIZE_DATE + 1];
 };
 
-void			minishell_greeting(const char *home_dir);
+void			minishell_greeting(void);
 char			*minishell_read_stdio(void);
 t_argv			*minishell_parse_str(const char *str_for_parse);
 int				minishell_command_execution(t_argv *beg);

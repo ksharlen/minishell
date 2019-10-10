@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 16:09:46 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/09 23:17:03 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:36:57 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ int		main(void)
 	search = NOT_FOUND;
 	minishell_paths_init();
 	minishell_history_init(&key_minishell_history);
-	system("clear");
 	while (INF)
 	{
-		minishell_greeting(getenv("HOME"));
+		minishell_greeting();
 		str_stdio = minishell_read_stdio();
 		minishell_push_minishell_history(str_stdio, &key_minishell_history);
 		beg = minishell_parse_str(str_stdio);

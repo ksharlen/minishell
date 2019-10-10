@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 20:12:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:45:53 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:19:58 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,16 @@ static char		*get_curr_dir(char *curr_dir, const char *home_dir)
 	return (p_str);
 }
 
-void			minishell_greeting(const char *home_dir)
+void			minishell_greeting(void)
 {
 	struct s_entry	entry;
+	char			*home_path;
 	char			*curr_dir_without_full_path;
 
+	home_path = getpwuid(getuid())->pw_dir;
 	get_curr_time(entry.time);
 	get_uname(entry.uname);
-	curr_dir_without_full_path = get_curr_dir(entry.curr_dir, home_dir);
+	curr_dir_without_full_path = get_curr_dir(entry.curr_dir, home_path);
 	ft_printf("[%s] %s%s%s %s%s%s $>", entry.time, COLOR_UNAME, entry.uname,
 		COLOR_DEFAULT, COLOR_DIR, curr_dir_without_full_path, COLOR_DEFAULT);
 }
