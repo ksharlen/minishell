@@ -6,20 +6,11 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 21:38:48 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 22:15:24 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void		minishell_handler(int sig)
-{
-	if (sig == SIGINT || sig == SIGQUIT)
-	{
-		ft_printf("\n");
-		minishell_greeting();
-	}
-}
 
 static size_t	skip_tabs(const char *str)
 {
@@ -68,8 +59,7 @@ char			*minishell_read_stdio(void)
 	char	*buf;
 
 	buf = (char[ARG_MAX]){0};
-	signal(SIGINT, minishell_handler);
-	signal(SIGQUIT, minishell_handler);
+	minishell_signals(handler_parrent);
 	if ((stat_gnl = get_next_line(STDIN, &read_stdio, FLAG_OFF)) == RET_ERROR)
 		err_exit(E_MALLOC, "minishell");
 	insert_env(buf, read_stdio);

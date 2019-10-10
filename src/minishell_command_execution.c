@@ -6,32 +6,11 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 19:01:46 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/10 22:21:15 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void handler_child(int status_child, pid_t pid_child, const char *path_cmd)
-{
-	char	*lvl_proccess;
-
-	lvl_proccess = getenv(SHLVL);
-	if (!lvl_proccess)
-		lvl_proccess = "1";
-	if (status_child == SIGINT)
-		ft_printf("\n");
-	else if (status_child == SIGSEGV)
-		PRINT_SIG_ERR(lvl_proccess, pid_child, ESIG, path_cmd);
-	else if (status_child == SIGABRT)
-		PRINT_SIG_ERR(lvl_proccess, pid_child, EABR, path_cmd);
-	else if (status_child == SIGBUS)
-		PRINT_SIG_ERR(lvl_proccess, pid_child, EBUS, path_cmd);
-	else if (status_child == SIGFPE)
-		PRINT_SIG_ERR(lvl_proccess, pid_child, FPOT, path_cmd);
-	else if (status_child == SIGQUIT)
-		PRINT_SIG_ERR(lvl_proccess, pid_child, QUIT, path_cmd);
-}
 
 static void	execute_internal_cmd(char *const argv[],
 	int argc, const char *cmd)
@@ -45,26 +24,41 @@ static void	execute_internal_cmd(char *const argv[],
 	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, environ);
 }
 
+// static void	child_handler(int sig)
+// {
+// 	if (sig == SIGINT)
+// 		exit(EXIT_FAILURE);
+// 	// else if (sig == SIGQUIT)
+// 	// {
+// 	// 	handler_child(SIGQUIT, getpid(), )
+// 	// 	exit(EXIT_FAILURE);
+// 	// }
+// }
+
 int			execute_cmd(char *const argv[], const char *path_cmd)
 {
 	pid_t			pid;
-	int				status_child;
+	int				stat_child;
 	enum e_u_err	err;
 
-	status_child = 0;
+	stat_child = 0;
 	err = SUCCESS;
+	minishell_signals(ignore_signals);
 	if ((pid = NEW_PROCESS()) == RET_ERROR)
 		err_exit(E_FORK, "minishell");
 	if (pid == CHILD_PROCESS)
 	{
+		// signal(SIGINT, child_handler);
+		// signal(SIGQUIT, child_handler);
+		minishell_signals(handler_child);
 		if ((err = execve(path_cmd, argv, environ) == NOT_FOUND))
 			CMD_NOT_FOUND(CMD_NAME);
 		else
 			exit(EXIT_SUCCESS);
 	}
-	else if (wait(&status_child) == RET_ERROR)
+	else if (wait(&stat_child) == RET_ERROR)
 		err_exit(E_WAIT, "minishell");
-	handler_child(status_child, pid, path_cmd);
+	status_child(stat_child, pid, path_cmd);
 	return (err);
 }
 
