@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 22:21:15 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 18:40:59 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ static void	execute_internal_cmd(char *const argv[],
 	internal_cmd[ft_atoi(cmd)]((int)argc, (char **)argv, environ);
 }
 
-// static void	child_handler(int sig)
-// {
-// 	if (sig == SIGINT)
-// 		exit(EXIT_FAILURE);
-// 	// else if (sig == SIGQUIT)
-// 	// {
-// 	// 	handler_child(SIGQUIT, getpid(), )
-// 	// 	exit(EXIT_FAILURE);
-// 	// }
-// }
-
 int			execute_cmd(char *const argv[], const char *path_cmd)
 {
 	pid_t			pid;
@@ -48,8 +37,6 @@ int			execute_cmd(char *const argv[], const char *path_cmd)
 		err_exit(E_FORK, "minishell");
 	if (pid == CHILD_PROCESS)
 	{
-		// signal(SIGINT, child_handler);
-		// signal(SIGQUIT, child_handler);
 		minishell_signals(handler_child);
 		if ((err = execve(path_cmd, argv, environ) == NOT_FOUND))
 			CMD_NOT_FOUND(CMD_NAME);
@@ -62,6 +49,34 @@ int			execute_cmd(char *const argv[], const char *path_cmd)
 	return (err);
 }
 
+static int			check_sys_symbals(const char *cmd_name)
+{
+	char			*buf;
+	uid_t			uid;
+	enum	e_u_err	err;
+
+	buf = (char[MAX_SIZE_PATH + 1]){0};
+	err = SUCCESS;
+	if (cmd_name && *cmd_name)
+	{
+		if (!ft_strcmp(cmd_name, "~"))
+		{
+			uid = getuid();
+			ft_strcpy(buf, getpwuid(uid)->pw_dir);
+			printf("minidhell: %s\n", buf);
+		}
+		else if (!ft_strcmp(cmd_name, "~+"))
+		{
+			
+		}
+		else if (!ft_strcmp(cmd_name, "~-"))
+			;
+		else
+			err = FAILURE;
+	}
+	return (err);
+}
+
 int			minishell_command_execution(t_argv *beg)
 {
 	enum e_find	search;
@@ -69,6 +84,8 @@ int			minishell_command_execution(t_argv *beg)
 
 	while (beg)
 	{
+		if (check_sys_symbals(beg->CMD_NAME) == SUCCESS)
+			return (FOUND);
 		search = minishell_command_search(beg->CMD_NAME, cmd_for_ex);
 		if (search == FOUND_EXIT)
 			return (FOUND_EXIT);
