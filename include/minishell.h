@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 23:22:37 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 23:30:56 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,9 @@
 # define CMD_NAME			argv[0]
 # define CHILD_PROCESS		0
 # define NUM_INTERNAL_CMDS	7
-# define EXP				extern char **environ
 # define NUMBERS			"0123456789"
+# define EXP_PATH			extern struct s_path g_path
+# define EXP_ENV			extern char **environ
 
 # define P_INT_CMD	path_internal_cmd
 # define P_MSRC		path_mshellrc
@@ -133,8 +134,8 @@
 */
 # define SIZE_DATE		24
 
-EXP;
-extern struct s_path	g_path;
+EXP_ENV;
+EXP_PATH;
 
 typedef unsigned long long	t_key;
 typedef unsigned int		t_error;

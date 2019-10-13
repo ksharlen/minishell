@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 01:06:40 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int					work_cmd(char *const argv[], t_env *env)
 		push_env(env, argv);
 		search = (find_in_the_var_path_env(env->opt & F_P ?
 			env->path_exec : env->path_dflt, env->cmd, path_ex));
-		if (search == NOT_FOUND)
-			ENV_PRINT(S_NO_SUCH, env->cmd);
-		else
+		if (search == FOUND)
+		{
 			execute_cmd(env->cmd_argv, path_ex);
-		ft_strdel_split(env->cmd_argv);
-		free(env->cmd_argv);
-		env->cmd_argv = NULL;
+			ft_strdel_split(env->cmd_argv);
+			free(env->cmd_argv);
+			env->cmd_argv = NULL;
+		}
 	}
 	return (search);
 }
@@ -90,6 +90,7 @@ void				work_opt(char *const *p_argv, t_env *env)
 	{
 		++p_argv;
 		env->path_exec = *p_argv;
+		env->opt |= F_P;
 		if (*p_argv)
 			p_argv++;
 	}

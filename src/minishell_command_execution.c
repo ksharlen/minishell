@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 22:53:58 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 01:01:23 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ int			minishell_command_execution(t_argv *beg)
 
 	while (beg)
 	{
-		if (check_sys_symbals(beg->CMD_NAME) == SUCCESS)
-			return (FOUND);
 		search = minishell_command_search(beg->CMD_NAME, cmd_for_ex);
-		if (search == FOUND_EXIT)
+		if (check_sys_symbals(beg->CMD_NAME) == SUCCESS)
+			;
+		else if (search == FOUND_EXIT)
 			return (FOUND_EXIT);
 		else if (search == FOUND_INTERNAL_CMD)
 			execute_internal_cmd(beg->argv, beg->argc, cmd_for_ex);
