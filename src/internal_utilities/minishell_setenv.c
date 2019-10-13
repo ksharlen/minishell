@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:09:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 22:46:35 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:49:42 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,15 @@ static int		new_val_name(int index, const char *value, size_t len_name)
 {
 	char	*tmp;
 	char	*buf;
-	// static int	num_free;
 
 	buf = (char[MAX_SIZE_PATH]){0};
 	ft_strncpy(buf, environ[index], len_name);
 	buf[len_name] = '=';
-	// ft_strcat(buf, value);
 	if (index != -1)
 	{
 		tmp = environ[index];
 		environ[index] = ft_strjoin(buf, value);
-		free(tmp);
+		ft_strdel(&tmp);
 		if (environ[index])
 			return (SUCCESS);
 	}
@@ -89,7 +87,6 @@ static int		create_new_name_val(const char *name, const char *value)
 int				minishell_setenv(const char *name, const char *value, const int replace)
 {
 	int				index;
-	// char			**p_name
 	enum e_u_err	err;
 
 	err = FAILURE;
