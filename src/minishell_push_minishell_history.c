@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/27 16:45:31 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/05 12:36:22 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:56:23 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void		minishell_history_init(struct s_key_data *k_data)
 	}
 	else
 		k_data->key = ft_atoi(k_data->key_str);
-	if ((k_data->fd_ms_history = open(g_path.P_MSHIST, O_CREAT | O_WRONLY | O_APPEND,
-		st_mode)) == RET_ERROR)
+	if ((k_data->fd_ms_history = open(g_path.P_MSHIST,
+		O_CREAT | O_WRONLY | O_APPEND, st_mode)) == RET_ERROR)
 		err_exit(E_OPEN, "minishell");
 }

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 19:16:37 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 23:22:37 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,22 +81,27 @@
 # define STR_NOT_IN_PWD		"string not in pwd:"
 # define ILLEGAL_OPT		"illegal option --e"
 # define NOT_FOUND_CMD		"command not found:"
-# define FILE_TO_LONG		"file name too long:" //worging for file and cmd
+# define FILE_TO_LONG		"file name too long:"
 
 /*
 **SIG_ERRORS
 */
-# define PRINT_SIG_ERR(lvl, pid, err, file) ft_printf("%v[%s]    %d %s  %s\n", STDERR_FILENO, lvl, pid, err, file)
+# define FORMAT "%v[%s]    %d %s  %s\n"
+# define PRINT_S(l, p, e, f) ft_printf(FORMAT, STDERR, l, p, e, f)
+# define PRINT_SIG_ERR(lvl, pid, err, file) PRINT_S(lvl, pid, err, file)
 # define ESIG	"Segmentation fault"
 # define EBUS	"Bus error"
 # define QUIT	"Quit"
 # define EABR	"Abort trap"
 # define FPOT	"Floating point exception"
 
-# define PRINT(p_name, e_name, out) ft_printf("%v%s: %s %s\n", STDERR_FILENO, p_name, e_name, out)
-# define PRINT_ERROR(p_name, e_name, out) PRINT(p_name, e_name, out)
-# define PRINT_ERROR_AND_RET(p_name, e_name, out) PRINT_ERROR(p_name, e_name, out); return (-1);
-# define CMD_NOT_FOUND(p_name) PRINT_ERROR(PROG_NAME, NOT_FOUND_CMD, p_name)
+/*
+**MSHELL_ERRORS
+*/
+# define MS_STR "%v%s: %s %s\n"
+# define PRINT(p_nm, e_nm, out) ft_printf(MS_STR, STDERR, p_nm, e_nm, out)
+# define PRINT_ERROR(p_nm, e_nm, out) PRINT(p_nm, e_nm, out)
+# define CMD_NOT_FOUND(p_nm) PRINT_ERROR(PROG_NAME, NOT_FOUND_CMD, p_nm)
 
 /*
 **PATH
@@ -104,7 +109,7 @@
 # define UTILITIES				"utilities"
 # define MHISTORY 				".minishell_history"
 # define MRC 					".minishellrc"
-# define KEY_LAST_CMD_MHISTORY "KEY"
+# define KEY_LAST_CMD_MHISTORY	"KEY"
 
 /*
 **OTHER
@@ -116,6 +121,7 @@
 # define CMD_NAME			argv[0]
 # define CHILD_PROCESS		0
 # define NUM_INTERNAL_CMDS	7
+# define EXP				extern char **environ
 # define NUMBERS			"0123456789"
 
 # define P_INT_CMD	path_internal_cmd
@@ -127,16 +133,17 @@
 */
 # define SIZE_DATE		24
 
-extern char 			**environ;
+EXP;
 extern struct s_path	g_path;
 
 typedef unsigned long long	t_key;
 typedef unsigned int		t_error;
 
-enum			e_stdstream
+enum			e_str
 {
-	STDIN,
-	STDOUT,
+	STDIN = STDIN_FILENO,
+	STDOUT = STDOUT_FILENO,
+	STDERR = STDERR_FILENO
 };
 
 enum			e_find
@@ -178,19 +185,24 @@ struct			s_key_data
 	char		date_ex_cmd[SIZE_DATE + 1];
 };
 
+/*
+**MAIN_FUNCa
+*/
 void			minishell_greeting(void);
 char			*minishell_read_stdio(void);
 t_argv			*minishell_parse_str(const char *str_for_parse);
 int				minishell_command_execution(t_argv *beg);
-void			list_add_end(t_argv **beg, char *cmd_argv);
-void			garbage_collector_internal(t_argv **beg);
 int				minishell_command_search(const char *cmd, char *path_ex);
+void			garbage_collector_internal(t_argv **beg);
+void			minishell_push_minishell_history(const char *str_stdio,
+	struct s_key_data *k_data);
+
+void			list_add_end(t_argv **beg, char *cmd_argv);
 int				find_in_the_var_path_env(const char *path_env,
 	const char *cmd, char *path_ex);
 void			strddel(char ***del);
 void			push_path(const char *cmd, const char *path, char *path_ex);
 int				search_path(const char *path, const char *cmd, char *path_ex);
-void			minishell_push_minishell_history(const char *str_stdio, struct s_key_data *k_data);
 int				execute_cmd(char *const argv[], const char *path_cmd);
 void			minishell_handler(int sig);
 
@@ -201,18 +213,6 @@ void			getkey_internal(struct s_key_data *key);
 */
 void			minishell_history_init(struct s_key_data *k_data);
 void			minishell_history_close(struct s_key_data *k_data);
-
-/*
-**	----UTILS----
-*/
-
-// int				cd(int argc, char *argv[], char *env[]);
-// int				check_dir_and_path_for_err(char *const argv[], char *path);
-// int				echo(int argc, char *argv[], char *env[]);
-// int				pwd(int argc, char *argv[], char *env[]);
-// int				env(int argc, char *argv[], char *env[]);
-// int				my_setenv(char *key, char *value, char *old_pwd);
-// int				my_unsetenv(char *key);
 
 /*
 **ERRORS
@@ -228,7 +228,8 @@ void			minishell_paths_init(void);
 /*
 **SIGNALS
 */
-void			status_child(int status_child, pid_t pid_child, const char *path_cmd);
+void			status_child(int status_child,
+	pid_t pid_child, const char *path_cmd);
 void			handler_parrent(int sig);
 void			handler_child(int sig);
 void			ignore_signals(int sig);

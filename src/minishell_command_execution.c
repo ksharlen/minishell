@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 19:20:08 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:53:58 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ int			execute_cmd(char *const argv[], const char *path_cmd)
 	return (err);
 }
 
-static int			check_sys_symbals(const char *cmd_name)
+static int	check_sys_symbals(const char *cmd_name)
 {
 	char			*buf;
-	enum	e_u_err	err;
+	enum e_u_err	err;
 
 	buf = (char[MAX_SIZE_PATH + 1]){0};
 	err = SUCCESS;
@@ -85,7 +85,8 @@ int			minishell_command_execution(t_argv *beg)
 			return (FOUND_EXIT);
 		else if (search == FOUND_INTERNAL_CMD)
 			execute_internal_cmd(beg->argv, beg->argc, cmd_for_ex);
-		else if (search == FOUND_SHELL_DIR || search == FOUND_PATH_ENV || search == FOUND)
+		else if (search == FOUND_SHELL_DIR ||
+			search == FOUND_PATH_ENV || search == FOUND)
 			execute_cmd(beg->argv, cmd_for_ex);
 		else
 			CMD_NOT_FOUND(beg->CMD_NAME);

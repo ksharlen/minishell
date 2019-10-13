@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:09:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 22:49:42 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:52:39 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ size_t			find_var_env(const char *name)
 	i = 0;
 	while (environ[i] && environ[i][0])
 	{
-		if ((!ft_memcmp(environ[i], name, len_name = ft_strnlen(name, '='))) && environ[i][len_name] == '=')
+		if ((!ft_memcmp(environ[i], name,
+			len_name = ft_strnlen(name, '='))) && environ[i][len_name] == '=')
 			return (i);
 		++i;
 	}
@@ -46,7 +47,8 @@ static int		new_val_name(int index, const char *value, size_t len_name)
 	return (FAILURE);
 }
 
-static int		push_new_environ(char **new_environ, size_t size_new_env, const char *name, const char *value)
+static int		push_new_environ(char **new_environ,
+	size_t size_new_env, const char *name, const char *value)
 {
 	size_t		i;
 	char		*buf;
@@ -84,7 +86,8 @@ static int		create_new_name_val(const char *name, const char *value)
 	return (SUCCESS);
 }
 
-int				minishell_setenv(const char *name, const char *value, const int replace)
+int				minishell_setenv(const char *name,
+	const char *value, const int replace)
 {
 	int				index;
 	enum e_u_err	err;
@@ -96,10 +99,7 @@ int				minishell_setenv(const char *name, const char *value, const int replace)
 		if (index != -1)
 		{
 			if (replace)
-			{
 				err = new_val_name(index, value, ft_strnlen(name, '='));
-				// free(*p_name);
-			}
 		}
 		else
 			err = create_new_name_val(name, value);

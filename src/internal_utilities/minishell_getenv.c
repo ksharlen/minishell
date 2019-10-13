@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 23:12:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 23:23:13 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:51:16 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ char		*minishell_getenv(const char *name)
 		p_env = environ;
 		while (*p_env)
 		{
-			if (!ft_memcmp(name, *p_env, len_name) && *((*p_env) + len_name) == '=')
+			if (!ft_memcmp(name, *p_env, len_name) &&
+				*((*p_env) + len_name) == '=')
 			{
 				p_ret = ft_strchr(*p_env, '=') + 1;
 				break ;

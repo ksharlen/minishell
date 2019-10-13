@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 21:48:36 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:58:02 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,26 @@ enum	e_u_err
 # define NOT_DIR	"Not a directory:"
 # define PERM		"Permission denied:"
 
-typedef unsigned char t_opts;
+typedef unsigned char	t_opts;
 
-struct	s_nameval
+struct				s_nameval
 {
 	char	*name;
 	char	*value;
 };
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	t_opts		opt;
 	char		*path_exec;
 	char		*path_dflt;
 	char		*cmd;
-	char 		**cmd_argv;
-}				t_env;
+	char		**cmd_argv;
+}					t_env;
 
 int					minishell_pwd(int argc, char **argv, char **env);
-int					minishell_setenv(const char *name, const char *value, const int replace);
+int					minishell_setenv(const char *name,
+	const char *value, const int replace);
 char				*minishell_getenv(const char *name);
 int					minishell_unsetenv(const char *name);
 int					minishell_echo(int argc, char **argv, char **env);
@@ -90,7 +91,6 @@ size_t				find_var_env(const char *name);
 int					minishell_env(int argc, char **argv, char **env);
 void				work_opt(char *const *p_argv, t_env *env);
 char				**split_s_key(const char *str);
-
 
 /*
 **WORK_FLAGS

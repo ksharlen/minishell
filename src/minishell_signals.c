@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 22:05:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:56:44 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void			ignore_signals(int sig)
 	(void)sig;
 }
 
-void			status_child(int stat_child, pid_t pid_child, const char *path_cmd)
+void			status_child(int stat_child,
+	pid_t pid_child, const char *path_cmd)
 {
 	char	*lvl_proccess;
 
@@ -50,7 +51,7 @@ void			handler_parrent(int sig)
 	}
 }
 
-void		handler_child(int sig)
+void			handler_child(int sig)
 {
 	if (sig == SIGINT)
 		exit(EXIT_FAILURE);
@@ -58,7 +59,7 @@ void		handler_child(int sig)
 		;
 }
 
-void		minishell_signals(void (*handler)(int))
+void			minishell_signals(void (*handler)(int))
 {
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
