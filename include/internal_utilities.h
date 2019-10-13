@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 23:24:06 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 21:48:36 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int					minishell_echo(int argc, char **argv, char **env);
 int					minishell_cd(int argc, char **argv, char **env);
 void				work_home_dir(const char *old_path, char *new_path);
 
-char				**find_var_env(const char *name);
+size_t				find_var_env(const char *name);
 int					minishell_env(int argc, char **argv, char **env);
 void				work_opt(char *const *p_argv, t_env *env);
 char				**split_s_key(const char *str);

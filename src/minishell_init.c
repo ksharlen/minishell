@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 11:54:26 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 18:58:11 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:47:53 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,19 @@ static void	set_shlvl(void)
 		minishell_setenv(SHLVL, "1", FLAG_ON);
 }
 
+static void	env_init()
+{
+	char	**new_env;
+
+	new_env = ft_linedup(environ);
+	environ = new_env;
+}
+
 void	minishell_paths_init(void)
 {
 	char cwd[MAX_SIZE_PATH + 1];
 
+	env_init();
 	ft_bzero(cwd, MAX_SIZE_PATH + 1);
 	ft_bzero(g_path.P_INT_CMD, MAX_SIZE_PATH + 1);
 	ft_bzero(g_path.P_MSRC, MAX_SIZE_PATH + 1);

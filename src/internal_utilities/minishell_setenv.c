@@ -6,40 +6,43 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 16:09:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/08 17:09:03 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 22:46:35 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal_utilities.h"
 
-char			**find_var_env(const char *name)
+size_t			find_var_env(const char *name)
 {
-	size_t		i;
+	int			i;
 	size_t		len_name;
 
 	i = 0;
 	while (environ[i] && environ[i][0])
 	{
 		if ((!ft_memcmp(environ[i], name, len_name = ft_strnlen(name, '='))) && environ[i][len_name] == '=')
-			return (&environ[i]);
+			return (i);
 		++i;
 	}
-	return (NULL);
+	return (-1);
 }
 
-static int		new_val_name(char **p_name, const char *value, size_t len_name)
+static int		new_val_name(int index, const char *value, size_t len_name)
 {
 	char	*tmp;
 	char	*buf;
+	// static int	num_free;
 
 	buf = (char[MAX_SIZE_PATH]){0};
-	ft_strncpy(buf, *p_name, len_name);
+	ft_strncpy(buf, environ[index], len_name);
 	buf[len_name] = '=';
-	if (*p_name)
+	// ft_strcat(buf, value);
+	if (index != -1)
 	{
-		tmp = (*p_name);
-		(*p_name) = ft_strjoin(buf, value);
-		if (*p_name)
+		tmp = environ[index];
+		environ[index] = ft_strjoin(buf, value);
+		free(tmp);
+		if (environ[index])
 			return (SUCCESS);
 	}
 	return (FAILURE);
@@ -85,17 +88,21 @@ static int		create_new_name_val(const char *name, const char *value)
 
 int				minishell_setenv(const char *name, const char *value, const int replace)
 {
-	char			**p_name;
+	int				index;
+	// char			**p_name
 	enum e_u_err	err;
 
 	err = FAILURE;
 	if (name && value && *name)
 	{
-		p_name = find_var_env(name);
-		if (p_name && *p_name)
+		index = find_var_env(name);
+		if (index != -1)
 		{
 			if (replace)
-				err = new_val_name(p_name, value, ft_strnlen(name, '='));
+			{
+				err = new_val_name(index, value, ft_strnlen(name, '='));
+				// free(*p_name);
+			}
 		}
 		else
 			err = create_new_name_val(name, value);

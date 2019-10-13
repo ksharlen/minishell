@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 18:17:43 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/06 17:39:00 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 21:49:31 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ static int	delete_var_env(const char *name)
 
 int			minishell_unsetenv(const char *name)
 {
-	char			**find_env;
+	// char			**find_env;
+	int				index;
 	enum e_u_err	err;
 
 	err = FAILURE;
 	if (name && *name)
 	{
-		find_env = find_var_env(name);
-		if (find_env && *find_env)
+		index = find_var_env(name);
+		if (index != -1)
 			err = delete_var_env(name);
 	}
 	return (err);
