@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 23:23:36 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 19:16:37 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,5 +235,12 @@ void			ignore_signals(int sig);
 void			minishell_signals(void (*handler)(int));
 void			status_child(const int status_child,
 	const pid_t pid_child, const char *path_cmd);
+
+/*
+**GETERS
+*/
+int				mshell_getpwd(char *buf);
+int				mshell_getoldpwd(char *buf);
+int				mshell_gethomedir(char *buf);
 
 #endif

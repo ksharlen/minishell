@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 11:54:26 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 18:58:11 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	set_shlvl(void)
 		++shlvl;
 		str_shlvl = ft_itoa(shlvl);
 		minishell_setenv(SHLVL, str_shlvl, FLAG_ON);
+		ft_strdel(&str_shlvl);
 	}
 	else
 		minishell_setenv(SHLVL, "1", FLAG_ON);
@@ -31,7 +32,6 @@ static void	set_shlvl(void)
 
 void	minishell_paths_init(void)
 {
-	char	*str_shlvl;
 	char cwd[MAX_SIZE_PATH + 1];
 
 	ft_bzero(cwd, MAX_SIZE_PATH + 1);
@@ -46,5 +46,4 @@ void	minishell_paths_init(void)
 	minishell_setenv("PWD", cwd, FLAG_OFF);
 	minishell_setenv("OLDPWD", cwd, FLAG_OFF);
 	set_shlvl();
-	ft_strdel(&str_shlvl);
 }

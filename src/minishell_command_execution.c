@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 18:40:59 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/13 19:20:08 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int			execute_cmd(char *const argv[], const char *path_cmd)
 static int			check_sys_symbals(const char *cmd_name)
 {
 	char			*buf;
-	uid_t			uid;
 	enum	e_u_err	err;
 
 	buf = (char[MAX_SIZE_PATH + 1]){0};
@@ -60,19 +59,14 @@ static int			check_sys_symbals(const char *cmd_name)
 	if (cmd_name && *cmd_name)
 	{
 		if (!ft_strcmp(cmd_name, "~"))
-		{
-			uid = getuid();
-			ft_strcpy(buf, getpwuid(uid)->pw_dir);
-			printf("minidhell: %s\n", buf);
-		}
+			err = mshell_gethomedir(buf);
 		else if (!ft_strcmp(cmd_name, "~+"))
-		{
-			
-		}
+			err = mshell_getpwd(buf);
 		else if (!ft_strcmp(cmd_name, "~-"))
-			;
+			err = mshell_getoldpwd(buf);
 		else
-			err = FAILURE;
+			return (err = FAILURE);
+		printf("minishell: %s\n", buf);
 	}
 	return (err);
 }
