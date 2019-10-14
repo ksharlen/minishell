@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 23:25:22 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:50:27 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ int			minishell_command_search(const char *cmd, char *path_ex)
 			return (search);
 		else if (search_path(g_path.P_INT_CMD, cmd, path_ex) == FOUND)
 			search = FOUND_SHELL_DIR;
-		else if (find_in_the_var_path_env(minishell_getenv("PATH"),
-		cmd, path_ex) == FOUND_PATH_ENV)
+		else if (find_in_the_var_path_env(cmd, path_ex) == FOUND_PATH_ENV)
 			search = FOUND_PATH_ENV;
 		else if (!access(cmd, F_OK))
 		{

@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 15:08:26 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:33:37 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct		s_env
 {
 	t_opts		opt;
 	char		*path_exec;
-	char		*path_dflt;
 	char		*cmd;
 	char		**cmd_argv;
 }					t_env;

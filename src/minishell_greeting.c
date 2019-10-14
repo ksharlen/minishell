@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 20:12:47 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/10 17:19:58 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:40:10 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@ static void		get_curr_time(char *curr_time)
 	time_t	date;
 	char	*str_date;
 
-	ft_bzero(curr_time, SIZE_TIME + 1);
-	if (time(&date) == RET_ERROR)
-		err_exit(E_TIME, "minishell");
-	if (!(str_date = ctime(&date)))
-		err_exit(E_TIME, "minishell");
-	ft_memcpy(curr_time, str_date + TO_TIME, SIZE_TIME);
+	str_date = NULL;
+	date = 0;
+	if (curr_time)
+	{
+		ft_bzero(curr_time, SIZE_TIME + 1);
+		if (time(&date) == RET_ERROR)
+			err_exit(E_TIME, "minishell");
+		if (!(str_date = ctime(&date)))
+			err_exit(E_TIME, "minishell");
+		ft_memcpy(curr_time, str_date + TO_TIME, SIZE_TIME);
+	}
 }
 
 static void		get_uname(char *uname)

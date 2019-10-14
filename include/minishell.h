@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 15:07:34 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:49:40 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@
 # define COLOR_UNAME	"\e[33m"
 # define COLOR_DEFAULT	"\e[0m"
 # define INF			1
+# define DFLT_PATH_ENV	"/bin"
 
 /*
 **ERRORS
@@ -128,6 +129,7 @@
 # define P_INT_CMD	path_internal_cmd
 # define P_MSRC		path_mshellrc
 # define P_MSHIST	path_mshell_history
+# define P_ENV		path_environ
 
 /*
 **MINISHELL_HISTORY
@@ -166,6 +168,7 @@ struct			s_entry
 
 struct			s_path
 {
+	char	path_environ[MAX_SIZE_PATH + 1];
 	char	path_internal_cmd[MAX_SIZE_PATH + 1];
 	char	path_mshellrc[MAX_SIZE_PATH + 1];
 	char	path_mshell_history[MAX_SIZE_PATH + 1];
@@ -199,8 +202,7 @@ void			minishell_push_minishell_history(const char *str_stdio,
 	struct s_key_data *k_data);
 
 void			list_add_end(t_argv **beg, char *cmd_argv);
-int				find_in_the_var_path_env(const char *path_env,
-	const char *cmd, char *path_ex);
+int				find_in_the_var_path_env(const char *cmd, char *path_ex);
 void			strddel(char ***del);
 void			push_path(const char *cmd, const char *path, char *path_ex);
 int				search_path(const char *path, const char *cmd, char *path_ex);
@@ -244,6 +246,7 @@ void			status_child(const int status_child,
 int				mshell_getpwd(char *buf);
 int				mshell_getoldpwd(char *buf);
 int				mshell_gethomedir(char *buf);
+int				mshell_gethome_env(char *buf);
 
 t_argv			*list_create(char *cmd_argv);
 

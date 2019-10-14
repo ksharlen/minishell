@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 01:01:23 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:57:26 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	check_sys_symbals(const char *cmd_name)
 			err = mshell_getoldpwd(buf);
 		else
 			return (err = FAILURE);
-		printf("minishell: %s\n", buf);
+		ft_printf("minishell: %s\n", buf);
 	}
 	return (err);
 }

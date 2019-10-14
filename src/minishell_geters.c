@@ -6,11 +6,28 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 18:45:38 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 19:15:43 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:55:55 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		mshell_gethome_env(char *buf)
+{
+	char	*path_env;
+
+	path_env = NULL;
+	if (buf)
+	{
+		path_env = minishell_getenv("PATH");
+		if (!path_env)
+			ft_strcpy(buf, DFLT_PATH_ENV);
+		else
+			ft_strcpy(buf, path_env);
+		return (SUCCESS);
+	}
+	return (FAILURE);
+}
 
 int		mshell_getpwd(char *buf)
 {

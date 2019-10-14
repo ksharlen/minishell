@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 15:18:51 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:32:51 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ static int		get_opt(int argc, char **opts, t_env *env)
 	int				ch;
 	enum e_u_err	err;
 
-	// printf("opts: %s\n", *opts);
-	printf("opts[index]: %s\n", opts[optind]);
 	ch = 0;
 	err = SUCCESS;
+	optarg = NULL;
+	optopt = 0;
 	optind = 1;
 	while ((ch = getopt(argc, opts, ENV_OPT)) != -1)
 	{

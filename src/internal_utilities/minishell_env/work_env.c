@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 22:16:28 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 15:03:42 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:45:55 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,18 @@ static void			push_env(t_env *env, char *const argv[])
 	}
 }
 
+static void			env_del(void)
+{
+	ft_strdel_split(environ);
+	free(environ);
+	environ = NULL;
+}
+
 int					work_cmd(char *const argv[], t_env *env)
 {
-	// char		path_ex[MAX_SIZE_PATH + 1];
 	enum e_find	search;
-	// t_argv		*new_cmd;
 
 	search = NOT_FOUND;
-	// new_cmd = NULL;
 	if (argv)
 	{
 		env->cmd = *argv;
@@ -64,23 +68,12 @@ int					work_cmd(char *const argv[], t_env *env)
 		}
 		push_env(env, argv);
 		search = exec_env(env);
-		// if (env->opt & F_P)
-		// {
-		// 	search = find_in_the_var_path_env(env->path_exec, env->cmd, path_ex);
-		// 	if (search != NOT_FOUND)
-		// 		execute_cmd(env->cmd_argv, path_ex);
-		// 	else
-		// 		ENV_PRINT(ENV_NO_SUCH, env->cmd);
-		// }
-		// else
-		// {
-		// 	new_cmd = convert_structs(env);
-		// 	minishell_command_execution(new_cmd);
-		// }
 		ft_strdel_split(env->cmd_argv);
 		free(env->cmd_argv);
 		env->cmd_argv = NULL;
 	}
+	if (env->opt & F_I)
+		env_del();
 	return (search);
 }
 
@@ -88,8 +81,7 @@ void				work_opt(char *const *p_argv, t_env *env)
 {
 	char	**copy_environ;
 
-	copy_environ = ft_linedup(environ);
-	env->path_dflt = minishell_getenv("PATH");
+	copy_environ = environ;
 	if (*p_argv && !ft_strcmp(*p_argv, "-i"))
 	{
 		environ = (char **)ft_memalloc(sizeof(char *));

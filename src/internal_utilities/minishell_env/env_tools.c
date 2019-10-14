@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:52:57 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 15:04:01 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:28:03 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		exec_env(const t_env *env)
 	{
 		if (env->opt & F_P)
 		{
-			search = find_in_the_var_path_env(env->path_exec, env->cmd, path_ex);
+			search = search_path(env->path_exec, env->cmd, path_ex);
 			if (search != NOT_FOUND)
 				execute_cmd(env->cmd_argv, path_ex);
 			else
@@ -34,6 +34,9 @@ int		exec_env(const t_env *env)
 		{
 			new_cmd = convert_structs(env);
 			minishell_command_execution(new_cmd);
+			free(new_cmd);
+			new_cmd = NULL;
+			//!ЗАФРИШИТЬ!!!!!!!!!!!!
 		}
 	}
 	return (search);
