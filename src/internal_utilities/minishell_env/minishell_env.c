@@ -6,11 +6,28 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 00:01:19 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 15:18:51 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal_utilities.h"
+
+static size_t	len_opt(char *const argv[])
+{
+	size_t		len;
+
+	len = 1;
+	if (argv && *argv)
+	{
+		++argv;
+		while (*argv && *argv[0] == '-')
+		{
+			++len;
+			++argv;
+		}
+	}
+	return (++len);
+}
 
 static void		env_init(t_env *env)
 {
@@ -23,6 +40,8 @@ static int		get_opt(int argc, char **opts, t_env *env)
 	int				ch;
 	enum e_u_err	err;
 
+	// printf("opts: %s\n", *opts);
+	printf("opts[index]: %s\n", opts[optind]);
 	ch = 0;
 	err = SUCCESS;
 	optind = 1;
@@ -49,6 +68,7 @@ static int		get_opt(int argc, char **opts, t_env *env)
 int				minishell_env(int argc, char **argv, char **env)
 {
 	t_env			m_env;
+	size_t			l_opt;
 	enum e_u_err	err;
 
 	P_UNUSED(env);
@@ -58,7 +78,8 @@ int				minishell_env(int argc, char **argv, char **env)
 		ft_print_lines(environ);
 	else
 	{
-		err = get_opt(argc, argv, &m_env);
+		l_opt = len_opt(argv);
+		err = get_opt(l_opt, argv, &m_env);
 		if (err == SUCCESS)
 		{
 			++argv;

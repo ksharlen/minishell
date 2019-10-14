@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 23:30:56 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 15:07:34 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,5 +244,7 @@ void			status_child(const int status_child,
 int				mshell_getpwd(char *buf);
 int				mshell_getoldpwd(char *buf);
 int				mshell_gethomedir(char *buf);
+
+t_argv			*list_create(char *cmd_argv);
 
 #endif

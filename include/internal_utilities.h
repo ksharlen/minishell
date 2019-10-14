@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 15:20:33 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 22:58:02 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 15:08:26 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ enum	e_u_err
 /*
 **ENV
 */
+# define ENV_NO_SUCH "no such file or directory"
 # define ENV_PRINT(err, filename) ft_printf("env: %s: %s\n", filename, err)
 # define ENV_OPT "P:i:u:S:"
 # define USG	"usage: env [-iv] [-P utilpath] [-S string] [-u name]"
@@ -62,6 +63,7 @@ enum	e_u_err
 # define PERM		"Permission denied:"
 
 typedef unsigned char	t_opts;
+typedef struct s_argv	t_argv;
 
 struct				s_nameval
 {
@@ -99,5 +101,11 @@ char *const			*u_flag(char *const argv[]);
 char				**s_flag(const char *str);
 char *const			*change_value_name(char *const argv[]);
 struct s_nameval	split_name_val(const char *nameval);
+
+/*
+**TOOLS_ENV
+*/
+t_argv				*convert_structs(const t_env *conv_from);
+int					exec_env(const t_env *env);
 
 #endif

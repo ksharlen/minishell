@@ -6,13 +6,13 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 21:33:41 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/02 20:39:02 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 14:21:45 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_argv	*list_create(char *cmd_argv)
+t_argv			*list_create(char *cmd_argv)
 {
 	t_argv	*new;
 
