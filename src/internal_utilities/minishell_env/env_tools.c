@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 14:52:57 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 18:28:03 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 18:47:16 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		exec_env(const t_env *env)
 			minishell_command_execution(new_cmd);
 			free(new_cmd);
 			new_cmd = NULL;
-			//!ЗАФРИШИТЬ!!!!!!!!!!!!
 		}
 	}
 	return (search);
