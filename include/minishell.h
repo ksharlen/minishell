@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 21:22:55 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 16:49:40 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 20:57:58 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,8 @@ struct			s_path
 	char	path_internal_cmd[MAX_SIZE_PATH + 1];
 	char	path_mshellrc[MAX_SIZE_PATH + 1];
 	char	path_mshell_history[MAX_SIZE_PATH + 1];
+	pid_t	pid_curr;
+	int		ret_child;
 };
 
 typedef struct	s_argv

@@ -1,2 +1,0 @@
-# minishell
-my first shell

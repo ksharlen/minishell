@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 14:50:39 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 16:50:27 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 21:53:57 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static char	*g_internal_commands[] = {
 	"0cd",
 	"1echo",
 	"2env",
-	"3pwd"
+	"3pwd",
+	NULL
 };
 
 static int	find_internal_cmd(const char *cmd, char *path_ex)

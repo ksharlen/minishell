@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/05 11:54:26 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 16:56:06 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 21:01:21 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void		minishell_paths_init(void)
 	ft_bzero(g_path.P_MSRC, MAX_SIZE_PATH + 1);
 	ft_bzero(g_path.P_MSHIST, MAX_SIZE_PATH + 1);
 	ft_bzero(g_path.P_ENV, MAX_SIZE_PATH + 1);
+	g_path.pid_curr = getpid();
 	mshell_gethome_env(g_path.path_environ);
 	getcwd(cwd, MAX_SIZE_PATH);
 	minishell_setenv("SHELL", cwd, FLAG_ON);

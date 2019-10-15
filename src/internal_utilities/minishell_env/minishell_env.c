@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/06 15:16:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 16:32:51 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 22:32:51 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ static int		get_opt(int argc, char **opts, t_env *env)
 			env->opt |= F_U;
 		else if (ch == '?')
 		{
-			err = FAILURE;
 			ft_printf("%v%s\n	   %s\n", STDERR_FILENO, USG, USG_1);
-			return (err);
+			return (FAILURE);
 		}
 	}
 	return (err);

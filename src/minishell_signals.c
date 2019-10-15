@@ -6,15 +6,18 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 22:05:07 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 22:56:44 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 22:15:32 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void			ignore_signals(int sig)
+static void		get_ret_child(const int stat_child)
 {
-	(void)sig;
+	if (WIFEXITED(stat_child))
+		g_path.ret_child = WEXITSTATUS(stat_child);
+	else
+		g_path.ret_child = WIFSIGNALED(stat_child);
 }
 
 void			status_child(int stat_child,
@@ -40,6 +43,7 @@ void			status_child(int stat_child,
 		ft_printf("\n");
 		PRINT_SIG_ERR(lvl_proccess, pid_child, QUIT, path_cmd);
 	}
+	get_ret_child(stat_child);
 }
 
 void			handler_parrent(int sig)

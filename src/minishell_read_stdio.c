@@ -6,7 +6,7 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:06:22 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/13 23:01:44 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 21:57:15 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,48 @@ static size_t	skip_tabs(const char *str)
 	return (len);
 }
 
+static void		push_env(char *buf, size_t len_w, const char *read_stdio)
+{
+	char	*buf_env;
+	char	*val_env;
+
+	buf_env = (char[MAX_SIZE_PATH + 1]){0};
+	ft_strncpy(buf_env, read_stdio, len_w);
+	val_env = minishell_getenv(buf_env);
+	if (val_env)
+		ft_strcat(buf, val_env);
+}
+
+static void		push_sys_doll(char *buf, const char sym)
+{
+	char	*str_val;
+
+	str_val = NULL;
+	str_val = ft_itoa(sym == '$' ? g_path.pid_curr : g_path.ret_child);
+	ft_strcat(buf, str_val);
+	ft_strdel(&str_val);
+}
+
 static void		insert_env(char *buf, const char *read_stdio)
 {
-	char		buf_env[MAX_SIZE_PATH + 1];
 	size_t		len_w;
-	char		*val_env;
 
-	len_w = 0;
 	if (read_stdio)
-		while (read_stdio)
+		while (read_stdio && *read_stdio)
 		{
-			ft_bzero(buf_env, MAX_SIZE_PATH + 1);
 			read_stdio = ft_strscat(buf, (char *)read_stdio, '$');
 			if (read_stdio)
 			{
-				len_w = skip_tabs(read_stdio);
-				if (len_w)
+				if (*read_stdio == '$' || *read_stdio == '?')
+					push_sys_doll(buf, *read_stdio++);
+				if (*read_stdio)
 				{
-					ft_strncpy(buf_env, read_stdio, len_w);
-					val_env = minishell_getenv(buf_env);
-					if (val_env)
-						ft_strcat(buf, val_env);
-					read_stdio += len_w;
+					len_w = skip_tabs(read_stdio);
+					if (len_w)
+					{
+						push_env(buf, len_w, read_stdio);
+						read_stdio += len_w;
+					}
 				}
 			}
 		}
@@ -60,7 +80,8 @@ char			*minishell_read_stdio(void)
 
 	buf = (char[ARG_MAX]){0};
 	minishell_signals(handler_parrent);
-	if ((stat_gnl = get_next_line(STDIN_FILENO, &read_stdio, FLAG_OFF)) == RET_ERROR)
+	if ((stat_gnl = get_next_line(STDIN_FILENO,
+		&read_stdio, FLAG_OFF)) == RET_ERROR)
 		err_exit(E_MALLOC, "minishell");
 	insert_env(buf, read_stdio);
 	ft_strdel(&read_stdio);

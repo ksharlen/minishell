@@ -6,11 +6,16 @@
 /*   By: ksharlen <ksharlen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 15:44:51 by ksharlen          #+#    #+#             */
-/*   Updated: 2019/10/14 16:57:26 by ksharlen         ###   ########.fr       */
+/*   Updated: 2019/10/14 22:15:41 by ksharlen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		ignore_signals(int sig)
+{
+	(void)sig;
+}
 
 static void	execute_internal_cmd(char *const argv[],
 	int argc, const char *cmd)
